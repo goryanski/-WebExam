@@ -14,7 +14,7 @@ namespace PhotoMania.DB.Entities
         public Post Post { get; set; }
         public int PostId { get; set; }
 
-        public UserProfile User { get; set; }
-        public int UserId { get; set; }
+        //public UserProfile User { get; set; }
+        //public int UserId { get; set; }
     }
 }

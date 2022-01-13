@@ -16,6 +16,7 @@ namespace PhotoMania.DB
         public DbSet<Role> Roles { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<UserProfile> Users { get; set; }
+        public DbSet<SocialLink> SocialLinks { get; set; }
         
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options)

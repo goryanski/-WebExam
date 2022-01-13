@@ -13,6 +13,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
+using PhotoMania.Business.Services;
+using PhotoMania.Business.Services.Interfaces;
 using PhotoMania.DB;
 using PhotoMania.DB.Repositories;
 using PhotoMania.DB.Repositories.Interfaces;
@@ -65,6 +67,7 @@ namespace PhotoMania
             });
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IRolesService, RolesService>();
 
             services.AddCors();
         }
