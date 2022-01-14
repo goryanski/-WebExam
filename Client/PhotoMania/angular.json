@@ -1,12 +1,12 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
-    "analytics": "40c12b45-abc0-44b4-ab12-64171a6efd41"
+    "analytics": "8436c8b8-75fd-4e50-b087-6958a64d8f71"
   },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Client": {
+    "PhotoMania": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Client",
+            "outputPath": "dist/PhotoMania",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -30,9 +30,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -71,10 +74,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Client:build:production"
+              "browserTarget": "PhotoMania:build:production"
             },
             "development": {
-              "browserTarget": "Client:build:development"
+              "browserTarget": "PhotoMania:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +85,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Client:build"
+            "browserTarget": "PhotoMania:build"
           }
         },
         "test": {
@@ -105,5 +108,5 @@
       }
     }
   },
-  "defaultProject": "Client"
+  "defaultProject": "PhotoMania"
 }
