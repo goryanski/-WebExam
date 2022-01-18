@@ -102,7 +102,25 @@ namespace PhotoMania.DB.Repositories
                 DislikesCount = 0,
                 UserId = user1.Id
             };
+            Post post2 = new Post
+            {
+                Description = "my second post",
+                Date = DateTime.Now,
+                LikesCount = 10,
+                DislikesCount = 10,
+                UserId = user1.Id
+            };
+            Post post3 = new Post
+            {
+                Description = "my third post",
+                Date = DateTime.Now,
+                LikesCount = 7,
+                DislikesCount = 7,
+                UserId = user1.Id
+            };
             db.Posts.Add(post1);
+            db.Posts.Add(post2);
+            db.Posts.Add(post3);
             db.SaveChanges();
 
             Comment comment1 = new Comment
@@ -120,7 +138,7 @@ namespace PhotoMania.DB.Repositories
             Avatar avatar1 = new Avatar
             {
                 Name = "avatar",
-                Url = "Uploads\\avatars\\avatar.jpg",
+                Url = @"Uploads\avatars\avatar.jpg",
                 UserId = user1.Id
             };
             db.Avatars.Add(avatar1);
@@ -134,11 +152,25 @@ namespace PhotoMania.DB.Repositories
 
             Photo photo1 = new Photo
             {
-                Name = "fall.jpeg",
-                Url = "Uploads\\images\\fall.jpeg",
-                PostId = user1.Id
+                Name = "fall",
+                Url = @"Uploads\images\fall.jpeg",
+                PostId = post1.Id
+            };
+            Photo photo2 = new Photo
+            {
+                Name = "spring",
+                Url = @"Uploads\images\spring.jpg",
+                PostId = post2.Id
+            };
+            Photo photo3 = new Photo
+            {
+                Name = "summer",
+                Url = @"Uploads\images\summer.jpg",
+                PostId = post3.Id
             };
             db.Photos.Add(photo1);
+            db.Photos.Add(photo2);
+            db.Photos.Add(photo3);
             db.SaveChanges();
             #endregion
         }

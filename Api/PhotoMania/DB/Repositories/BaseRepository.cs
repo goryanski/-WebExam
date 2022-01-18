@@ -37,6 +37,10 @@ namespace PhotoMania.DB.Repositories
         {
             return await Table.FirstOrDefaultAsync(entity => entity.Id == id);
         }
+        //public async Task<int> GetCountAsync()
+        //{
+        //    return await Task.FromResult(Table.ToList().Count());
+        //}
 
         public async Task UpdateAsync(T entity)
         {

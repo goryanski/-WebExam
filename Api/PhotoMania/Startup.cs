@@ -67,6 +67,7 @@ namespace PhotoMania
             });
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IPostsService, PostsService>();
             services.AddTransient<IRolesService, RolesService>();
 
             services.AddCors();

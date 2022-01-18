@@ -17,11 +17,13 @@ namespace PhotoMania.Controllers
     [ApiController]
     public class HomeController : ControllerBase
     {
-        IRolesService rolesService;
+        //IRolesService rolesService;
+        IPostsService postsService;
 
-        public HomeController(IRolesService rolesService)
+        public HomeController(/*IRolesService rolesService,*/ IPostsService postsService)
         {
-            this.rolesService = rolesService;
+            //this.rolesService = rolesService;
+            this.postsService = postsService;
         }
 
         //[HttpGet]
@@ -32,9 +34,10 @@ namespace PhotoMania.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<List<RoleDto>> GetInfo()
+        public async Task<List<PostDto>> GetPosts()
         {
-            return await rolesService.GetAllRoles();
+            //return await rolesService.GetAllRoles();
+            return await postsService.GetAllPosts();
         }
 
 
