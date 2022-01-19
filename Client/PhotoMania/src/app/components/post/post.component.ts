@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PostInterface} from "../../api/interfaces/post.interface";
+import {AppEnvironment} from "../../shared/app-environment.interface";
 
 @Component({
   selector: 'app-post',
@@ -17,9 +18,14 @@ export class PostComponent implements OnInit {
     username: '',
     commentsCount: ''
   };
-  constructor() { }
+  apiStaticFilesURL = '';
+
+  constructor(
+    private readonly appEnv: AppEnvironment
+  ) {
+    this.apiStaticFilesURL = appEnv.apiStaticFilesURL;
+  }
 
   ngOnInit(): void {
   }
-
 }

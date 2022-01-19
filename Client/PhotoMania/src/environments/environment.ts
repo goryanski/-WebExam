@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiPhotoManiaURL: 'http://localhost:60535/api/photoMania'
+  apiPhotoManiaURL: 'http://localhost:60535/api/photoMania',
+  apiStaticFilesURL: 'http://localhost:60535/StaticFiles/'
 };
 
 /*

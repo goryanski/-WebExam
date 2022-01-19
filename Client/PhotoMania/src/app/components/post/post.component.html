@@ -1,9 +1,8 @@
 <div class="post">
   <p class="username">{{post.username}}</p>
-  <!-- {{post.photoPath}}  ,  ./src/app/uploads/images/winter.jpg (delete uploads folder) -->
-  <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/first-day-of-winter-solstice-2021-1638278570.jpg?crop=1.00xw:0.803xh;0.00160xw,0.197xh&resize=1200:*" alt="post image">
-
-  <div class="d-flex justify-content-between">
+<!--  use images in api static files folder -->
+  <img src="{{apiStaticFilesURL + post.photoPath}}" alt="post image">
+  <div class="d-flex justify-content-between mt-2">
     <div class="likes-container">
       <div class="likes">
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
@@ -22,5 +21,5 @@
   </div>
 
   <p>{{post.description}}</p>
-  <p>Comments ({{post.commentsCount}})</p>
+  <p class="comments">Comments ({{post.commentsCount}})</p>
 </div>

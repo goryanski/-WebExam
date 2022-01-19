@@ -118,9 +118,27 @@ namespace PhotoMania.DB.Repositories
                 DislikesCount = 7,
                 UserId = user1.Id
             };
+            Post post4 = new Post
+            {
+                Description = "my forth post",
+                Date = DateTime.Now,
+                LikesCount = 3,
+                DislikesCount = 7,
+                UserId = user1.Id
+            };
+            Post post5 = new Post
+            {
+                Description = "my fifth post",
+                Date = DateTime.Now,
+                LikesCount = 2,
+                DislikesCount = 1,
+                UserId = user1.Id
+            };
             db.Posts.Add(post1);
             db.Posts.Add(post2);
             db.Posts.Add(post3);
+            db.Posts.Add(post4);
+            db.Posts.Add(post5);
             db.SaveChanges();
 
             Comment comment1 = new Comment
@@ -138,7 +156,7 @@ namespace PhotoMania.DB.Repositories
             Avatar avatar1 = new Avatar
             {
                 Name = "avatar",
-                Url = @"Uploads\avatars\avatar.jpg",
+                Url = @"avatars\avatar.jpg",
                 UserId = user1.Id
             };
             db.Avatars.Add(avatar1);
@@ -153,24 +171,38 @@ namespace PhotoMania.DB.Repositories
             Photo photo1 = new Photo
             {
                 Name = "fall",
-                Url = @"Uploads\images\fall.jpeg",
+                Url = @"images\fall.jpeg",
                 PostId = post1.Id
             };
             Photo photo2 = new Photo
             {
                 Name = "spring",
-                Url = @"Uploads\images\spring.jpg",
+                Url = @"images\spring.jpg",
                 PostId = post2.Id
             };
             Photo photo3 = new Photo
             {
                 Name = "summer",
-                Url = @"Uploads\images\summer.jpg",
+                Url = @"images\summer.jpg",
                 PostId = post3.Id
+            };
+            Photo photo4 = new Photo
+            {
+                Name = "fall",
+                Url = @"images\fall.jpeg",
+                PostId = post4.Id
+            };
+            Photo photo5 = new Photo
+            {
+                Name = "spring",
+                Url = @"images\spring.jpg",
+                PostId = post5.Id
             };
             db.Photos.Add(photo1);
             db.Photos.Add(photo2);
             db.Photos.Add(photo3);
+            db.Photos.Add(photo4);
+            db.Photos.Add(photo5);
             db.SaveChanges();
             #endregion
         }
