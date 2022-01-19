@@ -1,0 +1,35 @@
+.post {
+  border: 1px solid black;
+  border-radius: 5%;
+  margin: 20px auto;
+  width: 50%;
+  text-align: center;
+  .username {
+    text-align: left;
+    padding-left: 20px;
+    padding-top: 5px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  img {
+    width: 100%;
+  }
+  .likes-container {
+    display: flex;
+
+    .likes, .dislikes {
+        margin-left: 20px;
+    }
+    .likes {
+      svg {
+        color: red;
+      }
+    }
+    .dislikes {
+
+    }
+  }
+  .date {
+    padding-right: 20px;
+  }
+}

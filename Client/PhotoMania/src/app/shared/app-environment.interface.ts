@@ -1,8 +1,5 @@
 export interface AppEnvironment {
-  photoManiaApi: {
-    url: string,
-    key: string
-  }
+  apiPhotoManiaURL: string
 }
 
 export class AppEnvironment implements AppEnvironment {}

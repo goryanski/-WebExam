@@ -13,7 +13,7 @@ using PhotoMania.DB.Repositories.Interfaces;
 
 namespace PhotoMania.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/photoMania/[controller]")]
     [ApiController]
     public class HomeController : ControllerBase
     {
