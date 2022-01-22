@@ -12,7 +12,5 @@ namespace PhotoMania.DB.Repositories
         public AccountsRepository(DatabaseContext context) : base(context)
         {
         }
-
-       
     }
 }

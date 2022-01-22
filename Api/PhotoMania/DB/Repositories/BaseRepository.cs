@@ -32,6 +32,10 @@ namespace PhotoMania.DB.Repositories
         {
             return await Task.Run(() => Table.Where(predicate).ToList());
         }
+        public IQueryable<T> FindAll()
+        {
+            return this.Table;
+        }
 
         public async Task<T> GetAsync(int id)
         {

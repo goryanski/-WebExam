@@ -105,7 +105,7 @@ namespace PhotoMania.DB.Repositories
             Post post2 = new Post
             {
                 Description = "my second post",
-                Date = DateTime.Now,
+                Date = DateTime.Now.AddDays(-1),
                 LikesCount = 10,
                 DislikesCount = 10,
                 UserId = user1.Id
@@ -113,7 +113,7 @@ namespace PhotoMania.DB.Repositories
             Post post3 = new Post
             {
                 Description = "my third post",
-                Date = DateTime.Now,
+                Date = DateTime.Now.AddDays(-2),
                 LikesCount = 7,
                 DislikesCount = 7,
                 UserId = user1.Id
@@ -121,7 +121,7 @@ namespace PhotoMania.DB.Repositories
             Post post4 = new Post
             {
                 Description = "my forth post",
-                Date = DateTime.Now,
+                Date = DateTime.Now.AddDays(-3),
                 LikesCount = 3,
                 DislikesCount = 7,
                 UserId = user1.Id
@@ -129,7 +129,7 @@ namespace PhotoMania.DB.Repositories
             Post post5 = new Post
             {
                 Description = "my fifth post",
-                Date = DateTime.Now,
+                Date = DateTime.Now.AddDays(-4),
                 LikesCount = 2,
                 DislikesCount = 1,
                 UserId = user1.Id

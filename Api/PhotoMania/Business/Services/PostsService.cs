@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using PhotoMania.Business.Dto;
+using PhotoMania.Business.PaginationModels;
 using PhotoMania.Business.Services.Interfaces;
 using PhotoMania.DB.Repositories.Interfaces;
 
@@ -18,9 +19,9 @@ namespace PhotoMania.Business.Services
             this.uow = uow;
         }
 
-        public async Task<List<PostDto>> GetAllPosts()
+        public async Task<List<PostDto>> GetPosts(PostParameters postParameters)
         {
-            var postEntities = await uow.PostsRepository.GetAllAsync();
+            var postEntities = uow.PostsRepository.GetPosts(postParameters.PageNumber, postParameters.PageSize);
             // try to map all filds that possible
             var postsList = objectMapper.Mapper.Map<List<PostDto>>(postEntities);
             // make list to get some fields, that lost while mapping
