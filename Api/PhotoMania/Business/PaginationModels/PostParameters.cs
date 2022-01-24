@@ -14,7 +14,7 @@ namespace PhotoMania.Business.PaginationModels
         // We have two public properties – PageNumber and PageSize. If not set by the caller, PageNumber will be set to 1, and PageSize to 10.
         public int PageNumber { get; set; } = 1;
         // private field _pageSize
-        private int _pageSize = 10;
+        private int _pageSize = 2;
         // PageSize property exposes private field _pageSize
         public int PageSize
         {

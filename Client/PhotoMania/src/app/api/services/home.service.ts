@@ -16,12 +16,12 @@ export class HomeService {
   ) {
   }
 
-  getPosts(): Observable<PostInterface[]> {
+  getNextPosts(pageNumber: number, pageSize: number): Observable<PostInterface[]> {
     return this.httpClient.get<PostInterface[]>(
-        [
-          this.appEnv.apiPhotoManiaURL,
-          'home'
-        ].join('/')
+      [
+        this.appEnv.apiPhotoManiaURL,
+        `home?PageNumber=${pageNumber}&PageSize=${pageSize}`
+      ].join('/')
     ).pipe(
       publishReplay(1),
       refCount()
