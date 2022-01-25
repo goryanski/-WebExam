@@ -16,7 +16,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using PhotoMania.Business.Services;
+using PhotoMania.Business.Services.Auth;
 using PhotoMania.Business.Services.Interfaces;
+using PhotoMania.Business.Services.Interfaces.Auth;
 using PhotoMania.DB;
 using PhotoMania.DB.Repositories;
 using PhotoMania.DB.Repositories.Interfaces;
@@ -70,7 +72,9 @@ namespace PhotoMania
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IPostsService, PostsService>();
-            services.AddTransient<IRolesService, RolesService>();
+            services.AddTransient<ITokenService, TokenService>();
+            services.AddTransient<IAccountsService, AccountsService>();
+            services.AddTransient<IMD5Service, MD5Service>();
 
             services.AddCors();
         }
