@@ -12,9 +12,6 @@ namespace PhotoMania.Business.Automapper.Profiles
     {
         public MappingProfile()
         {
-            CreateMap<Role, RoleDto>();
-            CreateMap<RoleDto, Role>();
-
             CreateMap<Post, PostDto>();
             CreateMap<PostDto, Post>();
 

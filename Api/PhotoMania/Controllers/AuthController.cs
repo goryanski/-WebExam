@@ -24,14 +24,18 @@ namespace PhotoMania.Controllers
         [HttpPost("login")]
         public async Task<JwtResponse> Login([FromBody] LoginViewModel model)
         {
+            ;
             JwtResponse response = new JwtResponse
             {
                 AccessToken = "none",
-                Exception = "none"
+                Exception = "none",
+                UserRole = "none"
             };
             try
             {
-                response.AccessToken = await accountsService.GetAccessToken(model.Login, model.Password);
+                var info = await accountsService.GetAccessToken(model.Login, model.Password);
+                response.AccessToken = info.AccessToken;
+                response.UserRole = info.UserRole;
             }
             catch (UserNotFoundException)
             {

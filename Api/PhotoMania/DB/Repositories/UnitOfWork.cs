@@ -58,19 +58,19 @@ namespace PhotoMania.DB.Repositories
             Account account1 = new Account
             {
                 Login = "admin",
-                Password = "admin",
+                Password = AccountsRepository.HashPassword("admin"),
                 RoleId = role1.Id
             };
             Account account2 = new Account
             {
                 Login = "moderator",
-                Password = "moderator",
+                Password = AccountsRepository.HashPassword("moderator"),
                 RoleId = role2.Id
             };
             Account account3 = new Account
             {
                 Login = "user",
-                Password = "user",
+                Password = AccountsRepository.HashPassword("user"),
                 RoleId = role3.Id
             };
             db.Accounts.Add(account1);
