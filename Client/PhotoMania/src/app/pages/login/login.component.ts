@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {LoginService} from "./login.service";
 import {take, tap} from "rxjs/operators";
+declare var window: any;
 
 @Component({
   selector: 'app-login',
@@ -11,8 +12,7 @@ import {take, tap} from "rxjs/operators";
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
-  userNotFound: boolean = false;
-  wrongPassword: boolean = false;
+  formModal: any;
 
   constructor(
     private fb: FormBuilder,
@@ -36,38 +36,37 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.formModal = new window.bootstrap.Modal(
+      document.getElementById('myModal')
+    );
   }
 
   onLoginClick() {
     if (this.form.valid) {
       const { username, password } = this.form.value;
-      ///let exceptionExternal: string = 'str';
-      //console.log('LoginComponent exception: ', exception);
 
       this.loginService.login(username, password).pipe(
         tap(
           exception => {
-            //console.log('LoginComponent exception: ', exception)
             if(exception == 'none') {
-              //console.log('LoginComponent exception: none')
+              this.router.navigate(['/']);
             }
-            // else if(exception == 'User login not found') {
-            //   //console.log('LoginComponent exception: User login not found')
-            //   //let usernameControl = this.form.controls['username'].addValidators(Validators.);
-            //   //console.log('LoginComponent usernameControl: ', usernameControl);
-            // }
             else {
-              //console.log('LoginComponent exception: Wrong password')
-              //$('#myModal').modal('show');
+              let modalMessage = document.getElementById('modalMessage');
+              if(modalMessage != null) {
+                modalMessage.innerText = exception;
+              }
+              this.formModal.show();
             }
           }),
         take(1)
       ).subscribe();
-      //console.log('LoginComponent exceptionExternal: ', exceptionExternal);
     }
   }
 
   onBackClick() {
     this.router.navigate(['/']);
   }
+
+
 }
