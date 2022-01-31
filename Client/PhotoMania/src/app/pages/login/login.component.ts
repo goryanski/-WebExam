@@ -11,6 +11,8 @@ import {take, tap} from "rxjs/operators";
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
+  userNotFound: boolean = false;
+  wrongPassword: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -39,13 +41,29 @@ export class LoginComponent implements OnInit {
   onLoginClick() {
     if (this.form.valid) {
       const { username, password } = this.form.value;
-      // let exception: string = this.loginService.login(username, password);
-      // console.log('LoginComponent exception: ', exception);
+      ///let exceptionExternal: string = 'str';
+      //console.log('LoginComponent exception: ', exception);
+
       this.loginService.login(username, password).pipe(
-        tap(exception => console.log('LoginComponent exception: ', exception)),
+        tap(
+          exception => {
+            //console.log('LoginComponent exception: ', exception)
+            if(exception == 'none') {
+              //console.log('LoginComponent exception: none')
+            }
+            // else if(exception == 'User login not found') {
+            //   //console.log('LoginComponent exception: User login not found')
+            //   //let usernameControl = this.form.controls['username'].addValidators(Validators.);
+            //   //console.log('LoginComponent usernameControl: ', usernameControl);
+            // }
+            else {
+              //console.log('LoginComponent exception: Wrong password')
+              //$('#myModal').modal('show');
+            }
+          }),
         take(1)
       ).subscribe();
-      //console.log('LoginComponent exception: ', exception);
+      //console.log('LoginComponent exceptionExternal: ', exceptionExternal);
     }
   }
 
