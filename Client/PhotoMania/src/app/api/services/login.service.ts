@@ -13,7 +13,6 @@ export class LoginApiService {
     private readonly appEnv: AppEnvironment
   ) { }
 
-
   login(login: string, password: string): Observable<JwtResponse> {
     return this.http.post<JwtResponse>(
       [

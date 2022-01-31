@@ -10,4 +10,8 @@ export abstract class AbstractStorage implements Storage {
   abstract setItem(key: string, value: string): void;
 
   readonly length: number = 0;
+
+  abstract isUserAuthenticated(): boolean
+
+  abstract getUserRole(): string
 }

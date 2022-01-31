@@ -32,4 +32,13 @@ export class BrowserLocalStorage implements AbstractStorage {
   setItem(key: string, value: string): void {
     this.storage.setItem(key, value);
   }
+
+  isUserAuthenticated(): boolean {
+    let token = this.getItem('accessToken');
+    return !(token == null || token == 'none');
+  }
+  getUserRole(): string {
+    let role = this.getItem('currentUserRole');
+    return role != null ? role : 'none';
+  }
 }
