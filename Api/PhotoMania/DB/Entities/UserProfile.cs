@@ -9,7 +9,7 @@ namespace PhotoMania.DB.Entities
     {
         public string Email { get; set; }
         public int Rating { get; set; } // max 100_000_000
-        public string Description { get; set; }
+        public string Description { get; set; } // SocialLinks here
         public bool IsBlocked { get; set; }
         public DateTime RegistrationDate { get; set; }
 
@@ -19,7 +19,7 @@ namespace PhotoMania.DB.Entities
         public Account Account { get; set; }
 
         public List<Post> Posts { get; set; }
-        public List<SocialLink> SocialLinks { get; set; }
+        public List<SocialLink> SocialLinks { get; set; } // remove
         //public List<Comment> Comments { get; set; }
     }
 }

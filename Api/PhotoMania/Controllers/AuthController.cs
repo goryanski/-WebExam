@@ -24,7 +24,6 @@ namespace PhotoMania.Controllers
         [HttpPost("login")]
         public async Task<JwtResponse> Login([FromBody] LoginViewModel model)
         {
-            ;
             JwtResponse response = new JwtResponse
             {
                 AccessToken = "none",
@@ -47,6 +46,15 @@ namespace PhotoMania.Controllers
             }
 
             return response;
+        }
+
+        [HttpPost("registration")]
+        public async Task<string> Registration([FromBody] RegisterViewModel model)
+        {
+            string exception = "none";
+
+
+            return exception;
         }
     }
 }

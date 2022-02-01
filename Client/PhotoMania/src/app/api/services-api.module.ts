@@ -2,6 +2,7 @@ import {NgModule} from "@angular/core";
 import {HttpClientModule} from "@angular/common/http";
 import {HomeService} from "./services/home.service";
 import {LoginApiService} from "./services/login.service";
+import {UploadService} from "./services/upload.service";
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import {LoginApiService} from "./services/login.service";
   ],
   providers: [
     HomeService,
-    LoginApiService
+    LoginApiService,
+    UploadService
   ]
 })
 export class ApiServicesModule { }

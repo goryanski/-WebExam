@@ -1,0 +1,18 @@
+
+<div class="row" style="margin-bottom:15px;">
+  <div class="col-md-3">
+    <!-- we hide the actual upload control and use its reference (#file) to invoke its click event with the button. As soon as we click our button it will simulate the click event from the file controller -->
+  <!-- attribute accept - to help user choose correct type of file -->
+    <input type="file" accept=".jpg,.png,.jpeg" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;">
+    <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
+  </div>
+  <!-- show progress -->
+  <div class="col-md-4">
+    <span class="upload" *ngIf="progress > 0">
+      {{progress}}%
+    </span>
+    <span class="upload" *ngIf="message">
+      {{message}}
+    </span>
+  </div>
+</div>

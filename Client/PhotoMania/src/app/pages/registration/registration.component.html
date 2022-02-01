@@ -1,0 +1,74 @@
+<form class="registration-form mt-5" [formGroup]="form">
+  <div class="mb-3">
+    <label for="inputLogin" class="form-label">Login (it will be your username also)</label>
+    <input type="text" class="form-control"
+           formControlName="username" id="inputLogin" aria-describedby="emailHelp">
+    <div *ngIf="form.controls['username'].errors">
+      <div *ngIf="form.controls['username'].errors.required"
+           class="form-text text-danger">Field is required
+      </div>
+      <div *ngIf="form.controls['username'].errors.pattern"
+           class="form-text text-danger">English letters only, symbol _ (4-14 symbols)
+      </div>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="inputPassword" class="form-label">Password</label>
+    <input type="text" class="form-control"
+           formControlName="password" id="inputPassword">
+    <div *ngIf="form.controls['password'].errors">
+      <div *ngIf="form.controls['password'].errors.required"
+           class="form-text text-danger">Field is required
+      </div>
+      <div *ngIf="form.controls['password'].errors.minlength"
+           class="form-text text-danger">min 4 symbols
+      </div>
+      <div *ngIf="form.controls['password'].errors.maxlength"
+           class="form-text text-danger">max 16 symbols
+      </div>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="inputEmail" class="form-label">Email</label>
+    <input class="form-control"
+           formControlName="email" id="inputEmail">
+    <div *ngIf="form.controls['email'].errors">
+      <div *ngIf="form.controls['email'].errors.required"
+           class="form-text text-danger">Field is required
+      </div>
+      <div *ngIf="form.controls['email'].errors.email"
+           class="form-text text-danger">email is incorrect
+      </div>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="inputDescription" class="form-label">Description (optional) some info about you - age, habits, social links, phone number, etc</label>
+    <textarea type="text" class="form-control" rows="4"
+           formControlName="description" id="inputDescription">
+    </textarea>
+    <div *ngIf="form.controls['description'].errors">
+      <div *ngIf="form.controls['description'].errors.maxlength"
+           class="form-text text-danger">max 264 symbols
+      </div>
+    </div>
+  </div>
+
+
+  <div class="mb-3">
+    <label class="form-label">Avatar (only types jpg, png, jpeg)</label>
+    <!--  file-loader-->
+    <app-upload [saveImgFolder]="'avatars'"></app-upload>
+  </div>
+
+
+
+  <div class="mt-5">
+    <button [disabled]="!form.valid"
+            (click)="onRegisterClick()"
+            class="btn btn-warning">Register
+    </button>
+    <button (click)="onBackClick()"
+            class="btn btn-warning btn-back">Back
+    </button>
+  </div>
+</form>

@@ -4,6 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import {RouterModule} from "@angular/router";
 import { PostComponent } from './post/post.component';
+import { UploadComponent } from './upload/upload.component';
 
 
 // common components
@@ -11,13 +12,15 @@ import { PostComponent } from './post/post.component';
   declarations: [
     HeaderComponent,
     FooterComponent,
-    PostComponent
+    PostComponent,
+    UploadComponent
   ],
-    exports: [
-        HeaderComponent,
-        FooterComponent,
-        PostComponent
-    ],
+  exports: [
+    HeaderComponent,
+    FooterComponent,
+    PostComponent,
+    UploadComponent
+  ],
   imports: [
     CommonModule,
     RouterModule
