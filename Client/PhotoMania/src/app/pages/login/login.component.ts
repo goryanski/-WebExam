@@ -3,7 +3,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {LoginService} from "./login.service";
 import {take, tap} from "rxjs/operators";
-import {HeaderComponent} from "../../components/header/header.component";
+import {AuthHelper} from "../../shared/helpers/auth-helper";
+import {BrowserLocalStorage} from "../../shared/storage/local-storage";
 declare var window: any;
 
 @Component({
@@ -19,6 +20,8 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private readonly router: Router,
     private readonly loginService: LoginService,
+    private readonly authHelper: AuthHelper,
+    private readonly localStorage: BrowserLocalStorage
   ) {
     this.form = this.fb.group({
       'username': this.fb.control(
@@ -50,7 +53,8 @@ export class LoginComponent implements OnInit {
         tap(
           exception => {
             if(exception == 'none') {
-              this.changeAuthButtons();
+              // change links logOut, login, etc. (in a header)
+              this.authHelper.setAuthenticatedUserLinks();
               this.router.navigate(['/']);
             }
             else {
@@ -69,21 +73,5 @@ export class LoginComponent implements OnInit {
 
   onBackClick() {
     this.router.navigate(['/']);
-  }
-
-  changeAuthButtons() {
-    let logOutLink = document.getElementById('logOutLink');
-    let loginLink = document.getElementById('loginLink');
-    let registrationLink = document.getElementById('registrationLink');
-
-    if(logOutLink != null) {
-      logOutLink.style.display = "block";
-    }
-    if(registrationLink != null) {
-      registrationLink.style.display = "none";
-    }
-    if(loginLink != null) {
-      loginLink.style.display = "none";
-    }
   }
 }

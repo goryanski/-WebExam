@@ -3,14 +3,16 @@ import {BrowserLocalStorage} from "../storage/local-storage";
 
 @Injectable()
 export class AuthHelper {
-  logOutLink: HTMLElement | null;
-  loginLink: HTMLElement | null;
-  registrationLink: HTMLElement | null;
-  profileLink: HTMLElement | null;
-  adminPanelLink: HTMLElement | null;
-  moderatorPanelLink: HTMLElement | null;
+  logOutLink: any;
+  loginLink: any;
+  registrationLink: any;
+  profileLink: any;
+  adminPanelLink: any;
+  moderatorPanelLink: any;
 
-  constructor(private readonly localStorage: BrowserLocalStorage) {
+  constructor(private readonly localStorage: BrowserLocalStorage) {}
+
+  initFields() {
     this.logOutLink = document.getElementById('logOutLink');
     this.loginLink = document.getElementById('loginLink');
     this.registrationLink = document.getElementById('registrationLink');
@@ -21,19 +23,21 @@ export class AuthHelper {
 
   checkAndSetAuthUserLinks() {
     if(this.localStorage.isUserAuthenticated()) {
-      this.SetAuthenticatedUserLinks();
+      this.setAuthenticatedUserLinks();
     }
     else {
-      this.SetNonAuthenticatedUserLinks();
+      this.setNonAuthenticatedUserLinks();
     }
   }
 
-  SetAuthenticatedUserLinks() {
-    if(this.logOutLink != null) {
-      this.logOutLink.style.display = "block";
-    }
+  setAuthenticatedUserLinks() {
+    this.initFields();
+
     if(this.registrationLink != null) {
       this.registrationLink.style.display = "none";
+    }
+    if(this.logOutLink != null) {
+      this.logOutLink.style.display = "block";
     }
     if(this.loginLink != null) {
       this.loginLink.style.display = "none";
@@ -64,7 +68,8 @@ export class AuthHelper {
     }
   }
 
-  SetNonAuthenticatedUserLinks() {
+  setNonAuthenticatedUserLinks() {
+    this.initFields();
     if(this.logOutLink != null) {
       this.logOutLink.style.display = "none";
     }
@@ -84,4 +89,6 @@ export class AuthHelper {
       this.moderatorPanelLink.style.display = "none";
     }
   }
+
+
 }

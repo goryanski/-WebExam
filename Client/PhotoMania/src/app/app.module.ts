@@ -10,6 +10,7 @@ import {AppEnvironment} from "./shared/app-environment.interface";
 import {environment} from "../environments/environment";
 import {QueryHttpInterceptor} from "./shared/http-interceptors/query-http.interceptor";
 import {ApiServicesModule} from "./api/services-api.module";
+import {AuthHelper} from "./shared/helpers/auth-helper";
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {ApiServicesModule} from "./api/services-api.module";
   ],
   providers: [
     //AuthGuard,
+    AuthHelper,
     BrowserLocalStorage,
     {
       provide: AppEnvironment,

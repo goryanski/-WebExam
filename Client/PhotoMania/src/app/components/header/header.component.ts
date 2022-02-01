@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthHelper} from "../../shared/helpers/auth-helper";
 import {BrowserLocalStorage} from "../../shared/storage/local-storage";
 
 @Component({
@@ -7,41 +8,19 @@ import {BrowserLocalStorage} from "../../shared/storage/local-storage";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  isUserAuthenticated: boolean;
-  userRole: string;
 
-  constructor(private readonly localStorage: BrowserLocalStorage) {
-    this.isUserAuthenticated = this.localStorage.isUserAuthenticated();
-    this.userRole = this.localStorage.getUserRole();
-    // console.log('isUserAuthenticated: ', this.isUserAuthenticated);
-    // console.log('userRole: ', this.userRole);
-    console.log('HeaderComponent constructor');
-  }
+  constructor(
+    private readonly authHelper: AuthHelper,
+    private readonly localStorage: BrowserLocalStorage
+  ) {}
 
   ngOnInit(): void {
-    // console.log('isUserAuthenticated: ', this.isUserAuthenticated);
-    // console.log('userRole: ', this.userRole);
-    this.setAuthButtons();
-    console.log('HeaderComponent ngOnInit');
+    this.authHelper.checkAndSetAuthUserLinks();
   }
 
-  setAuthButtons() {
-    let logOutLink = document.getElementById('logOutLink');
-    let loginLink = document.getElementById('loginLink');
-    let registrationLink = document.getElementById('registrationLink');
-    //let
-    if(this.isUserAuthenticated) {
-
-
-      if(logOutLink != null) {
-        logOutLink.style.display = "block";
-      }
-      if(registrationLink != null) {
-        registrationLink.style.display = "none";
-      }
-      if(loginLink != null) {
-        loginLink.style.display = "none";
-      }
-    }
+  logOut() {
+    this.authHelper.setNonAuthenticatedUserLinks();
+    this.localStorage.removeItem('accessToken');
+    this.localStorage.removeItem('currentUserRole');
   }
 }
