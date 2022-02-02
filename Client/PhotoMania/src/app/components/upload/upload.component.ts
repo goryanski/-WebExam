@@ -29,20 +29,15 @@ export class UploadComponent implements OnInit {
     // otherwise we extract the file from the files parameter
     let fileToUpload = <File>files[0];
 
+    // check file extension
     let fileExt = fileToUpload.name.split('.').pop();
-    console.log('fileExt: ', fileExt);
     if(fileExt != 'jpg' && fileExt != 'png' && fileExt != 'jpeg') {
       this.message = 'Wrong file type, try again';
       return;
     }
-    else {
-      console.log('good file');
-    }
 
     // create a formData object and append our file that we want to upload
     const formData = new FormData();
-
-    //console.log('fileToUpload.name: ', fileToUpload.name);
 
     formData.append('file', fileToUpload, fileToUpload.name);
 

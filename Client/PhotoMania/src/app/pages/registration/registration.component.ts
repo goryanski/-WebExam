@@ -11,10 +11,11 @@ export class RegistrationComponent implements OnInit {
 
   form: FormGroup;
   pattern = {
-    login: '^[a-zA-Z_]{4,14}$', // English letters only, symbol _ (4-14 symbols)
+    login: '^[a-zA-Z_0-9]{4,14}$', // English letters only, digits, symbol _ (4-14 symbols)
   }
   // path to avatar in db (we can get it after user will load the avatar - watch this.uploadFinished())
   public response: { dbPath: ''; } | undefined;
+  public modalWindowData: any;
 
   constructor(
     private fb: FormBuilder,
@@ -58,11 +59,24 @@ export class RegistrationComponent implements OnInit {
 
   onRegisterClick() {
     // imgPath: this.response.dbPath
-    if(this.response != undefined) {
-      console.log('img db path: ', this.response.dbPath);
+    if(this.response === undefined) {
+      // the same logic as in login component
+      this.modalWindowData = {
+        title: 'Oops!',
+        message: 'It seems you did not choose an avatar!'
+      }
     }
     else {
-      console.log('there are no img db path here');
+      //console.log('okay');
+      if (this.form.valid) {
+        const {
+          username,
+          password,
+          email,
+          description
+        } = this.form.value;
+        console.log(`${username}\n${password}\n${email}\n${description}`)
+      }
     }
   }
 

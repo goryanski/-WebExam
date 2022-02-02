@@ -8,7 +8,7 @@
            class="form-text text-danger">Field is required
       </div>
       <div *ngIf="form.controls['username'].errors.pattern"
-           class="form-text text-danger">English letters only, symbol _ (4-14 symbols)
+           class="form-text text-danger">English letters only, digits, symbol _ (4-14 symbols)
       </div>
     </div>
   </div>
@@ -75,3 +75,6 @@
     </button>
   </div>
 </form>
+
+
+<app-modal-window [data]="modalWindowData"></app-modal-window>
