@@ -5,7 +5,6 @@ import {LoginService} from "./login.service";
 import {take, tap} from "rxjs/operators";
 import {AuthHelper} from "../../shared/helpers/auth-helper";
 import {BrowserLocalStorage} from "../../shared/storage/local-storage";
-declare var window: any;
 
 @Component({
   selector: 'app-login',
@@ -14,7 +13,7 @@ declare var window: any;
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
-  formModal: any;
+  public modalWindowData: any;
 
   constructor(
     private fb: FormBuilder,
@@ -39,11 +38,7 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-    this.formModal = new window.bootstrap.Modal(
-      document.getElementById('myModal')
-    );
-  }
+  ngOnInit(): void {}
 
   onLoginClick() {
     if (this.form.valid) {
@@ -58,12 +53,11 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['/']);
             }
             else {
-              // show error in a modal window
-              let modalMessage = document.getElementById('modalMessage');
-              if(modalMessage != null) {
-                modalMessage.innerText = exception;
+              // show error in a modal window. When we change field this.modalWindowData here -  in a modal-window component will call hook ngOnChanges (because we pass this.modalWindowData to the <app-modal-window> in a html template as an @Input() parameter) and we will see the modal window with wished title and message
+              this.modalWindowData = {
+                title: 'Oops!',
+                message: exception
               }
-              this.formModal.show();
             }
           }),
         take(1)

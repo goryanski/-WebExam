@@ -17,9 +17,9 @@ export class LoginService {
   login(login: string, password: string): Observable<string> {
     return this.loginApiService.login(login, password).pipe(
       tap(response => {
-        console.log('jwtResp - token str: ', response.accessToken);
-        console.log('role: ', response.userRole);
-        console.log('exception: ', response.exception);
+        // console.log('jwtResp - token str: ', response.accessToken);
+        // console.log('role: ', response.userRole);
+        // console.log('exception: ', response.exception);
 
         // Save token and role to localStorage
         this.localStorage.setItem('accessToken', response.accessToken);

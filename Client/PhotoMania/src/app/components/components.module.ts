@@ -5,6 +5,8 @@ import { FooterComponent } from './footer/footer.component';
 import {RouterModule} from "@angular/router";
 import { PostComponent } from './post/post.component';
 import { UploadComponent } from './upload/upload.component';
+import { ModalWindowComponent } from './modal-window/modal-window.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 // common components
@@ -13,17 +15,20 @@ import { UploadComponent } from './upload/upload.component';
     HeaderComponent,
     FooterComponent,
     PostComponent,
-    UploadComponent
+    UploadComponent,
+    ModalWindowComponent
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
     PostComponent,
-    UploadComponent
+    UploadComponent,
+    ModalWindowComponent
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    //ReactiveFormsModule
   ]
 })
 export class ComponentsModule { }

@@ -56,8 +56,11 @@
 
   <div class="mb-3">
     <label class="form-label">Avatar (only types jpg, png, jpeg)</label>
-    <!--  file-loader-->
-    <app-upload [saveImgFolder]="'avatars'"></app-upload>
+    <!-- file-loader
+          'avatars' - image folder on server
+          (onUploadFinished) - event on finish image upload to server -->
+    <app-upload [saveImgFolder]="'avatars'"
+                (onUploadFinished)="uploadFinished($event)"></app-upload>
   </div>
 
 

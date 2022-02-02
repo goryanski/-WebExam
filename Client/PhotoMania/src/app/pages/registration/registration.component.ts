@@ -13,6 +13,8 @@ export class RegistrationComponent implements OnInit {
   pattern = {
     login: '^[a-zA-Z_]{4,14}$', // English letters only, symbol _ (4-14 symbols)
   }
+  // path to avatar in db (we can get it after user will load the avatar - watch this.uploadFinished())
+  public response: { dbPath: ''; } | undefined;
 
   constructor(
     private fb: FormBuilder,
@@ -55,10 +57,21 @@ export class RegistrationComponent implements OnInit {
   }
 
   onRegisterClick() {
-
+    // imgPath: this.response.dbPath
+    if(this.response != undefined) {
+      console.log('img db path: ', this.response.dbPath);
+    }
+    else {
+      console.log('there are no img db path here');
+    }
   }
 
   onBackClick() {
+    this.router.navigate(['/']);
+  }
 
+  public uploadFinished = (event: any) => {
+    // in event we have the response object in which we can find a path of avatar to be saved in the database
+    this.response = event;
   }
 }

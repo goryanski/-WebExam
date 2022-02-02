@@ -32,8 +32,7 @@ export class UploadComponent implements OnInit {
     let fileExt = fileToUpload.name.split('.').pop();
     console.log('fileExt: ', fileExt);
     if(fileExt != 'jpg' && fileExt != 'png' && fileExt != 'jpeg') {
-      //console.log('wrong file');
-      this.message = 'Wrong file, try again';
+      this.message = 'Wrong file type, try again';
       return;
     }
     else {
