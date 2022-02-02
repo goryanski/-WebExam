@@ -20,11 +20,8 @@
       <div *ngIf="form.controls['password'].errors.required"
            class="form-text text-danger">Field is required
       </div>
-      <div *ngIf="form.controls['password'].errors.minlength"
-           class="form-text text-danger">min 4 symbols
-      </div>
-      <div *ngIf="form.controls['password'].errors.maxlength"
-           class="form-text text-danger">max 16 symbols
+      <div *ngIf="form.controls['password'].errors.pattern"
+           class="form-text text-danger">English letters only, digits, symbols _ # @ (4-16 symbols)
       </div>
     </div>
   </div>

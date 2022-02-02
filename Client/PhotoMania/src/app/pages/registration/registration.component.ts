@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {AuthApiService} from "../../api/services/auth.service";
+import {take, tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-registration',
@@ -12,15 +14,16 @@ export class RegistrationComponent implements OnInit {
   form: FormGroup;
   pattern = {
     login: '^[a-zA-Z_0-9]{4,14}$', // English letters only, digits, symbol _ (4-14 symbols)
+    password: '^[a-zA-Z_#@0-9]{4,16}$' // English letters only, digits, symbols _ # @ (4-16 symbols)
   }
   // path to avatar in db (we can get it after user will load the avatar - watch this.uploadFinished())
-  public response: { dbPath: ''; } | undefined;
+  public avatarImg: { dbPath: ''; } | undefined;
   public modalWindowData: any;
 
   constructor(
     private fb: FormBuilder,
     private readonly router: Router,
-    //private readonly authService: AuthenticationService
+    private readonly authApiService: AuthApiService
   ) {
     this.form = this.fb.group({
       'username': this.fb.control(
@@ -34,8 +37,7 @@ export class RegistrationComponent implements OnInit {
         '123456',
         [
           Validators.required,
-          Validators.minLength(4),
-          Validators.maxLength(16)
+          Validators.pattern(this.pattern.password)
         ]
       ),
       'email': this.fb.control(
@@ -58,8 +60,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   onRegisterClick() {
-    // imgPath: this.response.dbPath
-    if(this.response === undefined) {
+    if(this.avatarImg === undefined) {
       // the same logic as in login component
       this.modalWindowData = {
         title: 'Oops!',
@@ -67,7 +68,6 @@ export class RegistrationComponent implements OnInit {
       }
     }
     else {
-      //console.log('okay');
       if (this.form.valid) {
         const {
           username,
@@ -75,7 +75,21 @@ export class RegistrationComponent implements OnInit {
           email,
           description
         } = this.form.value;
-        console.log(`${username}\n${password}\n${email}\n${description}`)
+
+        this.authApiService.registration(
+          username, password, email, description, this.avatarImg.dbPath
+        ).pipe(
+          tap(
+            response => {
+              if(response === 'ok') {
+                // TODO: success message (modal)
+              }
+              else {
+                // TODO: error message (modal)
+              }
+            }),
+          take(1)
+        ).subscribe();
       }
     }
   }
@@ -86,6 +100,6 @@ export class RegistrationComponent implements OnInit {
 
   public uploadFinished = (event: any) => {
     // in event we have the response object in which we can find a path of avatar to be saved in the database
-    this.response = event;
+    this.avatarImg = event;
   }
 }

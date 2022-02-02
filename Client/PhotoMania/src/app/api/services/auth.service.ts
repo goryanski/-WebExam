@@ -7,7 +7,7 @@ import {JwtResponse} from "../interfaces/jwt-response.interface";
 
 
 @Injectable()
-export class LoginApiService {
+export class AuthApiService {
   constructor(
     private readonly http: HttpClient,
     private readonly appEnv: AppEnvironment
@@ -28,6 +28,30 @@ export class LoginApiService {
         headers: {
           'Authorization': 'Bearer token'
         }
+      }
+    ).pipe(
+      publishReplay(1),
+      refCount()
+    )
+  }
+
+
+  registration(
+    login: string, password: string, email: string, description: string, avatarPath: string
+  ) : Observable<string>
+  {
+    return this.http.post<string>(
+      [
+        this.appEnv.apiPhotoManiaURL,
+        'auth',
+        'registration'
+      ].join('/'),
+      {
+        login,
+        password,
+        email,
+        description,
+        avatarPath
       }
     ).pipe(
       publishReplay(1),

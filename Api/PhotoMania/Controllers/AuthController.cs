@@ -51,10 +51,13 @@ namespace PhotoMania.Controllers
         [HttpPost("registration")]
         public async Task<string> Registration([FromBody] RegisterViewModel model)
         {
-            string exception = "none";
+            ;
+            // data comes right
+            //string exception = "none";
+            string response = await accountsService.RegisterNewUser(model);
 
 
-            return exception;
+            return response;
         }
     }
 }
