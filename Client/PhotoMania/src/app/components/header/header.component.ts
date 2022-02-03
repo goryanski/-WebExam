@@ -12,14 +12,20 @@ export class HeaderComponent implements OnInit {
   constructor(
     private readonly authHelper: AuthHelper,
     private readonly localStorage: BrowserLocalStorage
-  ) {}
+  ) {
+
+    // let searchHeaderForm = document.getElementById('searchHeaderForm');
+    // if(searchHeaderForm != null) {
+    //   searchHeaderForm.style.display = "none !important";
+    // }
+  }
 
   ngOnInit(): void {
-    this.authHelper.checkAndSetAuthUserLinks();
+    this.authHelper.checkAndSetAuthUserState();
   }
 
   logOut() {
-    this.authHelper.setNonAuthenticatedUserLinks();
+    this.authHelper.setNonAuthenticatedUserState();
     this.localStorage.removeItem('accessToken');
     this.localStorage.removeItem('currentUserRole');
   }

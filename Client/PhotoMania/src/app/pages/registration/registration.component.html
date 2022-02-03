@@ -34,7 +34,10 @@
            class="form-text text-danger">Field is required
       </div>
       <div *ngIf="form.controls['email'].errors.email"
-           class="form-text text-danger">email is incorrect
+           class="form-text text-danger">Email is incorrect
+      </div>
+      <div *ngIf="form.controls['email'].errors.pattern"
+           class="form-text text-danger">Symbols * and ' are forbidden (4-32 symbols)
       </div>
     </div>
   </div>
@@ -44,8 +47,8 @@
            formControlName="description" id="inputDescription">
     </textarea>
     <div *ngIf="form.controls['description'].errors">
-      <div *ngIf="form.controls['description'].errors.maxlength"
-           class="form-text text-danger">max 264 symbols
+      <div *ngIf="form.controls['description'].errors.pattern"
+           class="form-text text-danger">English letters only, digits, space, symbols ,.!/+@_ Max 264 symbols
       </div>
     </div>
   </div>

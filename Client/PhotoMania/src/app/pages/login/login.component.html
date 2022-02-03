@@ -7,6 +7,9 @@
       <div *ngIf="form.controls['username'].errors.required"
            class="form-text text-danger">Field is required
       </div>
+      <div *ngIf="form.controls['username'].errors.pattern"
+           class="form-text text-danger">English letters only, digits, symbol _ (4-14 symbols)
+      </div>
     </div>
   </div>
   <div class="mb-3">
@@ -16,6 +19,9 @@
     <div *ngIf="form.controls['password'].errors">
       <div *ngIf="form.controls['password'].errors.required"
            class="form-text text-danger">Field is required
+      </div>
+      <div *ngIf="form.controls['password'].errors.pattern"
+           class="form-text text-danger">English letters only, digits, symbols _ # @ (4-16 symbols)
       </div>
     </div>
   </div>

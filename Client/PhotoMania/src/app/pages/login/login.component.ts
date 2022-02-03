@@ -13,6 +13,10 @@ import {BrowserLocalStorage} from "../../shared/storage/local-storage";
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
+  pattern = {
+    login: '^[a-zA-Z_0-9]{4,14}$', // English letters only, digits, symbol _ (4-14 symbols)
+    password: '^[a-zA-Z_#@0-9]{4,16}$' // English letters only, digits, symbols _ # @ (4-16 symbols)
+  }
   public modalWindowData: any;
 
   constructor(
@@ -26,13 +30,15 @@ export class LoginComponent implements OnInit {
       'username': this.fb.control(
         'user',
         [
-          Validators.required
+          Validators.required,
+          Validators.pattern(this.pattern.login)
         ]
       ),
       'password': this.fb.control(
         'user',
         [
-          Validators.required
+          Validators.required,
+          Validators.pattern(this.pattern.password)
         ]
       )
     })
@@ -49,7 +55,7 @@ export class LoginComponent implements OnInit {
           exception => {
             if(exception == 'none') {
               // change links logOut, login, etc. (in a header)
-              this.authHelper.setAuthenticatedUserLinks();
+              this.authHelper.setAuthenticatedUserState();
               this.router.navigate(['/']);
             }
             else {

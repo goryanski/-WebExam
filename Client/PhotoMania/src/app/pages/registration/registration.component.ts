@@ -14,7 +14,9 @@ export class RegistrationComponent implements OnInit {
   form: FormGroup;
   pattern = {
     login: '^[a-zA-Z_0-9]{4,14}$', // English letters only, digits, symbol _ (4-14 symbols)
-    password: '^[a-zA-Z_#@0-9]{4,16}$' // English letters only, digits, symbols _ # @ (4-16 symbols)
+    password: '^[a-zA-Z_#@0-9]{4,16}$', // English letters only, digits, symbols _ # @ (4-16 symbols)
+    email: '[^\'*]{4,32}', // Symbols * and ' are forbidden (4-32 symbols)
+    description: '^[a-zA-Z ,.!/+@_0-9]{0,264}$' // English letters only, digits, space, symbols ,.!/+@_ Max 264 symbols
   }
   // path to avatar in db (we can get it after user will load the avatar - watch this.uploadFinished())
   public avatarImg: { dbPath: ''; } | undefined;
@@ -45,12 +47,14 @@ export class RegistrationComponent implements OnInit {
         [
           Validators.required,
           Validators.email,
+          Validators.pattern(this.pattern.email)
         ]
       ),
       'description': this.fb.control(
         'some description',
         [
-          Validators.maxLength(264)
+          Validators.maxLength(264),
+          Validators.pattern(this.pattern.description)
         ]
       )
     })

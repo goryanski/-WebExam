@@ -9,6 +9,7 @@ export class AuthHelper {
   profileLink: any;
   adminPanelLink: any;
   moderatorPanelLink: any;
+  searchHeaderForm: any;
 
   constructor(private readonly localStorage: BrowserLocalStorage) {}
 
@@ -19,18 +20,19 @@ export class AuthHelper {
     this.profileLink = document.getElementById('profileLink');
     this.adminPanelLink = document.getElementById('adminPanelLink');
     this.moderatorPanelLink = document.getElementById('moderatorPanelLink');
+    this.searchHeaderForm = document.getElementById('searchHeaderForm');
   }
 
-  checkAndSetAuthUserLinks() {
+  checkAndSetAuthUserState() {
     if(this.localStorage.isUserAuthenticated()) {
-      this.setAuthenticatedUserLinks();
+      this.setAuthenticatedUserState();
     }
     else {
-      this.setNonAuthenticatedUserLinks();
+      this.setNonAuthenticatedUserState();
     }
   }
 
-  setAuthenticatedUserLinks() {
+  setAuthenticatedUserState() {
     this.initFields();
 
     if(this.registrationLink != null) {
@@ -41,6 +43,10 @@ export class AuthHelper {
     }
     if(this.loginLink != null) {
       this.loginLink.style.display = "none";
+    }
+
+    if(this.searchHeaderForm != null) {
+      this.searchHeaderForm.style.display = "block";
     }
 
     let role = this.localStorage.getUserRole();
@@ -68,7 +74,7 @@ export class AuthHelper {
     }
   }
 
-  setNonAuthenticatedUserLinks() {
+  setNonAuthenticatedUserState() {
     this.initFields();
     if(this.logOutLink != null) {
       this.logOutLink.style.display = "none";
@@ -87,6 +93,9 @@ export class AuthHelper {
     }
     if(this.moderatorPanelLink != null) {
       this.moderatorPanelLink.style.display = "none";
+    }
+    if(this.searchHeaderForm != null) {
+      this.searchHeaderForm.style.display = "none";
     }
   }
 
