@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {publishReplay, refCount} from "rxjs/operators";
 import {AppEnvironment} from "../../shared/app-environment.interface";
 import {JwtResponse} from "../interfaces/jwt-response.interface";
+import {RegistrationResponse} from "../interfaces/registration.response.interface";
 
 
 @Injectable()
@@ -36,11 +37,12 @@ export class AuthApiService {
   }
 
 
+
   registration(
     login: string, password: string, email: string, description: string, avatarPath: string
-  ) : Observable<string>
+  ) : Observable<RegistrationResponse>
   {
-    return this.http.post<string>(
+    return this.http.post<RegistrationResponse>(
       [
         this.appEnv.apiPhotoManiaURL,
         'auth',
@@ -52,6 +54,11 @@ export class AuthApiService {
         email,
         description,
         avatarPath
+      },
+      {
+        headers: {
+          'Authorization': 'Bearer token'
+        }
       }
     ).pipe(
       publishReplay(1),

@@ -49,15 +49,12 @@ namespace PhotoMania.Controllers
         }
 
         [HttpPost("registration")]
-        public async Task<string> Registration([FromBody] RegisterViewModel model)
+        public async Task<RegistrationResponse> Registration([FromBody] RegisterViewModel model)
         {
-            ;
-            // data comes right
-            //string exception = "none";
-            string response = await accountsService.RegisterNewUser(model);
-
-
-            return response;
+            return new RegistrationResponse
+            {
+                Response = await accountsService.RegisterNewUser(model)
+            };
         }
     }
 }

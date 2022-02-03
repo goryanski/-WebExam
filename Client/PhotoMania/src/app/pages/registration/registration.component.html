@@ -14,7 +14,7 @@
   </div>
   <div class="mb-3">
     <label for="inputPassword" class="form-label">Password</label>
-    <input type="text" class="form-control"
+    <input type="password" class="form-control"
            formControlName="password" id="inputPassword">
     <div *ngIf="form.controls['password'].errors">
       <div *ngIf="form.controls['password'].errors.required"
@@ -33,11 +33,8 @@
       <div *ngIf="form.controls['email'].errors.required"
            class="form-text text-danger">Field is required
       </div>
-      <div *ngIf="form.controls['email'].errors.email"
-           class="form-text text-danger">Email is incorrect
-      </div>
       <div *ngIf="form.controls['email'].errors.pattern"
-           class="form-text text-danger">Symbols * and ' are forbidden (4-32 symbols)
+           class="form-text text-danger">Email is incorrect
       </div>
     </div>
   </div>

@@ -7,7 +7,7 @@ namespace PhotoMania.DB.Entities
 {
     public class Avatar : BaseEntity
     {
-        public string Name { get; set; }
+        //public string Name { get; set; }
         public string Url { get; set; }
 
         public int UserId { get; set; }

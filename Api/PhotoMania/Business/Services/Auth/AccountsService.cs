@@ -28,6 +28,7 @@ namespace PhotoMania.Business.Services.Auth
         }
         public async Task<LoginUserResponse> GetAccessToken(string login, string password)
         {
+            ;
             Account account = null;
             if (validationService.LoginValidationError(login) == "")
             {
@@ -41,6 +42,7 @@ namespace PhotoMania.Business.Services.Auth
                 throw new UserNotFoundException();
             }
             // password comes as unencrypted, so we have to encrypt it to compare with password in DB (there all passwords are encrypted)
+            string res = validationService.PasswordValidationError(password);
             if (validationService.PasswordValidationError(password) != ""
                 || !account.Password.Equals(uow.AccountsRepository.HashPassword(password)))
             {
@@ -60,30 +62,47 @@ namespace PhotoMania.Business.Services.Auth
         public async Task<string> RegisterNewUser(RegisterViewModel model)
         {
             // validation
-            string validationResponse = ModelValidation(model);
+            string validationResponse = ModelValidation(model);       
             if (validationResponse == "valid")
             {
+                // separating into different entities and wright data to db
+                Account account = new Account
+                {
+                    Login = model.Login,
+                    Password = uow.AccountsRepository.HashPassword(model.Password),
+                    RoleId = 3 // user
+                };
+                await uow.AccountsRepository.CreateAsync(account);
 
+                UserProfile profile = new UserProfile
+                {
+                    AccountId = account.Id,
+                    Email = model.Email,
+                    Description = model.Description,
+                    IsBlocked = false,
+                    Rating = 0,
+                    RegistrationDate = DateTime.Now,
+                };
+                await uow.UsersRepository.CreateAsync(profile);
+
+                Avatar avatar = new Avatar
+                {
+                    Url = model.AvatarPath,
+                    UserId = profile.Id
+                };
+                await uow.AvatarsRepository.CreateAsync(avatar);
             }
-            // separating into Dto objects and entities
-
-            // wright data to db
-
-
             return validationResponse;
         }
 
         private string ModelValidation(RegisterViewModel model)
         {
-            // TODO: make separate service for validation (make login and password validation for login method above)
-            string response = ""; // valid
-            
-            
-
-
-
-
-            return response;
+            string response = ""; 
+            response += validationService.LoginValidationError(model.Login);
+            response += validationService.PasswordValidationError(model.Password);
+            response += validationService.EmailValidationError(model.Email);
+            response += validationService.DescriptionValidationError(model.Description);
+            return response == "" ? "valid" : response;
         }
     }
 }

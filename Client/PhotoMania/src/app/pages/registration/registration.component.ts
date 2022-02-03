@@ -15,7 +15,7 @@ export class RegistrationComponent implements OnInit {
   pattern = {
     login: '^[a-zA-Z_0-9]{4,14}$', // English letters only, digits, symbol _ (4-14 symbols)
     password: '^[a-zA-Z_#@0-9]{4,16}$', // English letters only, digits, symbols _ # @ (4-16 symbols)
-    email: '[^\'*]{4,32}', // Symbols * and ' are forbidden (4-32 symbols)
+    email: '^[a-zA-Z0-9][a-zA-Z0-9!#$%&+-/?^_{|}~]{2,32}@[a-zA-Z]{2,24}\\.[a-zA-Z]{2,16}$', // Email is incorrect
     description: '^[a-zA-Z ,.!/+@_0-9]{0,264}$' // English letters only, digits, space, symbols ,.!/+@_ Max 264 symbols
   }
   // path to avatar in db (we can get it after user will load the avatar - watch this.uploadFinished())
@@ -46,7 +46,6 @@ export class RegistrationComponent implements OnInit {
         'igorok208@gmail.com',
         [
           Validators.required,
-          Validators.email,
           Validators.pattern(this.pattern.email)
         ]
       ),
@@ -54,7 +53,7 @@ export class RegistrationComponent implements OnInit {
         'some description',
         [
           Validators.maxLength(264),
-          Validators.pattern(this.pattern.description)
+          //Validators.pattern(this.pattern.description)
         ]
       )
     })
@@ -84,12 +83,15 @@ export class RegistrationComponent implements OnInit {
           username, password, email, description, this.avatarImg.dbPath
         ).pipe(
           tap(
-            response => {
-              if(response === 'ok') {
-                // TODO: success message (modal)
+            registration => {
+              if(registration.response == 'valid') {
+                this.router.navigate(['/']);
               }
               else {
-                // TODO: error message (modal)
+                this.modalWindowData = {
+                  title: 'Registration error!',
+                  message: registration.response
+                }
               }
             }),
           take(1)

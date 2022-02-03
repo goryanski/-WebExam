@@ -19,7 +19,5 @@ namespace PhotoMania.DB.Entities
         public Account Account { get; set; }
 
         public List<Post> Posts { get; set; }
-        public List<SocialLink> SocialLinks { get; set; } // remove
-        //public List<Comment> Comments { get; set; }
     }
 }

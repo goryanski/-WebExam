@@ -16,7 +16,6 @@ namespace PhotoMania.DB.Repositories
         PhotosRepository _photosRepository;
         PostsRepository _postsRepository;
         RolesRepository _rolesRepository;
-        SocialLinksRepository _socialLinksRepository;
         UsersRepository _usersRepository;
         public AccountsRepository AccountsRepository =>
             _accountsRepository ?? (_accountsRepository = new AccountsRepository(db));
@@ -30,8 +29,6 @@ namespace PhotoMania.DB.Repositories
            _postsRepository ?? (_postsRepository = new PostsRepository(db));
         public RolesRepository RolesRepository =>
              _rolesRepository ?? (_rolesRepository = new RolesRepository(db));
-        public SocialLinksRepository SocialLinksRepository =>
-            _socialLinksRepository ?? (_socialLinksRepository = new SocialLinksRepository(db));
         public UsersRepository UsersRepository =>
           _usersRepository ?? (_usersRepository = new UsersRepository(db));
 
@@ -155,46 +152,34 @@ namespace PhotoMania.DB.Repositories
             #region UserProfile info
             Avatar avatar1 = new Avatar
             {
-                Name = "avatar",
                 Url = @"avatars\avatar.jpg",
                 UserId = user1.Id
             };
             db.Avatars.Add(avatar1);
 
-            SocialLink socialLink1 = new SocialLink
-            {
-                Link = "https://t.me/igorok_208",
-                UserId = user1.Id
-            };
-            db.SocialLinks.Add(socialLink1);
 
             Photo photo1 = new Photo
             {
-                Name = "fall",
                 Url = @"images\fall.jpeg",
                 PostId = post1.Id
             };
             Photo photo2 = new Photo
             {
-                Name = "spring",
                 Url = @"images\spring.jpg",
                 PostId = post2.Id
             };
             Photo photo3 = new Photo
             {
-                Name = "summer",
                 Url = @"images\summer.jpg",
                 PostId = post3.Id
             };
             Photo photo4 = new Photo
             {
-                Name = "fall",
                 Url = @"images\fall.jpeg",
                 PostId = post4.Id
             };
             Photo photo5 = new Photo
             {
-                Name = "spring",
                 Url = @"images\spring.jpg",
                 PostId = post5.Id
             };

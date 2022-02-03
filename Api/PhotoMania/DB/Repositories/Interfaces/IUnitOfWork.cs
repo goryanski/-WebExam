@@ -14,7 +14,6 @@ namespace PhotoMania.DB.Repositories.Interfaces
         PostsRepository PostsRepository { get; }
         RolesRepository RolesRepository { get; }
         UsersRepository UsersRepository { get; }
-        SocialLinksRepository SocialLinksRepository { get; }
 
     }
 }
