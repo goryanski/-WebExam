@@ -53,7 +53,7 @@ export class RegistrationComponent implements OnInit {
         'some description',
         [
           Validators.maxLength(264),
-          //Validators.pattern(this.pattern.description)
+          Validators.pattern(this.pattern.description)
         ]
       )
     })

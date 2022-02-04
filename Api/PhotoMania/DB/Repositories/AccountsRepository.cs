@@ -24,5 +24,11 @@ namespace PhotoMania.DB.Repositories
             }
             return sb.ToString();
         }
+
+        internal async Task<bool> UserAlreadyExists(string login)
+        {
+            Account account = (await GetAllAsync(acc => acc.Login == login)).FirstOrDefault();
+            return account != null;
+        }
     }
 }

@@ -62,7 +62,7 @@ namespace PhotoMania.Business.Services.Auth
         public async Task<string> RegisterNewUser(RegisterViewModel model)
         {
             // validation
-            string validationResponse = ModelValidation(model);       
+            string validationResponse = await ModelValidation(model);       
             if (validationResponse == "valid")
             {
                 // separating into different entities and wright data to db
@@ -95,10 +95,14 @@ namespace PhotoMania.Business.Services.Auth
             return validationResponse;
         }
 
-        private string ModelValidation(RegisterViewModel model)
+        private async Task<string> ModelValidation(RegisterViewModel model)
         {
             string response = ""; 
             response += validationService.LoginValidationError(model.Login);
+            if(response == "" && await uow.AccountsRepository.UserAlreadyExists(model.Login))
+            {
+                response += $"User with login '{model.Login}' already exists.\n";
+            }
             response += validationService.PasswordValidationError(model.Password);
             response += validationService.EmailValidationError(model.Email);
             response += validationService.DescriptionValidationError(model.Description);
