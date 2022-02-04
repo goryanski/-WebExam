@@ -20,6 +20,7 @@ export class LoginService {
         // Save token and role to localStorage
         this.localStorage.setItem('accessToken', response.accessToken);
         this.localStorage.setItem('currentUserRole', response.userRole);
+        this.localStorage.setItem('currentUserId', response.userId);
       }),
       // return only exception to login component (to show there what happened)
       map(response => response.exception)

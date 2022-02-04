@@ -28,13 +28,15 @@ namespace PhotoMania.Controllers
             {
                 AccessToken = "none",
                 Exception = "none",
-                UserRole = "none"
+                UserRole = "none",
+                UserId = "none"
             };
             try
             {
                 var info = await accountsService.GetAccessToken(model.Login, model.Password);
                 response.AccessToken = info.AccessToken;
                 response.UserRole = info.UserRole;
+                response.UserId = info.UserId;
             }
             catch (UserNotFoundException)
             {

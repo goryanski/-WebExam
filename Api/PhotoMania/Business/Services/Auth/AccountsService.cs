@@ -28,7 +28,6 @@ namespace PhotoMania.Business.Services.Auth
         }
         public async Task<LoginUserResponse> GetAccessToken(string login, string password)
         {
-            ;
             Account account = null;
             if (validationService.LoginValidationError(login) == "")
             {
@@ -51,11 +50,14 @@ namespace PhotoMania.Business.Services.Auth
             
             // get account role
             string role = (await uow.RolesRepository.GetAsync(account.RoleId)).Name;
+            // get user profile id (to return current user id to client)
+            string id = (await uow.UsersRepository.GetUserId(account.Id)).ToString();
 
             return new LoginUserResponse
             {
                 AccessToken = tokenService.CreateToken(account.Login, role),
-                UserRole = role
+                UserRole = role,
+                UserId = id
             };
         }
 

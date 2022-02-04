@@ -3,6 +3,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {HomeService} from "./services/home.service";
 import {AuthApiService} from "./services/auth.service";
 import {UploadService} from "./services/upload.service";
+import {LoadUserDataApiService} from "./services/load-user-data.service";
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import {UploadService} from "./services/upload.service";
   providers: [
     HomeService,
     AuthApiService,
-    UploadService
+    UploadService,
+    LoadUserDataApiService
   ]
 })
 export class ApiServicesModule { }

@@ -7,6 +7,7 @@ import { PostComponent } from './post/post.component';
 import { UploadComponent } from './upload/upload.component';
 import { ModalWindowComponent } from './modal-window/modal-window.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { UserProfileCardComponent } from './user-profile-card/user-profile-card.component';
 
 
 // common components
@@ -16,14 +17,16 @@ import {ReactiveFormsModule} from "@angular/forms";
     FooterComponent,
     PostComponent,
     UploadComponent,
-    ModalWindowComponent
+    ModalWindowComponent,
+    UserProfileCardComponent
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
     PostComponent,
     UploadComponent,
-    ModalWindowComponent
+    ModalWindowComponent,
+    UserProfileCardComponent
   ],
   imports: [
     CommonModule,

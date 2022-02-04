@@ -18,5 +18,11 @@ namespace PhotoMania.DB.Repositories
             var users = await Table.Include(u => u.Account).ToListAsync();
             return users.First(u => u.Id == userId).Account.Login;
         }
+
+        internal async Task<int> GetUserId(int accountId)
+        {
+            // certainly exists
+            return (await GetAllAsync(u => u.AccountId == accountId)).First().Id;
+        }
     }
 }

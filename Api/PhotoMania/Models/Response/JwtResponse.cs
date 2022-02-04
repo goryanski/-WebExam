@@ -10,6 +10,6 @@ namespace PhotoMania.Models.Response
         public string AccessToken { get; set; }
         public string Exception { get; set; }
         public string UserRole { get; set; }
-
+        public string UserId { get; set; }
     }
 }

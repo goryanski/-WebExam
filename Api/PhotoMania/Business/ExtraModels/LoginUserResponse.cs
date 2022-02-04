@@ -9,5 +9,6 @@ namespace PhotoMania.Business.ExtraModels
     {
         public string AccessToken { get; set; }
         public string UserRole { get; set; }
+        public string UserId { get; set; }
     }
 }

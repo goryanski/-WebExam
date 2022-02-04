@@ -18,8 +18,21 @@ export class QueryHttpInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError(err => {
         if (err.status === 401) {
-          this.router.navigate(['authentication']);
           this.browserLocalStorage.removeItem('accessToken');
+          this.browserLocalStorage.removeItem('currentUserRole');
+          this.browserLocalStorage.removeItem('currentUserId');
+
+
+          // reload page may be  {
+          //  reloadComponent() {
+          //    let currentUrl = this.router.url;
+          //    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+          //    this.router.onSameUrlNavigation = 'reload';
+          //    this.router.navigate([currentUrl]);
+          //  }
+          //}
+
+          this.router.navigate(['login']);
 
           return of(err.message);
         }
