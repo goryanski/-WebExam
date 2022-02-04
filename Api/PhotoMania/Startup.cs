@@ -75,6 +75,7 @@ namespace PhotoMania
             services.AddTransient<ITokenService, TokenService>();
             services.AddTransient<IAccountsService, AccountsService>();
             services.AddTransient<IValidationService, ValidationService>();
+            services.AddTransient<IUserDataService, UserDataService>();
 
             services.AddCors();
         }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PhotoMania.Business.Exceptions;
+using PhotoMania.Business.ExtraModels;
 using PhotoMania.Business.Services.Interfaces.Auth;
 using PhotoMania.Models.Response;
 using PhotoMania.Models.ViewModels;
@@ -51,7 +52,7 @@ namespace PhotoMania.Controllers
         }
 
         [HttpPost("registration")]
-        public async Task<RegistrationResponse> Registration([FromBody] RegisterViewModel model)
+        public async Task<RegistrationResponse> Registration([FromBody] RegisterRequestModel model)
         {
             return new RegistrationResponse
             {

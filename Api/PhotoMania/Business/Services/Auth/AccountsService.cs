@@ -61,7 +61,7 @@ namespace PhotoMania.Business.Services.Auth
             };
         }
 
-        public async Task<string> RegisterNewUser(RegisterViewModel model)
+        public async Task<string> RegisterNewUser(RegisterRequestModel model)
         {
             // validation
             string validationResponse = await ModelValidation(model);       
@@ -97,7 +97,7 @@ namespace PhotoMania.Business.Services.Auth
             return validationResponse;
         }
 
-        private async Task<string> ModelValidation(RegisterViewModel model)
+        private async Task<string> ModelValidation(RegisterRequestModel model)
         {
             string response = ""; 
             response += validationService.LoginValidationError(model.Login);

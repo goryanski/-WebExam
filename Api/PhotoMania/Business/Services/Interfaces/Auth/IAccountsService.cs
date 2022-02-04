@@ -10,6 +10,6 @@ namespace PhotoMania.Business.Services.Interfaces.Auth
     public interface IAccountsService
     {
         Task<LoginUserResponse> GetAccessToken(string login, string password);
-        Task<string> RegisterNewUser(RegisterViewModel model);
+        Task<string> RegisterNewUser(RegisterRequestModel model);
     }
 }

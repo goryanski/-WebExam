@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PhotoMania.Models.ViewModels
+namespace PhotoMania.Business.ExtraModels
 {
-    public class RegisterViewModel
+    public class RegisterRequestModel
     {
         public string Login { get; set; }
         public string Password { get; set; }
