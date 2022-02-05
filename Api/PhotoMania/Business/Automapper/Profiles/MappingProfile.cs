@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using PhotoMania.Business.Dto;
+using PhotoMania.Business.ExtraModels;
 using PhotoMania.DB.Entities;
 
 namespace PhotoMania.Business.Automapper.Profiles
@@ -14,6 +15,9 @@ namespace PhotoMania.Business.Automapper.Profiles
         {
             CreateMap<Post, PostDto>();
             CreateMap<PostDto, Post>();
+
+            CreateMap<UserProfile, UserProfileDataResponse>();
+            CreateMap<UserProfileDataResponse, UserProfile>();
 
 
         }

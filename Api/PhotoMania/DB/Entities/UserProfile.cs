@@ -8,8 +8,7 @@ namespace PhotoMania.DB.Entities
     public class UserProfile: BaseEntity
     {
         public string Email { get; set; }
-        public int Rating { get; set; } // max 100_000_000
-        public string Description { get; set; } // SocialLinks here
+        public string Description { get; set; }
         public bool IsBlocked { get; set; }
         public DateTime RegistrationDate { get; set; }
 

@@ -25,7 +25,6 @@ namespace PhotoMania.Controllers
         [HttpGet("profile")]
         public async Task<UserProfileDataResponse> GetUserProfileData([FromQuery] int id)
         {
-            // data comes right
             return await userDataService.GetUserProfileData(id);
         }
     }

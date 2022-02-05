@@ -82,7 +82,6 @@ namespace PhotoMania.Business.Services.Auth
                     Email = model.Email,
                     Description = model.Description,
                     IsBlocked = false,
-                    Rating = 0,
                     RegistrationDate = DateTime.Now,
                 };
                 await uow.UsersRepository.CreateAsync(profile);

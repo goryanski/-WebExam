@@ -99,5 +99,10 @@ export class AuthHelper {
     }
   }
 
+  clearLocalStorage() {
+    this.localStorage.removeItem('accessToken');
+    this.localStorage.removeItem('currentUserRole');
+    this.localStorage.removeItem('currentUserId');
+  }
 
 }

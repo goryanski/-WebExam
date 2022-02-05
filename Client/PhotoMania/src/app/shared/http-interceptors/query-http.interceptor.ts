@@ -4,12 +4,14 @@ import {catchError} from "rxjs/operators";
 import {Router} from "@angular/router";
 import {Injectable} from "@angular/core";
 import {BrowserLocalStorage} from "../storage/local-storage";
+import {AuthHelper} from "../helpers/auth-helper";
 
 @Injectable()
 export class QueryHttpInterceptor implements HttpInterceptor {
   constructor(
     private readonly router: Router,
-    private readonly browserLocalStorage: BrowserLocalStorage
+    private readonly browserLocalStorage: BrowserLocalStorage,
+    private readonly authHelper: AuthHelper
   ) {
 
   }
@@ -18,9 +20,18 @@ export class QueryHttpInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError(err => {
         if (err.status === 401) {
-          this.browserLocalStorage.removeItem('accessToken');
-          this.browserLocalStorage.removeItem('currentUserRole');
-          this.browserLocalStorage.removeItem('currentUserId');
+          // log out
+          this.authHelper.setNonAuthenticatedUserState(); // remove
+          this.authHelper.clearLocalStorage();
+          this.router.navigate(['login']);
+
+          // reload page
+          // let currentUrl = this.router.url;
+          // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+          // this.router.onSameUrlNavigation = 'reload';
+          // this.router.navigate([currentUrl]);
+
+
 
 
           // reload page may be  {
@@ -30,9 +41,9 @@ export class QueryHttpInterceptor implements HttpInterceptor {
           //    this.router.onSameUrlNavigation = 'reload';
           //    this.router.navigate([currentUrl]);
           //  }
-          //}
+          //} or rerender header (if token expires we will see profile and logout)
 
-          this.router.navigate(['login']);
+
 
           return of(err.message);
         }

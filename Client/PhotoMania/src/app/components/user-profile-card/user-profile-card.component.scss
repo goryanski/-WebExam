@@ -1,0 +1,62 @@
+.card {
+  display: flex;
+  flex-direction: row;
+  border-radius: 30px;
+  box-shadow: 0 1px 10px 2px rgba(34, 60, 80, 0.2);
+  margin: 40px auto;
+  width: 50%;
+  text-align: center;
+  .container-left {
+    width: 60%;
+    img {
+      width: 100%;
+      border-radius: 30px 0 30px 0;
+      box-shadow: 0 1px 10px 2px rgba(34, 60, 80, 0.2);
+    }
+    .nested-container {
+      display: flex;
+      justify-content: space-around;
+      margin: 30px;
+
+    }
+  }
+  .container-right {
+    width: 40%;
+    .username {
+      margin: 30px;
+      text-decoration: underline;
+    }
+    .top-user-label {
+      display: flex;
+      justify-content: center;
+      font-size: 22px;
+      color: #393;
+      margin: 50px;
+      .top-user-icons {
+        display: flex;
+        margin: 0;
+      }
+      .top-user-text {
+        font-weight: bold;
+      }
+    }
+    .description {
+      margin: 0 20px;
+    }
+    .register-info {
+      margin: 100px 20px 0;
+      color: #393;
+    }
+  }
+  // common
+  .digit-decorator, .username {
+    color: #393;
+    font-size: 30px;
+    font-weight: bold;
+  }
+}
+
+.loader {
+  text-align: center;
+  margin: 50px;
+}

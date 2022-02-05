@@ -67,7 +67,7 @@ namespace PhotoMania.DB.Repositories
             Account account3 = new Account
             {
                 Login = "user",
-                Password = AccountsRepository.HashPassword("user"),
+                Password = AccountsRepository.HashPassword("user12SDSDSD1w"),
                 RoleId = role3.Id
             };
             db.Accounts.Add(account1);
@@ -82,7 +82,6 @@ namespace PhotoMania.DB.Repositories
                 Email = "user1@gmail.com",
                 Description = "I'm 27. I like volleyball and walking in the woods",
                 IsBlocked = false,
-                Rating = 0,
                 RegistrationDate = DateTime.Now,
             };
             db.Users.Add(user1);
@@ -95,7 +94,7 @@ namespace PhotoMania.DB.Repositories
             {
                 Description = "my first post",
                 Date = DateTime.Now,
-                LikesCount = 0,
+                LikesCount = 4,
                 DislikesCount = 0,
                 UserId = user1.Id
             };
@@ -104,7 +103,7 @@ namespace PhotoMania.DB.Repositories
                 Description = "my second post",
                 Date = DateTime.Now.AddDays(-1),
                 LikesCount = 10,
-                DislikesCount = 10,
+                DislikesCount = 2,
                 UserId = user1.Id
             };
             Post post3 = new Post
@@ -112,14 +111,14 @@ namespace PhotoMania.DB.Repositories
                 Description = "my third post",
                 Date = DateTime.Now.AddDays(-2),
                 LikesCount = 7,
-                DislikesCount = 7,
+                DislikesCount = 1,
                 UserId = user1.Id
             };
             Post post4 = new Post
             {
                 Description = "my forth post",
                 Date = DateTime.Now.AddDays(-3),
-                LikesCount = 3,
+                LikesCount = 6,
                 DislikesCount = 7,
                 UserId = user1.Id
             };
@@ -127,7 +126,7 @@ namespace PhotoMania.DB.Repositories
             {
                 Description = "my fifth post",
                 Date = DateTime.Now.AddDays(-4),
-                LikesCount = 2,
+                LikesCount = 44,
                 DislikesCount = 1,
                 UserId = user1.Id
             };

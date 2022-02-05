@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges} from '@angular/core';
 import {PostInterface} from "../../api/interfaces/post.interface";
 import {AppEnvironment} from "../../shared/app-environment.interface";
 

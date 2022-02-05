@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
         ]
       ),
       'password': this.fb.control(
-        'user',
+        'user12SDSDSD1w',
         [
           Validators.required,
           Validators.pattern(this.pattern.password)

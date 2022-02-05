@@ -11,5 +11,10 @@ namespace PhotoMania.DB.Repositories
         public AvatarsRepository(DatabaseContext context) : base(context)
         {
         }
+
+        internal async Task<string> GetAvatarPath(int userId)
+        {
+            return (await GetAllAsync(a => a.UserId == userId)).First().Url;
+        }
     }
 }

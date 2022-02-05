@@ -30,5 +30,10 @@ namespace PhotoMania.DB.Repositories
             Account account = (await GetAllAsync(acc => acc.Login == login)).FirstOrDefault();
             return account != null;
         }
+
+        internal async Task<string> GetLogin(int accountId)
+        {
+            return (await GetAsync(accountId)).Login;
+        }
     }
 }
