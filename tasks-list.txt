@@ -1,4 +1,4 @@
-!- responsible interface (home and profile first)  [rmember top-user-label in user-profile-card]
+!- responsible interface (home and profile first)
 
 - set field modifiers to private everywhere you can
 - id all tables set as guid - ??

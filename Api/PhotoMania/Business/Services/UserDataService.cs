@@ -27,6 +27,9 @@ namespace PhotoMania.Business.Services
             response.Avatar = await uow.AvatarsRepository.GetAvatarPath(userId);
             response.PostsCount = await uow.PostsRepository.GetPostsCount(userId);
             response.Rating = await CalculateRating(userId);
+            // get only date without time
+            string date = response.RegistrationDate;
+            response.RegistrationDate = date.Substring(0, date.LastIndexOf(" "));
 
             return response;
         }

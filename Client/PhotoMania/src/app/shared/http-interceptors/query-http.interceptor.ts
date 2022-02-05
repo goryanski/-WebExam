@@ -21,15 +21,15 @@ export class QueryHttpInterceptor implements HttpInterceptor {
       catchError(err => {
         if (err.status === 401) {
           // log out
-          this.authHelper.setNonAuthenticatedUserState(); // remove
+          //this.authHelper.setNonAuthenticatedUserState(); // remove
           this.authHelper.clearLocalStorage();
           this.router.navigate(['login']);
 
           // reload page
-          // let currentUrl = this.router.url;
-          // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-          // this.router.onSameUrlNavigation = 'reload';
-          // this.router.navigate([currentUrl]);
+          let currentUrl = this.router.url;
+          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+          this.router.onSameUrlNavigation = 'reload';
+          this.router.navigate([currentUrl]);
 
 
 

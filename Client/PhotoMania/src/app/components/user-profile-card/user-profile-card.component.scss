@@ -17,7 +17,9 @@
       display: flex;
       justify-content: space-around;
       margin: 30px;
-
+      .posts {
+        margin-left: 50px;
+      }
     }
   }
   .container-right {
@@ -44,7 +46,7 @@
       margin: 0 20px;
     }
     .register-info {
-      margin: 100px 20px 0;
+      margin: 100px 20px 30px;
       color: #393;
     }
   }
@@ -59,4 +61,47 @@
 .loader {
   text-align: center;
   margin: 50px;
+}
+
+
+@media (max-width: 1420px) {
+  .card {
+    width: 70%;
+  }
+}
+@media (max-width: 1000px) {
+  .card {
+    width: 90%;
+    .container-left {
+      width: 50%;
+    }
+    .container-right {
+      width: 50%;
+    }
+  }
+}
+@media (max-width: 600px) {
+  .card {
+    .container-right {
+      .top-user-label {
+        //margin: 40px ;
+        font-size: 18px;
+      }
+    }
+  }
+}
+@media (max-width: 500px) {
+  .card {
+    width: 95%;
+    flex-direction: column;
+    .container-left {
+      width: 100%;
+      img {
+        border-radius: 30px 30px 0 0;
+      }
+    }
+    .container-right {
+      width: 100%;
+    }
+  }
 }
