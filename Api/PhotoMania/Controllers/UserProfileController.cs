@@ -22,9 +22,9 @@ namespace PhotoMania.Controllers
         }
 
         [HttpGet("posts")]
-        public async Task<List<PostDto>> GetUserPosts([FromQuery] PostParameters postParameters)
+        public async Task<List<PostDto>> GetUserPosts([FromQuery] PostParameters postParameters, int userId)
         {
-            return await postsService.GetUserPosts(postParameters);
+            return await postsService.GetUserPosts(postParameters, userId);
         }
     }
 }

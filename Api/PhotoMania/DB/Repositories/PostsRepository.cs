@@ -12,7 +12,7 @@ namespace PhotoMania.DB.Repositories
         {
         }
 
-        internal IEnumerable<Post> GetPosts(int pageNumber, int pageSize)
+        internal IEnumerable<Post> GetHomePagePosts(int pageNumber, int pageSize)
         {
             return FindAll()
                 .OrderByDescending(on => on.Date) // latest posts
