@@ -29,7 +29,7 @@ namespace PhotoMania.Controllers
         // we use the from query attribute to point out that we'll be using query parameters to define which page and how many posts we are requesting (posts?pageNumber=2&pageSize=2). The PostParameters class is the container for the actual parameters
         public async Task<List<PostDto>> GetPosts([FromQuery] PostParameters postParameters)
         {
-            return await postsService.GetPosts(postParameters);
+            return await postsService.GetAllPosts(postParameters);
         }
 
 

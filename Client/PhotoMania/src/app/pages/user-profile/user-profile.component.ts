@@ -10,10 +10,10 @@ import {UserProfileApiService} from "../../api/services/user-profile.service";
 })
 export class UserProfileComponent implements OnInit {
   currentUserId: number = 0;
-  postsToShow: PostInterface[] = [];
+
   constructor(
     private readonly profileService: UserProfileService,
-    private readonly profileApiService: UserProfileApiService
+
   ) {}
 
   ngOnInit(): void {

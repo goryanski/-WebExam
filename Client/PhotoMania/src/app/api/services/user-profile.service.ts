@@ -14,11 +14,19 @@ export class UserProfileApiService {
   ) {
   }
 
-  getNextPosts(pageNumber: number, pageSize: number): Observable<PostInterface[]> {
+  getNextPosts(pageNumber: number, pageSize: number, route: string): Observable<PostInterface[]> {
+    // console.log('UserProfileApiService path:',
+    //   [
+    //     this.appEnv.apiPhotoManiaURL,
+    //     `UserProfile',
+    //     `${route}?PageNumber=${pageNumber}&PageSize=${pageSize}`
+    //   ].join('/')
+    //   );
     return this.httpClient.get<PostInterface[]>(
       [
         this.appEnv.apiPhotoManiaURL,
-        `home?PageNumber=${pageNumber}&PageSize=${pageSize}`
+        'UserProfile',
+        `${route}?PageNumber=${pageNumber}&PageSize=${pageSize}`
       ].join('/')
     ).pipe(
       publishReplay(1),

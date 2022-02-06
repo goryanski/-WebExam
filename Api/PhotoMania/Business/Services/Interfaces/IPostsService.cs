@@ -9,6 +9,7 @@ namespace PhotoMania.Business.Services.Interfaces
 {
     public interface IPostsService
     {
-        Task<List<PostDto>> GetPosts(PostParameters postParameters);
+        Task<List<PostDto>> GetAllPosts(PostParameters postParameters);
+        Task<List<PostDto>> GetUserPosts(PostParameters postParameters);
     }
 }

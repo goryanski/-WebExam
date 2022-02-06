@@ -19,7 +19,7 @@ namespace PhotoMania.Business.Services
             this.uow = uow;
         }
 
-        public async Task<List<PostDto>> GetPosts(PostParameters postParameters)
+        public async Task<List<PostDto>> GetAllPosts(PostParameters postParameters)
         {
             var postEntities = uow.PostsRepository.GetPosts(postParameters.PageNumber, postParameters.PageSize);
             // try to map all filds that possible
@@ -34,6 +34,11 @@ namespace PhotoMania.Business.Services
                 postsList[i].PhotoPath = await uow.PhotosRepository.GetPath(postEntitiesList[i].Id);
             }
             return postsList;
+        }
+
+        public Task<List<PostDto>> GetUserPosts(PostParameters postParameters)
+        {
+            throw new NotImplementedException();
         }
     }
 }
