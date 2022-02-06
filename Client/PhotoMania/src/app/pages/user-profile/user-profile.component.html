@@ -3,25 +3,32 @@
 <!--menu-->
 <ul class="nav nav-tabs tabs" id="myTab" role="tablist">
   <li class="nav-item tabs-item" role="presentation">
-    <button class="nav-link active tabs-btn" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Posts</button>
+    <button class="nav-link active tabs-btn" id="posts-tab" data-bs-toggle="tab" data-bs-target="#posts" type="button" role="tab" aria-controls="posts" aria-selected="true">Posts</button>
   </li>
   <li class="nav-item tabs-item" role="presentation">
-    <button class="nav-link tabs-btn" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Favorites</button>
+    <button class="nav-link tabs-btn" id="favorites-tab" data-bs-toggle="tab" data-bs-target="#favorites" type="button" role="tab" aria-controls="favorites" aria-selected="false">Favorites</button>
   </li>
   <li class="nav-item tabs-item" role="presentation">
-    <button class="nav-link tabs-btn" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Edit profile</button>
+    <button class="nav-link tabs-btn" id="edit-tab" data-bs-toggle="tab" data-bs-target="#edit" type="button" role="tab" aria-controls="edit" aria-selected="false">Edit profile</button>
+  </li>
+  <li class="nav-item tabs-item" role="presentation">
+    <button class="nav-link tabs-btn" id="new-tab" data-bs-toggle="tab" data-bs-target="#new" type="button" role="tab" aria-controls="new" aria-selected="false">New post</button>
   </li>
 </ul>
 
 
+<!--content-->
 <div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+  <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
     <app-user-posts></app-user-posts>
   </div>
-  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+  <div class="tab-pane fade" id="favorites" role="tabpanel" aria-labelledby="favorites-tab">
     <app-user-favorites-posts></app-user-favorites-posts>
   </div>
-  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+  <div class="tab-pane fade" id="edit" role="tabpanel" aria-labelledby="edit-tab">
     <app-edit-profile></app-edit-profile>
+  </div>
+  <div class="tab-pane fade" id="new" role="tabpanel" aria-labelledby="new-tab">
+    <app-create-post></app-create-post>
   </div>
 </div>

@@ -8,6 +8,7 @@ import {UserProfileService} from "./user-profile.service";
 import { UserPostsComponent } from './user-posts/user-posts.component';
 import { UserFavoritesPostsComponent } from './user-favorites-posts/user-favorites-posts.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { CreatePostComponent } from './create-post/create-post.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     UserProfileComponent,
     UserPostsComponent,
     UserFavoritesPostsComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    CreatePostComponent
   ],
   imports: [
     CommonModule,
