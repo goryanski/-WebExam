@@ -1,3 +1,29 @@
+@import 'src/app/shared/helpers/vars';
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  border-bottom: 1px solid $extra_color_1;
+  .tabs-item {
+    :hover {
+      border-radius: 10px 10px 0 0;
+    }
+  }
+  .tabs-btn {
+    color: $main_color;
+  }
+  .active {
+    background-color: $extra_color_1;
+    color: rgba(0, 0, 0, 0.5);
+    border: 1px solid $extra_color_1;
+    border-radius: 10px 10px 0 0;
+    border-bottom: none;
+  }
+}
+
+
+
 //@media (max-width: 1420px) {
 
 //}

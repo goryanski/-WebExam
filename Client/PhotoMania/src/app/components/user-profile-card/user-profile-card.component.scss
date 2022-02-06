@@ -1,3 +1,5 @@
+@import 'src/app/shared/helpers/vars';
+
 .card {
   display: flex;
   flex-direction: row;
@@ -32,7 +34,7 @@
       display: flex;
       justify-content: center;
       font-size: 22px;
-      color: #393;
+      color: $extra_color_2;
       margin: 50px;
       .top-user-icons {
         display: flex;
@@ -47,12 +49,12 @@
     }
     .register-info {
       margin: 100px 20px 30px;
-      color: #393;
+      color: $extra_color_2;
     }
   }
   // common
   .digit-decorator, .username {
-    color: #393;
+    color: $extra_color_2;
     font-size: 30px;
     font-weight: bold;
   }
@@ -84,7 +86,6 @@
   .card {
     .container-right {
       .top-user-label {
-        //margin: 40px ;
         font-size: 18px;
       }
     }
