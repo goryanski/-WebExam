@@ -27,10 +27,21 @@ namespace PhotoMania.Business.Services
             return await ConvertPosts(postEntities.ToList());
         }
 
+        public async Task<List<PostDto>> GetPostsBySearchKey(PostParameters postParameters, string searchKey)
+        {
+            List<Post> selectedPosts = (await uow.PostsRepository.GetAllAsync(p => p.Description.Contains(searchKey)))
+                .OrderByDescending(on => on.Date)
+                .Skip((postParameters.PageNumber - 1) * postParameters.PageSize)
+                .Take(postParameters.PageSize)
+                .ToList();
+
+            return await ConvertPosts(selectedPosts);
+        }
+
         public async Task<List<PostDto>> GetUserPosts(PostParameters postParameters, int userId)
         {
             List<Post> selectedPosts = (await uow.PostsRepository.GetAllAsync(p => p.UserId == userId))
-                .OrderByDescending(on => on.Date) // latest posts
+                .OrderByDescending(on => on.Date)
                 .Skip((postParameters.PageNumber - 1) * postParameters.PageSize)
                 .Take(postParameters.PageSize)
                 .ToList();

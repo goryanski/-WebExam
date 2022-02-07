@@ -1,0 +1,16 @@
+@import 'src/app/shared/helpers/vars';
+
+.loader, .no-posts-message {
+  text-align: center;
+  margin: 50px;
+}
+.fake-header {
+  width: 100%;
+  height: 60px;
+  background-color: $main_color;
+  a {
+    text-decoration: none;
+    color: $main_background_color;
+    padding-top: 15px;
+  }
+}

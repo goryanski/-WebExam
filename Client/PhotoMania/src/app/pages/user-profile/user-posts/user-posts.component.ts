@@ -37,8 +37,7 @@ export class UserPostsComponent implements OnInit {
   @HostListener('window:scroll', ['$event'])
   onScroll(e: HTMLElement) {
     let scroll =  window.pageYOffset;
-    if (scroll > this.currentPosition) {
-      // scrollDown (scrollUp - nothing to do)
+    if (scroll > this.currentPosition && this.userId != 0) {
       this.showNextPosts();
     }
     this.currentPosition = scroll;
@@ -58,7 +57,7 @@ export class UserPostsComponent implements OnInit {
         });
     }
     else{
-      console.log('can not send query to display user posts because userId absent in local storage or something else')
+      console.log('can not send query to display user posts because userId absent in local storage')
     }
   }
 }

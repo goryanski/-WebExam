@@ -7,7 +7,7 @@ import {publishReplay, refCount} from "rxjs/operators";
 import {BrowserLocalStorage} from "../../shared/storage/local-storage";
 
 @Injectable()
-export class UserProfileApiService {
+export class PostsApiService {
   readonly options = {
     headers: {
       'Authorization': `Bearer ${this.browserLocalStorage.getItem('accessToken')}`
@@ -20,12 +20,11 @@ export class UserProfileApiService {
   ) {
   }
 
-  getNextPosts(pageNumber: number, pageSize: number, route: string, userId: number): Observable<PostInterface[]> {
+  getNextPosts(pageNumber: number, pageSize: number, searchKey: string): Observable<PostInterface[]> {
     return this.httpClient.get<PostInterface[]>(
       [
         this.appEnv.apiPhotoManiaURL,
-        'UserProfile',
-        `${route}?PageNumber=${pageNumber}&PageSize=${pageSize}&userId=${userId}`
+        `Posts?PageNumber=${pageNumber}&PageSize=${pageSize}&searchKey=${searchKey}`
       ].join('/'),
       this.options
     ).pipe(

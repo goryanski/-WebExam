@@ -29,25 +29,6 @@ export class QueryHttpInterceptor implements HttpInterceptor {
           setTimeout(() => {
             document.location.reload();
           },1000);
-          //document.location.reload();
-
-          // reload page
-          // let currentUrl = this.router.url;
-          // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-          // this.router.onSameUrlNavigation = 'reload';
-          // this.router.navigate([currentUrl]);
-
-
-
-
-          // reload page may be  {
-          //  reloadComponent() {
-          //    let currentUrl = this.router.url;
-          //    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-          //    this.router.onSameUrlNavigation = 'reload';
-          //    this.router.navigate([currentUrl]);
-          //  }
-          //} or rerender header (if token expires we will see profile and logout)
 
 
 

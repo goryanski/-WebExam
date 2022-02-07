@@ -14,18 +14,19 @@ namespace PhotoMania.Controllers
     [Route("api/photoMania/[controller]")]
     [ApiController]
     [Authorize]
-    public class UserProfileController : ControllerBase
+    public class PostsController : ControllerBase
     {
         IPostsService postsService;
-        public UserProfileController(IPostsService postsService)
+
+        public PostsController(IPostsService postsService)
         {
             this.postsService = postsService;
         }
 
-        [HttpGet("posts")]
-        public async Task<List<PostDto>> GetUserPosts([FromQuery] PostParameters postParameters, int userId)
+        [HttpGet]
+        public async Task<List<PostDto>> GetPostsBySearchKey([FromQuery] PostParameters postParameters, string searchKey)
         {
-            return await postsService.GetUserPosts(postParameters, userId);
+            return await postsService.GetPostsBySearchKey(postParameters, searchKey);
         }
     }
 }

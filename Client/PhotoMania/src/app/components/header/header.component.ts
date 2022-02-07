@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AuthHelper} from "../../shared/helpers/auth-helper";
 import {BrowserLocalStorage} from "../../shared/storage/local-storage";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -14,7 +14,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private readonly authHelper: AuthHelper,
     //private readonly localStorage: BrowserLocalStorage
-    private readonly router: Router
+    private readonly router: Router,
+  private readonly activatedRoute: ActivatedRoute
   ) {
 
   }
@@ -41,6 +42,11 @@ export class HeaderComponent implements OnInit {
     if(this.searchField != undefined) {
       let text: string = this.searchField.nativeElement.value;
       if(text != '') {
+        // if(this.router.url.startsWith('/found-posts')) {
+        //   this.router.navigate(['/']);
+        //   console.log('navigate to home');
+        // }
+        // console.log('navigate to target');
         this.router.navigate([`found-posts/${text}`]);
       }
     }

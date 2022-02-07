@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { FoundPostsRoutingModule } from './found-posts-routing.module';
 import { FoundPostsComponent } from './found-posts.component';
+import {ComponentsModule} from "../../components/components.module";
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { FoundPostsComponent } from './found-posts.component';
   ],
   imports: [
     CommonModule,
-    FoundPostsRoutingModule
+    FoundPostsRoutingModule,
+    ComponentsModule
   ]
 })
 export class FoundPostsModule { }
