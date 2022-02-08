@@ -1,26 +1,29 @@
 <div class="post">
-<!--  <p class="username">-->
-<!--    <a href="/">{{post.username}}</a>-->
-<!--  </p>-->
   <p class="username" #username (click)="clickByUsername()">{{post.username}}</p>
   <!--  use images in api static files folder -->
   <img src="{{apiStaticFilesURL + post.photoPath}}" alt="post image">
   <div class="d-flex justify-content-between mt-2">
     <div class="likes-container">
-      <div class="likes">
+      <div class="likes" (click)="likeClick()">
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
           <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
         </svg>
-        {{post.likesCount}}
+        <div class="like-number" id="likeCount" #like>
+          {{post.likesCount}}
+        </div>
       </div>
-      <div class="dislikes">
+      <div class="dislikes" (click)="dislikeClick()">
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
           <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
         </svg>
-        {{post.dislikesCount}}
+        <div class="dislike-number" #dislike>
+          {{post.dislikesCount}}
+        </div>
       </div>
     </div>
     <p class="date">{{post.date}}</p>
+    <input type="hidden" #postId value="{{post.id}}">
+    <input type="hidden" #ownerId value="{{post.userId}}">
   </div>
 
   <p>{{post.description}}</p>

@@ -54,25 +54,32 @@ namespace PhotoMania.DB.Repositories
 
             Account account1 = new Account
             {
-                Login = "admin",
-                Password = AccountsRepository.HashPassword("admin"),
+                Login = "admin17",
+                Password = AccountsRepository.HashPassword("admin171717"),
                 RoleId = role1.Id
             };
             Account account2 = new Account
             {
                 Login = "moderator",
-                Password = AccountsRepository.HashPassword("moderator"),
+                Password = AccountsRepository.HashPassword("moderator1717"),
                 RoleId = role2.Id
             };
             Account account3 = new Account
             {
-                Login = "user",
+                Login = "vasya",
+                Password = AccountsRepository.HashPassword("user12SDSDSD1w"),
+                RoleId = role3.Id
+            };
+            Account account4 = new Account
+            {
+                Login = "avatar",
                 Password = AccountsRepository.HashPassword("user12SDSDSD1w"),
                 RoleId = role3.Id
             };
             db.Accounts.Add(account1);
             db.Accounts.Add(account2);
             db.Accounts.Add(account3);
+            db.Accounts.Add(account4);
             db.SaveChanges();
 
 
@@ -84,7 +91,16 @@ namespace PhotoMania.DB.Repositories
                 IsBlocked = false,
                 RegistrationDate = DateTime.Now,
             };
+            UserProfile user2 = new UserProfile
+            {
+                AccountId = account4.Id,
+                Email = "user2@gmail.com",
+                Description = "I love blue girls",
+                IsBlocked = false,
+                RegistrationDate = DateTime.Now,
+            };
             db.Users.Add(user1);
+            db.Users.Add(user2);
             db.SaveChanges();
             #endregion
 
@@ -92,7 +108,7 @@ namespace PhotoMania.DB.Repositories
             #region Posts
             Post post1 = new Post
             {
-                Description = "my first post",
+                Description = "amazing fall",
                 Date = DateTime.Now,
                 LikesCount = 4,
                 DislikesCount = 0,
@@ -100,7 +116,7 @@ namespace PhotoMania.DB.Repositories
             };
             Post post2 = new Post
             {
-                Description = "my second post",
+                Description = "beautiful spring",
                 Date = DateTime.Now.AddDays(-1),
                 LikesCount = 10,
                 DislikesCount = 2,
@@ -108,7 +124,7 @@ namespace PhotoMania.DB.Repositories
             };
             Post post3 = new Post
             {
-                Description = "my third post",
+                Description = "just summer",
                 Date = DateTime.Now.AddDays(-2),
                 LikesCount = 7,
                 DislikesCount = 1,
@@ -116,7 +132,7 @@ namespace PhotoMania.DB.Repositories
             };
             Post post4 = new Post
             {
-                Description = "my forth post",
+                Description = "lovely winter",
                 Date = DateTime.Now.AddDays(-3),
                 LikesCount = 6,
                 DislikesCount = 7,
@@ -124,18 +140,39 @@ namespace PhotoMania.DB.Repositories
             };
             Post post5 = new Post
             {
-                Description = "my fifth post",
+                Description = "my first post",
                 Date = DateTime.Now.AddDays(-4),
                 LikesCount = 44,
                 DislikesCount = 1,
                 UserId = user1.Id
+            };
+            Post post6 = new Post
+            {
+                Description = "my dog",
+                Date = DateTime.Now.AddDays(-9),
+                LikesCount = 550022,
+                DislikesCount = 16,
+                UserId = user2.Id
+            };
+            Post post7 = new Post
+            {
+                Description = "life under water",
+                Date = DateTime.Now.AddDays(-11),
+                LikesCount = 490099,
+                DislikesCount = 9,
+                UserId = user2.Id
             };
             db.Posts.Add(post1);
             db.Posts.Add(post2);
             db.Posts.Add(post3);
             db.Posts.Add(post4);
             db.Posts.Add(post5);
+            db.Posts.Add(post6);
+            db.Posts.Add(post7);
             db.SaveChanges();
+
+
+
 
             Comment comment1 = new Comment
             {
@@ -152,9 +189,15 @@ namespace PhotoMania.DB.Repositories
             Avatar avatar1 = new Avatar
             {
                 Url = @"avatars\avatar.jpg",
+                UserId = user2.Id
+            };
+            Avatar avatar2 = new Avatar
+            {
+                Url = @"avatars\vasya_ava.jpg",
                 UserId = user1.Id
             };
             db.Avatars.Add(avatar1);
+            db.Avatars.Add(avatar2);
 
 
             Photo photo1 = new Photo
@@ -174,19 +217,31 @@ namespace PhotoMania.DB.Repositories
             };
             Photo photo4 = new Photo
             {
-                Url = @"images\fall.jpeg",
+                Url = @"images\winter.jpg",
                 PostId = post4.Id
             };
             Photo photo5 = new Photo
             {
-                Url = @"images\spring.jpg",
+                Url = @"images\forest.jpg",
                 PostId = post5.Id
+            };
+            Photo photo6 = new Photo
+            {
+                Url = @"images\my_dog.jpg",
+                PostId = post6.Id
+            };
+            Photo photo7 = new Photo
+            {
+                Url = @"images\under_water.jpg",
+                PostId = post7.Id
             };
             db.Photos.Add(photo1);
             db.Photos.Add(photo2);
             db.Photos.Add(photo3);
             db.Photos.Add(photo4);
             db.Photos.Add(photo5);
+            db.Photos.Add(photo6);
+            db.Photos.Add(photo7);
             db.SaveChanges();
             #endregion
         }

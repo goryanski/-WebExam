@@ -13,11 +13,6 @@
     margin: 0;
     font-weight: bold;
     font-size: 20px;
-    //a {
-    //  display: block;
-    //  text-decoration: none;
-    //  color: $main_color;
-    //}
   }
   .username:hover {
     cursor: pointer;
@@ -29,17 +24,24 @@
   }
   .likes-container {
     display: flex;
-
-    .likes, .dislikes {
-        margin-left: 20px;
-    }
     .likes {
       svg {
         color: #ff0000;
       }
     }
-    .dislikes {
-
+    .likes, .dislikes {
+      margin-left: 20px;
+      display: flex;
+      .like-number, .dislike-number {
+        padding-left: 5px;
+      }
+    }
+    svg:hover {
+      width: 40px;
+      height: 40px;
+    }
+    .dislikes:hover, .likes:hover {
+      cursor: pointer;
     }
   }
   .date {

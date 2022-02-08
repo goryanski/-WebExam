@@ -101,8 +101,11 @@ export class AuthHelper {
 
   clearLocalStorage() {
     this.localStorage.removeItem('accessToken');
-    this.localStorage.removeItem('currentUserRole');
-    this.localStorage.removeItem('currentUserId');
+    this.localStorage.removeItem('y16'); // currentUserRole
+    this.localStorage.removeItem('v33'); // currentUserId
+    // to destroy the current component (because, for example, currentUserId can be saved in a component and after user logout, user still can set likes or something else)
+    setTimeout(() => {
+      document.location.reload();
+    },1000);
   }
-
 }

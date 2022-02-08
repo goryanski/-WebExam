@@ -7,4 +7,5 @@ export interface PostInterface {
   dislikesCount: number,
   username: string,
   commentsCount: string
+  userId: number
 }

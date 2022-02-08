@@ -38,7 +38,15 @@ export class BrowserLocalStorage implements AbstractStorage {
     return !(token == null || token == 'none');
   }
   getUserRole(): string {
-    let role = this.getItem('currentUserRole');
+    let role = this.getItem('y16'); // currentUserRole
     return role != null ? role : 'none';
+  }
+  getCurrentUserId(): number {
+    let id = localStorage.getItem('v33'); // currentUserId
+    console.log('getCurrentUserId: ', id)
+    if(id != null && id != 'none') {
+      return parseInt(id);
+    }
+    return 0;
   }
 }

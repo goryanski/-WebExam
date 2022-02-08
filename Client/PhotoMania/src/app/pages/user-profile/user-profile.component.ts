@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {UserProfileService} from "./user-profile.service";
-import {PostInterface} from "../../api/interfaces/post.interface";
-import {UserProfileApiService} from "../../api/services/user-profile.service";
+import {BrowserLocalStorage} from "../../shared/storage/local-storage";
 
 @Component({
   selector: 'app-user-profile',
@@ -12,12 +10,11 @@ export class UserProfileComponent implements OnInit {
   currentUserId: number = 0;
 
   constructor(
-    private readonly profileService: UserProfileService,
-
+    private readonly localStorage: BrowserLocalStorage
   ) {}
 
   ngOnInit(): void {
-    this.currentUserId = this.profileService.getCurrentUserId();
+    this.currentUserId = this.localStorage.getCurrentUserId();
   }
 
 }

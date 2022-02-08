@@ -15,5 +15,6 @@ namespace PhotoMania.Business.Dto
         public int DislikesCount { get; set; }
         public string Username { get; set; }
         public int CommentsCount { get; set; }
+        public int UserId { get; set; }
     }
 }
