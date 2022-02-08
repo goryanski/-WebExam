@@ -32,8 +32,6 @@ export class FoundUserComponent implements OnInit, OnDestroy {
       if(this.header != null) {
         this.header.style.display = "none";
       }
-      //this.username = params.name;
-      console.log("FoundUserComponent this.username: ", params.name)
       this.userDataService.getUserIdByName(params.name)
         .pipe(take(1))
         .subscribe(res => {
@@ -41,6 +39,7 @@ export class FoundUserComponent implements OnInit, OnDestroy {
             this.userNotFound = true;
           }
           else {
+            // when this id changes, app-user-profile-card will find user and app-user-posts will find user posts
             this.userId = res;
           }
           //console.log('getUserIdByName res: ', res);

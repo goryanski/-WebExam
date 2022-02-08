@@ -8,9 +8,11 @@
 
 <div *ngIf="!userNotFound; else noUserMessage">
   <app-user-profile-card [userId]="userId"></app-user-profile-card>
+  <app-user-posts [userId]="userId"></app-user-posts>
 </div>
 <ng-template #noUserMessage >
   <div class="no-user-message">No match</div>
 </ng-template>
 
-<app-user-posts></app-user-posts>
+
+

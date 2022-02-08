@@ -1,33 +1,33 @@
-import {Component, HostListener, Input, OnInit} from '@angular/core';
-import {UserProfileApiService} from "../../../api/services/user-profile.service";
-import {PostInterface} from "../../../api/interfaces/post.interface";
+import {Component, HostListener, Input, OnChanges, OnInit, SimpleChange} from '@angular/core';
+import {UserProfileApiService} from "../../api/services/user-profile.service";
+import {PostInterface} from "../../api/interfaces/post.interface";
 import {take} from "rxjs/operators";
-import {BrowserLocalStorage} from "../../../shared/storage/local-storage";
+import {BrowserLocalStorage} from "../../shared/storage/local-storage";
 
 @Component({
   selector: 'app-user-posts',
   templateUrl: './user-posts.component.html',
   styleUrls: ['./user-posts.component.scss']
 })
-export class UserPostsComponent implements OnInit {
+export class UserPostsComponent implements OnInit, OnChanges {
   postsToShow: PostInterface[] = [];
   pageNumber: number = 1;
   pageSize: number = 2;
   currentPosition =  window.pageYOffset;
   noPostsAtAll: boolean = false;
-  //@Input() userId: number = 0; user Id will be @Input() parameter because we must know if user wants to see his own posts, or it's another user want to see posts of someone. but now we will consider that user seeing his own parameters
-  userId: number = 0;
+  @Input() userId: number = 0;
 
 
   constructor(
     private readonly profileApiService: UserProfileApiService,
     private readonly localStorage: BrowserLocalStorage
   ) {
-    let storagedId = this.localStorage.getItem('currentUserId');
-    if(storagedId != null) {
-      this.userId = parseInt(storagedId);
+  }
+
+  ngOnChanges(changes: { [property: string]: SimpleChange }): void {
+    if(this.userId != 0) {
+      this.showNextPosts();
     }
-    this.showNextPosts();
   }
 
   ngOnInit(): void {
