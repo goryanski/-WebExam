@@ -1,6 +1,7 @@
-import {Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges} from '@angular/core';
+import {Component, ElementRef, Input, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewChild} from '@angular/core';
 import {PostInterface} from "../../api/interfaces/post.interface";
 import {AppEnvironment} from "../../shared/app-environment.interface";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-post',
@@ -19,13 +20,24 @@ export class PostComponent implements OnInit {
     commentsCount: ''
   };
   apiStaticFilesURL = '';
+  @ViewChild('username') username: ElementRef | undefined;
 
   constructor(
-    private readonly appEnv: AppEnvironment
+    private readonly appEnv: AppEnvironment,
+    private readonly router: Router
   ) {
     this.apiStaticFilesURL = appEnv.apiStaticFilesURL;
   }
 
   ngOnInit(): void {
+  }
+
+  clickByUsername() {
+    if(this.username != undefined) {
+      let text: string = this.username.nativeElement.innerText;
+      if(text != '') {
+        this.router.navigate([`found-user/${text}`]);
+      }
+    }
   }
 }

@@ -1,5 +1,8 @@
 <div class="post">
-  <p class="username">{{post.username}}</p>
+<!--  <p class="username">-->
+<!--    <a href="/">{{post.username}}</a>-->
+<!--  </p>-->
+  <p class="username" #username (click)="clickByUsername()">{{post.username}}</p>
   <!--  use images in api static files folder -->
   <img src="{{apiStaticFilesURL + post.photoPath}}" alt="post image">
   <div class="d-flex justify-content-between mt-2">
