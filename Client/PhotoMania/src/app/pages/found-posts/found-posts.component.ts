@@ -21,7 +21,7 @@ export class FoundPostsComponent implements OnInit, OnDestroy {
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly postsService: PostsApiService,
-    private readonly router: Router
+    //private readonly router: Router
   ) { }
 
   ngOnInit(): void {

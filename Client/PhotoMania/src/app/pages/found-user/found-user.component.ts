@@ -1,27 +1,58 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PostInterface} from "../../api/interfaces/post.interface";
 import {UserProfileApiService} from "../../api/services/user-profile.service";
 import {BrowserLocalStorage} from "../../shared/storage/local-storage";
+import {ActivatedRoute} from "@angular/router";
+import {LoadUserDataApiService} from "../../api/services/load-user-data.service";
+import {take} from "rxjs/operators";
 
 @Component({
   selector: 'app-found-user',
   templateUrl: './found-user.component.html',
   styleUrls: ['./found-user.component.scss']
 })
-export class FoundUserComponent implements OnInit {
-  postsToShow: PostInterface[] = [];
-  pageNumber: number = 1;
-  pageSize: number = 2;
-  currentPosition =  window.pageYOffset;
-  noPostsAtAll: boolean = false;
+export class FoundUserComponent implements OnInit, OnDestroy {
+  userNotFound: boolean = false;
+  userId: number = 0;
+  header: HTMLElement | null = null;
 
   constructor(
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly userDataService: LoadUserDataApiService,
+
     //private readonly profileApiService: UserProfileApiService
   ) {
     //this.showNextPosts();
   }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe(params => {
+      // hide header to replace it with fake header (btn back)
+      this.header = document.getElementById('headerElement');
+      if(this.header != null) {
+        this.header.style.display = "none";
+      }
+      //this.username = params.name;
+      console.log("FoundUserComponent this.username: ", params.name)
+      this.userDataService.getUserIdByName(params.name)
+        .pipe(take(1))
+        .subscribe(res => {
+          if(res == -1) {
+            this.userNotFound = true;
+          }
+          else {
+            this.userId = res;
+          }
+          //console.log('getUserIdByName res: ', res);
+        });
+      //this.showNextPosts();
+    });
   }
 
+  ngOnDestroy(): void {
+    // show header again
+    if(this.header != null) {
+      this.header.style.display = "block";
+    }
+  }
 }

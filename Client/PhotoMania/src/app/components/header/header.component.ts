@@ -42,11 +42,6 @@ export class HeaderComponent implements OnInit {
     if(this.searchField != undefined) {
       let text: string = this.searchField.nativeElement.value;
       if(text != '') {
-        // if(this.router.url.startsWith('/found-posts')) {
-        //   this.router.navigate(['/']);
-        //   console.log('navigate to home');
-        // }
-        // console.log('navigate to target');
         this.router.navigate([`found-posts/${text}`]);
       }
     }

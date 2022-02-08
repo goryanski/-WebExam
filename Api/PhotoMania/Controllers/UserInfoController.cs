@@ -27,5 +27,10 @@ namespace PhotoMania.Controllers
         {
             return await userDataService.GetUserProfileData(id);
         }
+        [HttpGet("getId")]
+        public async Task<int> GetUserIdByName([FromQuery] string username)
+        {
+            return await userDataService.GetUserIdByName(username);
+        }
     }
 }

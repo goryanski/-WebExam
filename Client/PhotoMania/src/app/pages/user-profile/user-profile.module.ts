@@ -12,20 +12,23 @@ import { CreatePostComponent } from './create-post/create-post.component';
 
 
 @NgModule({
-  declarations: [
-    UserProfileComponent,
-    UserPostsComponent,
-    UserFavoritesPostsComponent,
-    EditProfileComponent,
-    CreatePostComponent
-  ],
-  imports: [
-    CommonModule,
-    UserProfileRoutingModule,
-    ComponentsModule
-  ],
-  providers: [
-    UserProfileService
-  ],
+    declarations: [
+        UserProfileComponent,
+        UserPostsComponent,
+        UserFavoritesPostsComponent,
+        EditProfileComponent,
+        CreatePostComponent
+    ],
+    imports: [
+        CommonModule,
+        UserProfileRoutingModule,
+        ComponentsModule
+    ],
+    providers: [
+        UserProfileService
+    ],
+    exports: [
+        UserPostsComponent
+    ]
 })
 export class UserProfileModule { }

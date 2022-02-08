@@ -9,5 +9,6 @@ namespace PhotoMania.Business.Services.Interfaces
     public interface IUserDataService
     {
         Task<UserProfileDataResponse> GetUserProfileData(int userId);
+        Task<int> GetUserIdByName(string username);
     }
 }

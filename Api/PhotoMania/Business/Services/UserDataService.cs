@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using PhotoMania.Business.ExtraModels;
 using PhotoMania.Business.Services.Interfaces;
+using PhotoMania.DB.Entities;
 using PhotoMania.DB.Repositories.Interfaces;
 
 namespace PhotoMania.Business.Services
@@ -17,6 +18,18 @@ namespace PhotoMania.Business.Services
         {
             this.uow = uow;
         }
+
+        public async Task<int> GetUserIdByName(string username)
+        {
+            int userId = -1;
+            Account account = (await uow.AccountsRepository.GetAllAsync(a => a.Login == username)).FirstOrDefault();
+            if(account != null)
+            {
+                userId = await uow.UsersRepository.GetUserId(account.Id);
+            }
+            return userId;
+        }
+
         public async Task<UserProfileDataResponse> GetUserProfileData(int userId)
         {
             var userEntity = await uow.UsersRepository.GetAsync(userId);

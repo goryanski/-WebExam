@@ -35,4 +35,18 @@ export class LoadUserDataApiService {
       refCount()
     )
   }
+
+  getUserIdByName(username: string): Observable<number> {
+    return this.http.get<number>(
+      [
+        this.appEnv.apiPhotoManiaURL,
+        'userInfo',
+        `getId?username=${username}`
+      ].join('/'),
+      this.options
+    ).pipe(
+      publishReplay(1),
+      refCount()
+    )
+  }
 }
