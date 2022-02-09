@@ -32,4 +32,8 @@ export class PostsApiService {
       refCount()
     );
   }
+
+  SetLike(postId: number, userId: number) {
+
+  }
 }
