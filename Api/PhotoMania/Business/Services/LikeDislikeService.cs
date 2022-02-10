@@ -28,7 +28,8 @@ namespace PhotoMania.Business.Services
             FavouritePost favouritePost = new FavouritePost
             {
                 PostId = postId,
-                UserId = userId
+                UserId = userId,
+                Date = DateTime.Now
             };
             await uow.FavouritePostsRepository.CreateAsync(favouritePost);
             

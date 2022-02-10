@@ -1,1 +1,14 @@
-<p>user-favorites-posts works!</p>
+<div class="posts" *ngIf="postsToShow as posts" >
+  <div *ngIf="!noPostsAtAll; else noPostsMessage">
+    <div *ngIf="posts.length > 0; else loading">
+      <app-post  *ngFor="let post of posts" [post]="post"></app-post>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading >
+  <div class="spinner-border" role="status"></div>
+</ng-template>
+<ng-template #noPostsMessage >
+  <div class="no-posts-message">There are no posts</div>
+</ng-template>

@@ -48,6 +48,33 @@ namespace PhotoMania.Business.Services
 
             return await ConvertPosts(selectedPosts);
         }
+
+        public async Task<List<PostDto>> GetUserFavouritesPosts(PostParameters postParameters, int userId)
+        {
+            // first get latest user favourite posts 
+            List<FavouritePost> favouritePosts = (await uow.FavouritePostsRepository.GetAllAsync(fp => fp.UserId == userId))
+                .OrderByDescending(on => on.Date)
+                .Skip((postParameters.PageNumber - 1) * postParameters.PageSize)
+                .Take(postParameters.PageSize)
+                .ToList();
+
+            // then take their ids
+            List<int> FavouritesPostsIds = new List<int>();
+            foreach (var post in favouritePosts)
+            {
+                FavouritesPostsIds.Add(post.PostId);
+            }
+
+            // then find posts entities by these ids one by one
+            List<Post> selectedPosts = new List<Post>();
+            foreach (var id in FavouritesPostsIds)
+            {
+                selectedPosts.Add(await uow.PostsRepository.GetAsync(id));
+            }
+
+            return await ConvertPosts(selectedPosts);
+        }
+
         private async Task<List<PostDto>> ConvertPosts(List<Post> postEntities)
         {
             // try to map all filds that possible

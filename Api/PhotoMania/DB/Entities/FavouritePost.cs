@@ -9,5 +9,6 @@ namespace PhotoMania.DB.Entities
     {
         public int UserId { get; set; }
         public int PostId { get; set; }
+        public DateTime Date { get; set; }
     }
 }

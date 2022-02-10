@@ -19,8 +19,7 @@ export class UserPostsComponent implements OnInit, OnChanges {
 
 
   constructor(
-    private readonly profileApiService: UserProfileApiService,
-    private readonly localStorage: BrowserLocalStorage
+    private readonly profileApiService: UserProfileApiService
   ) {
   }
 
@@ -55,9 +54,6 @@ export class UserPostsComponent implements OnInit, OnChanges {
           this.postsToShow.push(...res)
           this.pageNumber++;
         });
-    }
-    else{
-      console.log('can not send query to display user posts because userId absent in local storage')
     }
   }
 }

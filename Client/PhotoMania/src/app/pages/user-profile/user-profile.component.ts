@@ -8,6 +8,7 @@ import {BrowserLocalStorage} from "../../shared/storage/local-storage";
 })
 export class UserProfileComponent implements OnInit {
   currentUserId: number = 0;
+  userIdForFavouritesPosts: number = 0;
 
   constructor(
     private readonly localStorage: BrowserLocalStorage
@@ -17,4 +18,8 @@ export class UserProfileComponent implements OnInit {
     this.currentUserId = this.localStorage.getCurrentUserId();
   }
 
+  ShowFavouritesPostsClick() {
+    // to load FavouritesPosts only when button ShowFavouritesPosts was clicked
+    this.userIdForFavouritesPosts = this.currentUserId;
+  }
 }

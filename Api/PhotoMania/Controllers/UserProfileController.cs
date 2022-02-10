@@ -27,5 +27,11 @@ namespace PhotoMania.Controllers
         {
             return await postsService.GetUserPosts(postParameters, userId);
         }
+
+        [HttpGet("favourites")]
+        public async Task<List<PostDto>> GetUserFavouritesPosts([FromQuery] PostParameters postParameters, int userId)
+        {
+            return await postsService.GetUserFavouritesPosts(postParameters, userId);
+        }
     }
 }
