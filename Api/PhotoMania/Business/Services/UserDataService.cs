@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PhotoMania.Business.Dto;
 using PhotoMania.Business.ExtraModels;
 using PhotoMania.Business.Services.Interfaces;
 using PhotoMania.DB.Entities;
@@ -58,6 +59,21 @@ namespace PhotoMania.Business.Services
             }
             // no more than a million
             return rating >= 1000_000 ? 1000_000 : rating;
+        }
+
+        public async Task<UserDto> GetGeneralUserData(int userId)
+        {
+            UserProfile userProfile = await uow.UsersRepository.GetAsync(userId);
+            Account account = await uow.AccountsRepository.GetAsync(userProfile.AccountId);
+
+            return new UserDto
+            {
+                Username = account.Login,
+                Password = "", // we won't send password for more security
+                Email = userProfile.Email,
+                Description = userProfile.Description,
+                Avatar = await uow.AvatarsRepository.GetAvatarPath(userId)
+            };
         }
     }
 }

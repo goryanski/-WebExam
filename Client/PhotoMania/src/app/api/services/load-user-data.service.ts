@@ -6,6 +6,7 @@ import {JwtResponse} from "../interfaces/jwt-response.interface";
 import {UserProfileCard} from "../interfaces/user-profile-card.interface";
 import {BrowserLocalStorage} from "../../shared/storage/local-storage";
 import {publishReplay, refCount} from "rxjs/operators";
+import {UserInterface} from "../interfaces/user.interface";
 
 @Injectable()
 export class LoadUserDataApiService {
@@ -42,6 +43,20 @@ export class LoadUserDataApiService {
         this.appEnv.apiPhotoManiaURL,
         'userInfo',
         `getId?username=${username}`
+      ].join('/'),
+      this.options
+    ).pipe(
+      publishReplay(1),
+      refCount()
+    )
+  }
+
+  loadGeneralUserData(userId: number): Observable<UserInterface> {
+    return this.http.get<UserInterface>(
+      [
+        this.appEnv.apiPhotoManiaURL,
+        'userInfo',
+        `data?userId=${userId}`
       ].join('/'),
       this.options
     ).pipe(

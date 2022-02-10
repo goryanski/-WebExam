@@ -39,10 +39,6 @@ export class CreatePostComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onBackClick() {
-    this.router.navigate(['/']);
-  }
-
   public uploadFinished = (event: any) => {
     // in event we have the response object in which we can find a path of photo to be saved in the database
     this.photo = event;

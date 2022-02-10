@@ -93,7 +93,7 @@ namespace PhotoMania.DB.Repositories
             {
                 AccountId = account3.Id,
                 Email = "user1@gmail.com",
-                Description = "I'm 27. I like volleyball and walking in the woods",
+                Description = "I am 27. I like volleyball and walking in the woods",
                 IsBlocked = false,
                 RegistrationDate = DateTime.Now,
             };

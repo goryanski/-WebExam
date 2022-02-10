@@ -1,1 +1,77 @@
-<p>edit-profile works!</p>
+<form class="edit-form mt-5" [formGroup]="form">
+  <div class="mb-5">
+    <label class="form-label">Avatar (only types jpg, png, jpeg)</label>
+    <app-upload [saveImgFolder]="'avatars'"
+                (onUploadFinished)="uploadFinished($event)"></app-upload>
+
+    <input type="checkbox" class="form-check-input bg-success" id="chbChangeAvatar">
+    <label class="form-label" for="chbChangeAvatar">Choose the file and click on the check box to change an avatar, otherwise the avatar won't change</label>
+
+  </div>
+
+  <div class="mb-5">
+    <label for="inputLogin" class="form-label">Login (it will be your username also)</label>
+    <input type="text" class="form-control"
+           formControlName="username" id="inputLogin" aria-describedby="emailHelp">
+    <div *ngIf="form.controls['username'].errors">
+      <div *ngIf="form.controls['username'].errors.required"
+           class="form-text text-danger">Field is required
+      </div>
+      <div *ngIf="form.controls['username'].errors.pattern"
+           class="form-text text-danger">English letters only, digits, symbol _ (4-14 symbols)
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-5">
+    <label for="inputPassword" class="form-label">Password (if you don't want to change password just leave this field empty. You can't see your old password for more security)</label>
+    <input type="password" class="form-control"
+           formControlName="password" id="inputPassword">
+    <div *ngIf="form.controls['password'].errors">
+      <div *ngIf="form.controls['password'].errors.pattern"
+           class="form-text text-danger">English letters only, digits, symbols _ # @ (4-16 symbols)
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-5">
+    <label for="inputForDescription" class="form-label">Description</label>
+    <textarea type="text" class="form-control" rows="4"
+              formControlName="description" id="inputForDescription">
+    </textarea>
+    <div *ngIf="form.controls['description'].errors">
+      <div *ngIf="form.controls['description'].errors.required"
+           class="form-text text-danger">Field is required
+      </div>
+      <div *ngIf="form.controls['description'].errors.pattern"
+           class="form-text text-danger">English letters only, digits, space, symbols ,.!/+@_ 4-64 symbols
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="inputEmail" class="form-label">Email</label>
+    <input class="form-control"
+           formControlName="email" id="inputEmail">
+    <div *ngIf="form.controls['email'].errors">
+      <div *ngIf="form.controls['email'].errors.required"
+           class="form-text text-danger">Field is required
+      </div>
+      <div *ngIf="form.controls['email'].errors.pattern"
+           class="form-text text-danger">Email is incorrect
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="mt-5">
+    <button [disabled]="!form.valid"
+            (click)="onEditClick()"
+            class="btn btn-warning">Edit
+    </button>
+  </div>
+</form>
+
+
+<app-modal-window [data]="modalWindowData"></app-modal-window>

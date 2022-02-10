@@ -28,7 +28,7 @@ export class QueryHttpInterceptor implements HttpInterceptor {
 
           setTimeout(() => {
             document.location.reload();
-          },1000);
+          },500);
 
 
 
