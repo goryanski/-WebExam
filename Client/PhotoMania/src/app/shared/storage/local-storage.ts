@@ -43,7 +43,6 @@ export class BrowserLocalStorage implements AbstractStorage {
   }
   getCurrentUserId(): number {
     let id = localStorage.getItem('v33'); // currentUserId
-    console.log('getCurrentUserId: ', id)
     if(id != null && id != 'none') {
       return parseInt(id);
     }

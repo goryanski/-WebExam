@@ -4,7 +4,7 @@ import {AppEnvironment} from "../../shared/app-environment.interface";
 import {Router} from "@angular/router";
 import {BrowserLocalStorage} from "../../shared/storage/local-storage";
 import {PostsApiService} from "../../api/services/posts.service";
-import {take} from "rxjs/operators";
+import {take, tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-post',
@@ -30,6 +30,7 @@ export class PostComponent implements OnInit {
   @ViewChild('ownerId') postOwnerId: ElementRef | undefined;
   @ViewChild('like') like: ElementRef | undefined;
   @ViewChild('dislike') dislike: ElementRef | undefined;
+  @ViewChild('errorLabel') errorLabel: ElementRef | undefined;
 
 
   constructor(
@@ -56,29 +57,56 @@ export class PostComponent implements OnInit {
 
   likeClick() {
     if(this.canClick()) {
-      // send query to api for change likes count
-      // params: postId, userId(from storage)
-      // in api:
-      // 2. check if this user(id = userId) hasn't already liked this post (id=postId)
-      // 3. change likes count in post with id = postId
-
-      // this.postsService.SetLike(this.getPostId(), this.currentUserId)
-      //   .pipe(take(1))
-      //   .subscribe(res => {
-      //     console.log("this.postsService.SetLike res: ", res);
-      //   });
-
-      // after checking increase likes number
-      let countLikes: number = parseInt(this.like?.nativeElement.innerText);
-      if(this.like?.nativeElement.innerText != undefined) {
-        this.like.nativeElement.innerText = (++countLikes).toString();
+      this.postsService.SetLikeDislike('setLike', this.getPostId(), this.currentUserId)
+        .pipe(take(1))
+        .subscribe(res => {
+            if(res.response === 'ok') {
+              // display increasing likes number
+              if(this.like?.nativeElement.innerText != undefined) {
+                let countLikes: number = parseInt(this.like?.nativeElement.innerText);
+                this.like.nativeElement.innerText = (++countLikes).toString();
+              }
+            }
+            else {
+              // show error
+              if(this.errorLabel?.nativeElement.innerText != undefined) {
+                this.errorLabel.nativeElement.innerText = "can't like a second time";
+              }
+            }
+          }
+        );
+    }
+    else {
+      // show error
+      if(this.errorLabel?.nativeElement.innerText != undefined) {
+        this.errorLabel.nativeElement.innerText = "can't like your own post";
       }
     }
   }
 
   dislikeClick() {
     if(this.canClick()) {
-
+      this.postsService.SetLikeDislike('setDislike', this.getPostId(), this.currentUserId)
+        .pipe(take(1))
+        .subscribe(res => {
+          if(res.response === 'ok') {
+            // display increasing dislikes number
+            if(this.dislike?.nativeElement.innerText != undefined) {
+              let countDislikes: number = parseInt(this.dislike?.nativeElement.innerText);
+              this.dislike.nativeElement.innerText = (++countDislikes).toString();
+            }
+          }
+          else {
+            if(this.errorLabel?.nativeElement.innerText != undefined) {
+              this.errorLabel.nativeElement.innerText = "can't dislike a second time";
+            }
+          }
+        });
+    }
+    else {
+      if(this.errorLabel?.nativeElement.innerText != undefined) {
+        this.errorLabel.nativeElement.innerText = "can't dislike your own post";
+      }
     }
   }
 

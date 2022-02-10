@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using PhotoMania.Business.Dto;
 using PhotoMania.Business.PaginationModels;
 using PhotoMania.Business.Services.Interfaces;
+using PhotoMania.Models.Response;
+using PhotoMania.Models.ViewModels;
 
 namespace PhotoMania.Controllers
 {
@@ -17,16 +19,36 @@ namespace PhotoMania.Controllers
     public class PostsController : ControllerBase
     {
         IPostsService postsService;
+        ILikeDislikeService likeDislikeService;
 
-        public PostsController(IPostsService postsService)
+        public PostsController(IPostsService postsService, ILikeDislikeService likeDislikeService)
         {
             this.postsService = postsService;
+            this.likeDislikeService = likeDislikeService;
         }
 
         [HttpGet]
         public async Task<List<PostDto>> GetPostsBySearchKey([FromQuery] PostParameters postParameters, string searchKey)
         {
             return await postsService.GetPostsBySearchKey(postParameters, searchKey);
+        }
+
+        [HttpPost("setLike")]
+        public async Task<ApiResponse> SetLikeToPost([FromBody] LikeDislikePostViewModel model)
+        {
+            return new ApiResponse
+            {
+                Response = await likeDislikeService.SetLikeToPost(model.PostId, model.UserId)
+            };
+        }
+
+        [HttpPost("setDislike")]
+        public async Task<ApiResponse> SetDislikeToPost([FromBody] LikeDislikePostViewModel model)
+        {
+            return new ApiResponse
+            {
+                Response = await likeDislikeService.SetDislikeToPost(model.PostId, model.UserId)
+            };
         }
     }
 }

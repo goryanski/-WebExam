@@ -15,6 +15,7 @@ namespace PhotoMania.DB.Repositories.Interfaces
         RolesRepository RolesRepository { get; }
         UsersRepository UsersRepository { get; }
         FavouritePostsRepository FavouritePostsRepository { get; }
+        HatedPostsRepository HatedPostsRepository { get; }
 
     }
 }

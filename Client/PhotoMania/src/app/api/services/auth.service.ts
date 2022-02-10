@@ -4,7 +4,7 @@ import {Observable} from "rxjs";
 import {publishReplay, refCount} from "rxjs/operators";
 import {AppEnvironment} from "../../shared/app-environment.interface";
 import {JwtResponse} from "../interfaces/jwt-response.interface";
-import {RegistrationResponse} from "../interfaces/registration.response.interface";
+import {ApiResponse} from "../interfaces/api.response.interface";
 
 
 @Injectable()
@@ -40,9 +40,9 @@ export class AuthApiService {
 
   registration(
     login: string, password: string, email: string, description: string, avatarPath: string
-  ) : Observable<RegistrationResponse>
+  ) : Observable<ApiResponse>
   {
-    return this.http.post<RegistrationResponse>(
+    return this.http.post<ApiResponse>(
       [
         this.appEnv.apiPhotoManiaURL,
         'auth',

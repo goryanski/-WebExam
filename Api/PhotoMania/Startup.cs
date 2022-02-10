@@ -76,6 +76,7 @@ namespace PhotoMania
             services.AddTransient<IAccountsService, AccountsService>();
             services.AddTransient<IValidationService, ValidationService>();
             services.AddTransient<IUserDataService, UserDataService>();
+            services.AddTransient<ILikeDislikeService, LikeDislikeService>();
 
             services.AddCors();
         }

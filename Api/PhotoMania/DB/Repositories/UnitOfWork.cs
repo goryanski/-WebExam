@@ -18,6 +18,7 @@ namespace PhotoMania.DB.Repositories
         RolesRepository _rolesRepository;
         UsersRepository _usersRepository;
         FavouritePostsRepository _favouritePostsRepository;
+        HatedPostsRepository _hatedPostsRepository;
         public AccountsRepository AccountsRepository =>
             _accountsRepository ?? (_accountsRepository = new AccountsRepository(db));
         public AvatarsRepository AvatarsRepository =>
@@ -34,13 +35,15 @@ namespace PhotoMania.DB.Repositories
           _usersRepository ?? (_usersRepository = new UsersRepository(db));
         public FavouritePostsRepository FavouritePostsRepository =>
          _favouritePostsRepository ?? (_favouritePostsRepository = new FavouritePostsRepository(db));
+        public HatedPostsRepository HatedPostsRepository =>
+        _hatedPostsRepository ?? (_hatedPostsRepository = new HatedPostsRepository(db));
 
 
 
         public UnitOfWork(DatabaseContext context)
         {
             db = context;
-            DbInit();
+            //DbInit();
         }
 
         private void DbInit()

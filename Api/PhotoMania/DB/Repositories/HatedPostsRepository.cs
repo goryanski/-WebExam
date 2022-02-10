@@ -6,9 +6,9 @@ using PhotoMania.DB.Entities;
 
 namespace PhotoMania.DB.Repositories
 {
-    public class FavouritePostsRepository : BaseRepository<FavouritePost>
+    public class HatedPostsRepository : BaseRepository<HatedPost>
     {
-        public FavouritePostsRepository(DatabaseContext context) : base(context)
+        public HatedPostsRepository(DatabaseContext context) : base(context)
         {
         }
     }

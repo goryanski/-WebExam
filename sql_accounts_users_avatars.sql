@@ -7,7 +7,6 @@ SELECT TOP (1000) [Id]
 
   SELECT TOP (1000) [Id]
       ,[Email]
-      ,[Rating]
       ,[Description]
       ,[IsBlocked]
       ,[RegistrationDate]

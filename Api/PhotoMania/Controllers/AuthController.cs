@@ -52,9 +52,9 @@ namespace PhotoMania.Controllers
         }
 
         [HttpPost("registration")]
-        public async Task<RegistrationResponse> Registration([FromBody] RegisterRequestModel model)
+        public async Task<ApiResponse> Registration([FromBody] RegisterRequestModel model)
         {
-            return new RegistrationResponse
+            return new ApiResponse
             {
                 Response = await accountsService.RegisterNewUser(model)
             };
