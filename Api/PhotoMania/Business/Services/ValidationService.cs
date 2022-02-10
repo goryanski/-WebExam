@@ -36,5 +36,12 @@ namespace PhotoMania.Business.Services
                ? "Description must be English letters only, digits, space, symbols ,.!/+@_ Max 264 symbols.\n"
                : "";
         }
+
+        public string PostDescriptionValidationError(string description)
+        {
+            return !Regex.IsMatch(description, "^[a-zA-Z ,.!/+@_0-9]{4,64}$")
+              ? "Description must be English letters only, digits, space, symbols ,.!/+@_ 4-64 symbols.\n"
+              : "";
+        }
     }
 }

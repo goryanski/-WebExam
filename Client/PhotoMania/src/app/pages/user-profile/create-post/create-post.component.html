@@ -1,1 +1,39 @@
-<p>create-post works!</p>
+<form class="create-form mt-5" [formGroup]="form">
+  <div class="mb-3">
+    <label class="form-label">Photo (only types jpg, png, jpeg)</label>
+    <!-- file-loader
+          'images' - image folder on server
+          (onUploadFinished) - event on finish image upload to server -->
+    <app-upload [saveImgFolder]="'images'"
+                (onUploadFinished)="uploadFinished($event)"></app-upload>
+  </div>
+
+  <div class="mb-3">
+    <label for="inputDescription" class="form-label">Description</label>
+    <textarea type="text" class="form-control" rows="4"
+              formControlName="description" id="inputDescription">
+    </textarea>
+    <div *ngIf="form.controls['description'].errors">
+      <div *ngIf="form.controls['description'].errors.required"
+           class="form-text text-danger">Field is required
+      </div>
+      <div *ngIf="form.controls['description'].errors.pattern"
+           class="form-text text-danger">English letters only, digits, space, symbols ,.!/+@_ 4-64 symbols
+      </div>
+    </div>
+  </div>
+
+
+  <div class="mt-5">
+    <button [disabled]="!form.valid"
+            (click)="onCreateClick()"
+            class="btn btn-warning">Create
+    </button>
+    <button (click)="onBackClick()"
+            class="btn btn-warning btn-back">Back
+    </button>
+  </div>
+</form>
+
+
+<app-modal-window [data]="modalWindowData"></app-modal-window>

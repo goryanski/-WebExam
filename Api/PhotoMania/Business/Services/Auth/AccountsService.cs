@@ -35,7 +35,7 @@ namespace PhotoMania.Business.Services.Auth
                 .GetAllAsync(u => u.Login.Equals(login)))
                 .FirstOrDefault();
             }
-            ;
+            
             if (account is null)
             {
                 throw new UserNotFoundException();

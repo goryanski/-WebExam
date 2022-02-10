@@ -50,5 +50,14 @@ namespace PhotoMania.Controllers
                 Response = await likeDislikeService.SetDislikeToPost(model.PostId, model.UserId)
             };
         }
+
+        [HttpPost("create")]
+        public async Task<ApiResponse> CreatePost([FromBody] PostViewModel model)
+        {
+            return new ApiResponse
+            {
+                Response = await postsService.CreatePost(model.Description, model.DbPath, model.UserId)
+            };
+        }
     }
 }

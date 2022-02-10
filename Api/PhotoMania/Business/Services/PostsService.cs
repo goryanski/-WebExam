@@ -13,11 +13,13 @@ namespace PhotoMania.Business.Services
     public class PostsService : IPostsService
     {
         private IUnitOfWork uow;
+        private IValidationService validationService;
         private Automapper.ObjectMapper objectMapper = Automapper.ObjectMapper.Instance;
 
-        public PostsService(IUnitOfWork uow)
+        public PostsService(IUnitOfWork uow, IValidationService validationService)
         {
             this.uow = uow;
+            this.validationService = validationService;
         }
 
 
@@ -89,6 +91,33 @@ namespace PhotoMania.Business.Services
                 postsList[i].PhotoPath = await uow.PhotosRepository.GetPath(postEntitiesList[i].Id);
             }
             return postsList;
+        }
+
+        public async Task<string> CreatePost(string description, string dbPath, int userId)
+        {
+            string error = validationService.PostDescriptionValidationError(description);
+            if(error != "")
+            {
+                return error;
+            }
+            // create
+            Post post = new Post
+            {
+                Description = description,
+                Date = DateTime.Now,
+                LikesCount = 0,
+                DislikesCount = 0,
+                UserId = userId
+            };
+            await uow.PostsRepository.CreateAsync(post);
+            Photo photo = new Photo
+            {
+                Url = dbPath,
+                PostId = post.Id
+            };
+            await uow.PhotosRepository.CreateAsync(photo);
+
+            return "ok";
         }
     }
 }

@@ -51,4 +51,23 @@ export class PostsApiService {
       refCount()
     );
   }
+
+  createPost(description: string, dbPath: string, userId: number): Observable<ApiResponse> {
+    return this.httpClient.post<ApiResponse>(
+      [
+        this.appEnv.apiPhotoManiaURL,
+        'Posts',
+        'create'
+      ].join('/'),
+      {
+        description,
+        dbPath,
+        userId
+      },
+      this.options
+    ).pipe(
+      publishReplay(1),
+      refCount()
+    );
+  }
 }

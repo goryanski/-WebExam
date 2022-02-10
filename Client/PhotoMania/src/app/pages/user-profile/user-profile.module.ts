@@ -8,6 +8,7 @@ import { UserPostsComponent } from '../../components/user-posts/user-posts.compo
 import { UserFavoritesPostsComponent } from './user-favorites-posts/user-favorites-posts.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CreatePostComponent } from './create-post/create-post.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { CreatePostComponent } from './create-post/create-post.component';
     imports: [
         CommonModule,
         UserProfileRoutingModule,
-        ComponentsModule
+        ComponentsModule,
+        ReactiveFormsModule
     ],
     providers: [
 

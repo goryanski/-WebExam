@@ -18,7 +18,7 @@ export class RegistrationComponent implements OnInit {
     email: '^[a-zA-Z0-9][a-zA-Z0-9!#$%&+-/?^_{|}~]{2,32}@[a-zA-Z]{2,24}\\.[a-zA-Z]{2,16}$', // Email is incorrect
     description: '^[a-zA-Z ,.!/+@_0-9]{0,264}$' // English letters only, digits, space, symbols ,.!/+@_ Max 264 symbols
   }
-  // path to avatar in db (we can get it after user will load the avatar - watch this.uploadFinished())
+  // path to avatar in db (we can get it after user uploads the avatar - watch this.uploadFinished())
   public avatarImg: { dbPath: ''; } | undefined;
   public modalWindowData: any;
 
