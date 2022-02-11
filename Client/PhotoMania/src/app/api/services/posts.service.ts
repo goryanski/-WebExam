@@ -70,4 +70,18 @@ export class PostsApiService {
       refCount()
     );
   }
+
+  getPostById(id: number): Observable<PostInterface> {
+    return this.httpClient.get<PostInterface>(
+      [
+        this.appEnv.apiPhotoManiaURL,
+        'Posts',
+        `getPost?id=${id}`
+      ].join('/'),
+      this.options
+    ).pipe(
+      publishReplay(1),
+      refCount()
+    );
+  }
 }

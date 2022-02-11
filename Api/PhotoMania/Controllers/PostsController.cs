@@ -59,5 +59,11 @@ namespace PhotoMania.Controllers
                 Response = await postsService.CreatePost(model.Description, model.DbPath, model.UserId)
             };
         }
+
+        [HttpGet("getPost")]
+        public async Task<PostDto> GetPostById([FromQuery] int id)
+        {
+            return await postsService.GetPostById(id);
+        }
     }
 }

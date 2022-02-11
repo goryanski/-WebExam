@@ -23,7 +23,7 @@ export class PostComponent implements OnInit {
     commentsCount: '',
     userId: 0
   };
-  apiStaticFilesURL = '';
+  apiStaticFilesURL: string = '';
   currentUserId: number = 0;
   @ViewChild('username') username: ElementRef | undefined;
   @ViewChild('postId') postId: ElementRef | undefined;
@@ -117,5 +117,12 @@ export class PostComponent implements OnInit {
 
   private getPostId(): number {
     return this.postId?.nativeElement.value;
+  }
+
+  clickByComments() {
+    if(this.postId != undefined) {
+      let id: number = this.postId.nativeElement.value;
+      this.router.navigate([`view-post-comments/${id}`]);
+    }
   }
 }

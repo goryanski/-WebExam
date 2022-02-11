@@ -33,6 +33,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/found-user/found-user.module').then(m => m.FoundUserModule)
   },
   {
+    path: 'found-user/:name',
+    loadChildren: () => import('./pages/found-user/found-user.module').then(m => m.FoundUserModule)
+  },
+  {
+    path: 'view-post-comments/:id',
+    loadChildren: () => import('./pages/view-post-comments/view-post-comments.module').then(m => m.ViewPostCommentsModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundModule)
   }

@@ -14,5 +14,6 @@ namespace PhotoMania.Business.Services.Interfaces
         Task<List<PostDto>> GetPostsBySearchKey(PostParameters postParameters, string searchKey);
         Task<List<PostDto>> GetUserFavouritesPosts(PostParameters postParameters, int userId);
         Task<string> CreatePost(string description, string dbPath, int userId);
+        Task<PostDto> GetPostById(int id);
     }
 }
