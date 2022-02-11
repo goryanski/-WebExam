@@ -5,6 +5,8 @@ import {Observable} from "rxjs";
 import {PostInterface} from "../interfaces/post.interface";
 import {publishReplay, refCount} from "rxjs/operators";
 import {BrowserLocalStorage} from "../../shared/storage/local-storage";
+import {UserInterface} from "../interfaces/user.interface";
+import {ApiResponse} from "../interfaces/api.response.interface";
 
 @Injectable()
 export class UserProfileApiService {
@@ -27,6 +29,22 @@ export class UserProfileApiService {
         'UserProfile',
         `${route}?PageNumber=${pageNumber}&PageSize=${pageSize}&userId=${userId}`
       ].join('/'),
+      this.options
+    ).pipe(
+      publishReplay(1),
+      refCount()
+    );
+  }
+
+  editUserPersonalInfo(user: UserInterface): Observable<ApiResponse> {
+    console.log('UserProfileApiService user: ', user)
+    return this.httpClient.put<ApiResponse>(
+      [
+        this.appEnv.apiPhotoManiaURL,
+        'UserProfile',
+        'update'
+      ].join('/'),
+      user,
       this.options
     ).pipe(
       publishReplay(1),

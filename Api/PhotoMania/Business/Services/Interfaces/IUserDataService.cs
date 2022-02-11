@@ -12,5 +12,6 @@ namespace PhotoMania.Business.Services.Interfaces
         Task<UserProfileDataResponse> GetUserProfileData(int userId);
         Task<int> GetUserIdByName(string username);
         Task<UserDto> GetGeneralUserData(int userId);
+        Task<string> EditUserPersonalInfo(UserDto user);
     }
 }

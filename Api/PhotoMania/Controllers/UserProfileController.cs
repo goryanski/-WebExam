@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using PhotoMania.Business.Dto;
 using PhotoMania.Business.PaginationModels;
 using PhotoMania.Business.Services.Interfaces;
+using PhotoMania.Models.Response;
 
 namespace PhotoMania.Controllers
 {
@@ -17,9 +18,11 @@ namespace PhotoMania.Controllers
     public class UserProfileController : ControllerBase
     {
         IPostsService postsService;
-        public UserProfileController(IPostsService postsService)
+        IUserDataService userDataService;
+        public UserProfileController(IPostsService postsService, IUserDataService userDataService)
         {
             this.postsService = postsService;
+            this.userDataService = userDataService;
         }
 
         [HttpGet("posts")]
@@ -33,5 +36,15 @@ namespace PhotoMania.Controllers
         {
             return await postsService.GetUserFavouritesPosts(postParameters, userId);
         }
+
+        [HttpPut("update")]
+        public async Task<ApiResponse> EditUserPersonalInfo([FromBody] UserDto user)
+        {
+            return new ApiResponse
+            {
+                Response = await userDataService.EditUserPersonalInfo(user)
+            };
+        }
+
     }
 }

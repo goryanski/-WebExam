@@ -16,5 +16,10 @@ namespace PhotoMania.DB.Repositories
         {
             return (await GetAllAsync(a => a.UserId == userId)).First().Url;
         }
+
+        public async Task<Avatar> GetAvatarByUserId(int userId)
+        {
+            return (await GetAllAsync(a => a.UserId == userId)).First();
+        }
     }
 }

@@ -4,7 +4,7 @@
     <app-upload [saveImgFolder]="'avatars'"
                 (onUploadFinished)="uploadFinished($event)"></app-upload>
 
-    <input type="checkbox" class="form-check-input bg-success" id="chbChangeAvatar">
+    <input type="checkbox" #chbChangeAvatar class="form-check-input bg-success" id="chbChangeAvatar">
     <label class="form-label" for="chbChangeAvatar">Choose the file and click on the check box to change an avatar, otherwise the avatar won't change</label>
 
   </div>
