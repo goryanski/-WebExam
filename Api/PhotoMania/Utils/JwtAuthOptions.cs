@@ -12,7 +12,7 @@ namespace PhotoMania.Utils
         public const string ISSUER = "server";
         public const string AUDIENCE = "client";
         const string KEY = "6214C4B6-2984-4BB7-A2EA-3706246C6CE5";
-        public const int LIFETIME_SEC = 60;
+        public const int LIFETIME_SEC = 60 * 60;
         public static SymmetricSecurityKey GetSymmetricSecurityKey()
         {
             return new SymmetricSecurityKey(Encoding.ASCII.GetBytes(KEY));

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PhotoMania.DB.Entities.Comments;
 
 namespace PhotoMania.DB.Entities
 {

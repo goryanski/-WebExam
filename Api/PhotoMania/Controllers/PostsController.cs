@@ -28,7 +28,7 @@ namespace PhotoMania.Controllers
         }
 
         [HttpGet]
-        public async Task<List<PostDto>> GetPostsBySearchKey([FromQuery] PostParameters postParameters, string searchKey)
+        public async Task<List<PostDto>> GetPostsBySearchKey([FromQuery] PaginationParameters postParameters, string searchKey)
         {
             return await postsService.GetPostsBySearchKey(postParameters, searchKey);
         }

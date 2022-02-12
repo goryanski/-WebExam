@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PhotoMania.Business.PaginationModels
 {
-    public class PostParameters
+    public class PaginationParameters
     {
         // We are using constant maxPageSize to restrict our API to a maximum of 50 posts
         const int maxPageSize = 50;

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using PhotoMania.DB.Entities;
+using PhotoMania.DB.Entities.Comments;
+using PhotoMania.DB.Repositories.Comments;
 using PhotoMania.DB.Repositories.Interfaces;
 
 namespace PhotoMania.DB.Repositories
@@ -19,6 +21,9 @@ namespace PhotoMania.DB.Repositories
         UsersRepository _usersRepository;
         FavouritePostsRepository _favouritePostsRepository;
         HatedPostsRepository _hatedPostsRepository;
+        LikedCommentsRepository _likedCommentsRepository;
+        LikedCommentRepliesRepository _likedCommentRepliesRepository;
+        CommentRepliesRepository _commentRepliesRepository;
         public AccountsRepository AccountsRepository =>
             _accountsRepository ?? (_accountsRepository = new AccountsRepository(db));
         public AvatarsRepository AvatarsRepository =>
@@ -37,6 +42,12 @@ namespace PhotoMania.DB.Repositories
          _favouritePostsRepository ?? (_favouritePostsRepository = new FavouritePostsRepository(db));
         public HatedPostsRepository HatedPostsRepository =>
         _hatedPostsRepository ?? (_hatedPostsRepository = new HatedPostsRepository(db));
+        public LikedCommentsRepository LikedCommentsRepository =>
+       _likedCommentsRepository ?? (_likedCommentsRepository = new LikedCommentsRepository(db));
+        public LikedCommentRepliesRepository LikedCommentRepliesRepository =>
+       _likedCommentRepliesRepository ?? (_likedCommentRepliesRepository = new LikedCommentRepliesRepository(db));
+        public CommentRepliesRepository CommentRepliesRepository =>
+       _commentRepliesRepository ?? (_commentRepliesRepository = new CommentRepliesRepository(db));
 
 
 
@@ -82,10 +93,17 @@ namespace PhotoMania.DB.Repositories
                 Password = AccountsRepository.HashPassword("user12SDSDSD1w"),
                 RoleId = role3.Id
             };
+            Account account5 = new Account
+            {
+                Login = "masha",
+                Password = AccountsRepository.HashPassword("user12SDSDSD1w"),
+                RoleId = role3.Id
+            };
             db.Accounts.Add(account1);
             db.Accounts.Add(account2);
             db.Accounts.Add(account3);
             db.Accounts.Add(account4);
+            db.Accounts.Add(account5);
             db.SaveChanges();
 
 
@@ -95,7 +113,7 @@ namespace PhotoMania.DB.Repositories
                 Email = "user1@gmail.com",
                 Description = "I am 27. I like volleyball and walking in the woods",
                 IsBlocked = false,
-                RegistrationDate = DateTime.Now,
+                RegistrationDate = DateTime.Now.AddDays(-14),
             };
             UserProfile user2 = new UserProfile
             {
@@ -103,10 +121,19 @@ namespace PhotoMania.DB.Repositories
                 Email = "user2@gmail.com",
                 Description = "I love blue girls",
                 IsBlocked = false,
-                RegistrationDate = DateTime.Now,
+                RegistrationDate = DateTime.Now.AddDays(-19),
+            };
+            UserProfile user3 = new UserProfile
+            {
+                AccountId = account5.Id,
+                Email = "user3@gmail.com",
+                Description = "Just Mary",
+                IsBlocked = false,
+                RegistrationDate = DateTime.Now.AddDays(-7),
             };
             db.Users.Add(user1);
             db.Users.Add(user2);
+            db.Users.Add(user3);
             db.SaveChanges();
             #endregion
 
@@ -168,6 +195,14 @@ namespace PhotoMania.DB.Repositories
                 DislikesCount = 9,
                 UserId = user2.Id
             };
+            Post post8 = new Post
+            {
+                Description = "my first painting",
+                Date = DateTime.Now.AddDays(-2),
+                LikesCount = 789,
+                DislikesCount = 0,
+                UserId = user3.Id
+            };
             db.Posts.Add(post1);
             db.Posts.Add(post2);
             db.Posts.Add(post3);
@@ -175,23 +210,94 @@ namespace PhotoMania.DB.Repositories
             db.Posts.Add(post5);
             db.Posts.Add(post6);
             db.Posts.Add(post7);
+            db.Posts.Add(post8);
             db.SaveChanges();
-
-
-
-
-            Comment comment1 = new Comment
-            {
-                Text = "my first comment",
-                Date = DateTime.Now,
-                PostId = post1.Id,
-                //UserId = user1.Id,
-            };
-            db.Comments.Add(comment1);
             #endregion
 
 
-            #region UserProfile info
+
+            #region Post comments
+            // Vasya wrote a comment
+            Comment comment1 = new Comment
+            {
+                Text = "who let the dogs out?))",
+                Date = DateTime.Now.AddDays(-4),
+                PostId = post6.Id,
+                LikesCount = 12,
+                OwnerId = user1.Id,
+                OwnerName = account3.Login,
+            };
+            // masha wrote a comment
+            Comment comment2 = new Comment
+            {
+                Text = "My Bear is better!",
+                Date = DateTime.Now.AddDays(-3),
+                PostId = post6.Id,
+                LikesCount = 0,
+                OwnerId = user3.Id,
+                OwnerName = account5.Login,
+            };
+            db.Comments.Add(comment1);
+            db.Comments.Add(comment2);
+            db.SaveChanges();
+
+
+            // avatar answered to vasya for his comment
+            CommentReply commentReply1 = new CommentReply
+            {
+                Text = "ahaha lol",
+                Date = DateTime.Now.AddDays(-3),
+                LikesCount = 0,
+                OwnerId = user2.Id,
+                OwnerName = account4.Login,
+                CommentId = comment1.Id,
+                WhomId = user1.Id,
+                WhomName = account3.Login 
+            };
+            // masha answered to vasya for his comment
+            CommentReply commentReply2 = new CommentReply
+            {
+                Text = "I think this dog eats too much;)",
+                Date = DateTime.Now.AddDays(-3),
+                LikesCount = 2,
+                OwnerId = user3.Id,
+                OwnerName = account5.Login,
+                CommentId = comment1.Id,
+                WhomId = user1.Id,
+                WhomName = account3.Login
+            };
+            // avatar answered to masha for her answer
+            CommentReply commentReply3 = new CommentReply
+            {
+                Text = "not very much but really often:))",
+                Date = DateTime.Now.AddDays(-2),
+                LikesCount = 4,
+                OwnerId = user2.Id,
+                OwnerName = account4.Login,
+                CommentId = comment1.Id,
+                WhomId = user3.Id,
+                WhomName = account5.Login
+            };
+            // vasya answered to avatar for his answer
+            CommentReply commentReply4 = new CommentReply
+            {
+                Text = "Nothing is too good for such a cute dog:)",
+                Date = DateTime.Now.AddDays(-1),
+                LikesCount = 12,
+                OwnerId = user1.Id,
+                OwnerName = account3.Login,
+                CommentId = comment1.Id,
+                WhomId = user2.Id,
+                WhomName = account4.Login
+            };
+            db.CommentReply.Add(commentReply1);
+            db.CommentReply.Add(commentReply2);
+            db.CommentReply.Add(commentReply3);
+            db.CommentReply.Add(commentReply4);
+            #endregion
+
+
+            #region Photos, avatars
             Avatar avatar1 = new Avatar
             {
                 Url = @"avatars\avatar.jpg",
@@ -202,8 +308,14 @@ namespace PhotoMania.DB.Repositories
                 Url = @"avatars\vasya_ava.jpg",
                 UserId = user1.Id
             };
+            Avatar avatar3 = new Avatar
+            {
+                Url = @"avatars\masha_ava.jpg",
+                UserId = user3.Id
+            };
             db.Avatars.Add(avatar1);
             db.Avatars.Add(avatar2);
+            db.Avatars.Add(avatar3);
 
 
             Photo photo1 = new Photo
@@ -241,6 +353,11 @@ namespace PhotoMania.DB.Repositories
                 Url = @"images\under_water.jpg",
                 PostId = post7.Id
             };
+            Photo photo8 = new Photo
+            {
+                Url = @"images\painting.jpg",
+                PostId = post8.Id
+            };
             db.Photos.Add(photo1);
             db.Photos.Add(photo2);
             db.Photos.Add(photo3);
@@ -248,6 +365,7 @@ namespace PhotoMania.DB.Repositories
             db.Photos.Add(photo5);
             db.Photos.Add(photo6);
             db.Photos.Add(photo7);
+            db.Photos.Add(photo8);
             db.SaveChanges();
             #endregion
         }

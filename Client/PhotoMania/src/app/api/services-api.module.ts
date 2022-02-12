@@ -6,6 +6,7 @@ import {UploadService} from "./services/upload.service";
 import {LoadUserDataApiService} from "./services/load-user-data.service";
 import {UserProfileApiService} from "./services/user-profile.service";
 import {PostsApiService} from "./services/posts.service";
+import {CommentsService} from "./services/comments.service";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {PostsApiService} from "./services/posts.service";
     UploadService,
     LoadUserDataApiService,
     UserProfileApiService,
-    PostsApiService
+    PostsApiService,
+    CommentsService
   ]
 })
 export class ApiServicesModule { }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using PhotoMania.DB.Entities;
+using PhotoMania.DB.Entities.Comments;
 
 namespace PhotoMania.DB
 {
@@ -18,6 +19,9 @@ namespace PhotoMania.DB
         public DbSet<UserProfile> Users { get; set; }
         public DbSet<FavouritePost> FavouritePosts { get; set; }
         public DbSet<HatedPost> HatedPost { get; set; }
+        public DbSet<LikedCommentReply> LikedCommentReply { get; set; }
+        public DbSet<LikedComment> LikedComment { get; set; }
+        public DbSet<CommentReply> CommentReply { get; set; }
         
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options)

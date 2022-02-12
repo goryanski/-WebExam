@@ -20,7 +20,7 @@ export class PostComponent implements OnInit {
     likesCount: 0,
     dislikesCount: 0,
     username: '',
-    commentsCount: '',
+    commentsCount: 0,
     userId: 0
   };
   apiStaticFilesURL: string = '';

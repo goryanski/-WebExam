@@ -6,6 +6,6 @@ export interface PostInterface {
   likesCount: number,
   dislikesCount: number,
   username: string,
-  commentsCount: string
+  commentsCount: number
   userId: number
 }

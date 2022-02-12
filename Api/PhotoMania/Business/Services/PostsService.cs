@@ -23,13 +23,13 @@ namespace PhotoMania.Business.Services
         }
 
 
-        public async Task<List<PostDto>> GetAllPosts(PostParameters postParameters)
+        public async Task<List<PostDto>> GetAllPosts(PaginationParameters postParameters)
         {
             var postEntities = uow.PostsRepository.GetHomePagePosts(postParameters.PageNumber, postParameters.PageSize);
             return await ConvertPosts(postEntities.ToList());
         }
 
-        public async Task<List<PostDto>> GetPostsBySearchKey(PostParameters postParameters, string searchKey)
+        public async Task<List<PostDto>> GetPostsBySearchKey(PaginationParameters postParameters, string searchKey)
         {
             List<Post> selectedPosts = (await uow.PostsRepository.GetAllAsync(p => p.Description.Contains(searchKey)))
                 .OrderByDescending(on => on.Date)
@@ -40,7 +40,7 @@ namespace PhotoMania.Business.Services
             return await ConvertPosts(selectedPosts);
         }
 
-        public async Task<List<PostDto>> GetUserPosts(PostParameters postParameters, int userId)
+        public async Task<List<PostDto>> GetUserPosts(PaginationParameters postParameters, int userId)
         {
             List<Post> selectedPosts = (await uow.PostsRepository.GetAllAsync(p => p.UserId == userId))
                 .OrderByDescending(on => on.Date)
@@ -51,7 +51,7 @@ namespace PhotoMania.Business.Services
             return await ConvertPosts(selectedPosts);
         }
 
-        public async Task<List<PostDto>> GetUserFavouritesPosts(PostParameters postParameters, int userId)
+        public async Task<List<PostDto>> GetUserFavouritesPosts(PaginationParameters postParameters, int userId)
         {
             // first get latest user favourite posts 
             List<FavouritePost> favouritePosts = (await uow.FavouritePostsRepository.GetAllAsync(fp => fp.UserId == userId))

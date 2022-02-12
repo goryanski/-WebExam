@@ -6,6 +6,7 @@ using AutoMapper;
 using PhotoMania.Business.Dto;
 using PhotoMania.Business.ExtraModels;
 using PhotoMania.DB.Entities;
+using PhotoMania.DB.Entities.Comments;
 
 namespace PhotoMania.Business.Automapper.Profiles
 {
@@ -19,7 +20,8 @@ namespace PhotoMania.Business.Automapper.Profiles
             CreateMap<UserProfile, UserProfileDataResponse>();
             CreateMap<UserProfileDataResponse, UserProfile>();
 
-
+            CreateMap<Comment, CommentDto>();
+            CreateMap<CommentDto, Comment>();
         }
     }
 }
