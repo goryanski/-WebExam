@@ -18,7 +18,7 @@
            class="form-text text-danger">Field is required
       </div>
       <div *ngIf="form.controls['username'].errors.pattern"
-           class="form-text text-danger">English letters only, digits, symbol _ (4-14 symbols)
+           class="form-text text-danger">English letters only, digits, symbols _.^! (4-14 symbols). at least 4 letters
       </div>
     </div>
   </div>
@@ -44,7 +44,7 @@
            class="form-text text-danger">Field is required
       </div>
       <div *ngIf="form.controls['description'].errors.pattern"
-           class="form-text text-danger">English letters only, digits, space, symbols ,.!/+@_ 4-64 symbols
+           class="form-text text-danger">English letters only, digits, space, symbols ,.!/+@:_^ Max 264 symbols
       </div>
     </div>
   </div>

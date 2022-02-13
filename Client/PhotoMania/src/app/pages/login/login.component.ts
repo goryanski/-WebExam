@@ -14,8 +14,8 @@ import {BrowserLocalStorage} from "../../shared/storage/local-storage";
 export class LoginComponent implements OnInit {
   form: FormGroup;
   pattern = {
-    login: '^[a-zA-Z_0-9]{4,14}$', // English letters only, digits, symbol _ (4-14 symbols)
-    password: '^[a-zA-Z_#@0-9]{4,16}$' // English letters only, digits, symbols _ # @ (4-16 symbols)
+    login: '^[a-zA-Z_.^!0-9]{4,14}$', // English letters only, digits, symbols _.^! (4-14 symbols). at least 4 letters
+    password: '^[a-zA-Z_#@.^!0-9]{4,16}$' // English letters only, digits, symbols _#@.^! (4-16 symbols)
   }
   public modalWindowData: any;
 

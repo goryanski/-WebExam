@@ -34,7 +34,7 @@ import { CommentComponent } from './comment/comment.component';
   imports: [
     CommonModule,
     RouterModule,
-    //ReactiveFormsModule
+    ReactiveFormsModule
   ]
 })
 export class ComponentsModule { }

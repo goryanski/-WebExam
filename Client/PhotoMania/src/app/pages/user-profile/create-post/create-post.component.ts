@@ -13,7 +13,7 @@ import {BrowserLocalStorage} from "../../../shared/storage/local-storage";
 export class CreatePostComponent implements OnInit {
   form: FormGroup;
   pattern = {
-    description: '^[a-zA-Z ,.!/+@_0-9]{4,64}$' // English letters only, digits, space, symbols ,.!/+@_ 4-64 symbols
+    description: '^[a-zA-Z ,.!/:+@_^0-9]{4,64}$' // English letters only, digits, space, symbols ,.!/+@:_^ 4-64 symbols
   }
   // path to photo in db (we can get it after user uploads the photo - watch this.uploadFinished())
   public photo: { dbPath: ''; } | undefined;
