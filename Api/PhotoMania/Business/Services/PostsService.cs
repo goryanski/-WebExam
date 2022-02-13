@@ -14,12 +14,14 @@ namespace PhotoMania.Business.Services
     {
         private IUnitOfWork uow;
         private IValidationService validationService;
+        private ICommonService commonService;
         private Automapper.ObjectMapper objectMapper = Automapper.ObjectMapper.Instance;
 
-        public PostsService(IUnitOfWork uow, IValidationService validationService)
+        public PostsService(IUnitOfWork uow, IValidationService validationService, ICommonService commonService)
         {
             this.uow = uow;
             this.validationService = validationService;
+            this.commonService = commonService;
         }
 
 
@@ -89,7 +91,7 @@ namespace PhotoMania.Business.Services
                 postsList[i].CommentsCount = await uow.CommentsRepository.GetCountAsync(postEntitiesList[i].Id);
                 postsList[i].Username = await uow.UsersRepository.GetUsername(postEntitiesList[i].UserId);
                 postsList[i].PhotoPath = await uow.PhotosRepository.GetPath(postEntitiesList[i].Id);
-                postsList[i].Date = ConvertDateToTimeAgo(postEntitiesList[i].Date);
+                postsList[i].Date = commonService.ConvertDateToTimeAgo(postEntitiesList[i].Date);
             }
             return postsList;
         }
@@ -121,48 +123,6 @@ namespace PhotoMania.Business.Services
             return "ok";
         }
 
-        public string ConvertDateToTimeAgo(DateTime dateTime)
-        {
-            string result = string.Empty;
-            var timeSpan = DateTime.Now.Subtract(dateTime);
-
-            if (timeSpan <= TimeSpan.FromSeconds(60))
-            {
-                result = string.Format("{0} seconds ago", timeSpan.Seconds);
-            }
-            else if (timeSpan <= TimeSpan.FromMinutes(60))
-            {
-                result = timeSpan.Minutes > 1 ?
-                    String.Format("{0} minutes ago", timeSpan.Minutes) :
-                    "a minute ago";
-            }
-            else if (timeSpan <= TimeSpan.FromHours(24))
-            {
-                result = timeSpan.Hours > 1 ?
-                    String.Format("{0} hours ago", timeSpan.Hours) :
-                    "an hour ago";
-            }
-            else if (timeSpan <= TimeSpan.FromDays(30))
-            {
-                result = timeSpan.Days > 1 ?
-                    String.Format("{0} days ago", timeSpan.Days) :
-                    "yesterday";
-            }
-            else if (timeSpan <= TimeSpan.FromDays(365))
-            {
-                result = timeSpan.Days > 30 ?
-                    String.Format("{0} months ago", timeSpan.Days / 30) :
-                    "a month ago";
-            }
-            else
-            {
-                result = timeSpan.Days > 365 ?
-                    String.Format("{0} years ago", timeSpan.Days / 365) :
-                    "a year ago";
-            }
-
-            return result;
-        }
 
         public async Task<PostDto> GetPostById(int id)
         {
@@ -171,7 +131,7 @@ namespace PhotoMania.Business.Services
             postDto.CommentsCount = await uow.CommentsRepository.GetCountAsync(post.Id);
             postDto.Username = await uow.UsersRepository.GetUsername(post.UserId);
             postDto.PhotoPath = await uow.PhotosRepository.GetPath(post.Id);
-            postDto.Date = ConvertDateToTimeAgo(post.Date);
+            postDto.Date = commonService.ConvertDateToTimeAgo(post.Date);
             return postDto;
         }
     }

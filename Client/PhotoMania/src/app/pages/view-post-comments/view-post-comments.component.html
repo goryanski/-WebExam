@@ -3,12 +3,23 @@
 </div>
 
 
+<form class="write-comment-form">
+  <div class="comment-field-block">
+    <label for="commentField" #commentFieldLabel>Write a comment</label>
+    <textarea type="text" class="form-control me-2 mt-2" id="commentField"
+              #commentField>
+  </textarea>
+  </div>
+  <button type="button" class="btn btn-warning" (click)="sendClick()">Send</button>
+</form>
+
+
 <div class="comments-block">
-
-</div>
-
-<div class="write-comment-form">
-
+  <div class="posts" *ngIf="commentsToShow as comments" >
+    <div *ngIf="comments.length > 0">
+      <app-comment *ngFor="let comment of comments" [comment]="comment"></app-comment>
+    </div>
+  </div>
 </div>
 
 

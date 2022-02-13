@@ -11,5 +11,10 @@ namespace PhotoMania.DB.Repositories.Comments
         public CommentRepliesRepository(DatabaseContext context) : base(context)
         {
         }
+
+        internal async Task<int> GetCommentRepliesCount(int id)
+        {
+            return (await GetAllAsync(r => r.CommentId == id)).Count();
+        }
     }
 }

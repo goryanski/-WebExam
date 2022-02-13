@@ -1,0 +1,85 @@
+@import 'src/app/shared/helpers/vars';
+
+.comment {
+  border-radius: 30px;
+  box-shadow: 0 1px 10px 2px rgba(34, 60, 80, 0.2);
+  margin: 40px auto;
+  width: 50%;
+  padding: 20px;
+
+  // general
+  .owner-name, .watch-replies, .reply {
+    font-size: 20px;
+    text-decoration: underline;
+    color: $extra_color_2;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  .first-line {
+    display: flex;
+    justify-content: space-between;
+    .likes {
+      padding-left: 40px;
+      display: flex;
+      cursor: pointer;
+      svg {
+        color: #ff0000;
+      }
+      .like-number {
+        padding-left: 5px;
+      }
+    }
+  }
+  .second-line {
+    margin-top: 35px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+
+@media (max-width: 1400px) {
+  .comment {
+    width: 70%;
+  }
+}
+@media (max-width: 1000px) {
+  .comment {
+    width: 80%;
+  }
+}
+@media (max-width: 700px) {
+  .comment {
+    width: 90%;
+    .first-line {
+      .likes {
+        svg {
+          width: 24px;
+          height: 24px;
+        }
+
+        svg:hover {
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 500px) {
+  .comment {
+    width: 95%;
+    .first-line {
+      .likes {
+        svg {
+          width: 22px;
+          height: 22px;
+        }
+        svg:hover {
+          width: 28px;
+          height: 28px;
+        }
+      }
+    }
+  }
+}

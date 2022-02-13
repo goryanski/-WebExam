@@ -14,10 +14,12 @@ namespace PhotoMania.Business.Services
     {
         private IUnitOfWork uow;
         private Automapper.ObjectMapper objectMapper = Automapper.ObjectMapper.Instance;
+        ICommonService commonService;
 
-        public CommentsService(IUnitOfWork uow)
+        public CommentsService(IUnitOfWork uow, ICommonService commonService)
         {
             this.uow = uow;
+            this.commonService = commonService;
         }
 
         public async Task<List<CommentDto>> GetPostComments(PaginationParameters commentsParameters, int postId)
@@ -33,42 +35,14 @@ namespace PhotoMania.Business.Services
 
         private async Task<List<CommentDto>> ConvertComments(List<Comment> selectedComments)
         {
-            List<CommentDto> CommentsList = objectMapper.Mapper.Map<List<CommentDto>>(selectedComments);
-            // now we have all we need, except replies count, so get it
-            foreach (var comment in CommentsList)
+            List<CommentDto> commentsDto = objectMapper.Mapper.Map<List<CommentDto>>(selectedComments);
+            // now we have all we need, except replies count and date in a particular format, so get it
+            for (int i = 0; i < commentsDto.Count(); i++)
             {
-                //comment.RepliesCount = 
+                commentsDto[i].RepliesCount = await uow.CommentRepliesRepository.GetCommentRepliesCount(selectedComments[i].Id);
+                commentsDto[i].Date = commonService.ConvertDateToTimeAgo(selectedComments[i].Date);
             }
-            ;
-
-            return  new List<CommentDto>();
+            return commentsDto;
         }
-        //private async Task<List<PostDto>> ConvertPosts(List<Post> postEntities)
-        //{
-        //    // try to map all filds that possible
-        //    var postsList = objectMapper.Mapper.Map<List<PostDto>>(postEntities);
-        //    // make list to get some fields, that lost while mapping
-        //    var postEntitiesList = postEntities.ToList();
-        //    // 3 filds we have to map manually
-        //    for (int i = 0; i < postEntities.Count(); i++)
-        //    {
-        //        postsList[i].CommentsCount = await uow.CommentsRepository.GetCountAsync(postEntitiesList[i].Id);
-        //        postsList[i].Username = await uow.UsersRepository.GetUsername(postEntitiesList[i].UserId);
-        //        postsList[i].PhotoPath = await uow.PhotosRepository.GetPath(postEntitiesList[i].Id);
-        //        postsList[i].Date = ConvertDateToTimeAgo(postEntitiesList[i].Date);
-        //    }
-        //    return postsList;
-        //}
-        //public class CommentDto
-        //{
-        //    public int Id { get; set; }
-        //    public string Text { get; set; }
-        //    public string Date { get; set; }
-        //    public int LikesCount { get; set; }
-        //    public int PostId { get; set; }
-        //    public int OwnerId { get; set; }
-        //    public string OwnerName { get; set; }
-        //    public int RepliesCount { get; set; }
-        //}
     }
 }
