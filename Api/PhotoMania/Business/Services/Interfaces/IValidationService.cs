@@ -12,5 +12,6 @@ namespace PhotoMania.Business.Services.Interfaces
         string EmailValidationError(string email);
         string DescriptionValidationError(string description);
         string PostDescriptionValidationError(string description);
+        bool IsHeaderSearchFieldValid(string searchKey);
     }
 }

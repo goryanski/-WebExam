@@ -47,7 +47,7 @@ export class HeaderComponent implements OnInit {
   btnFindUserClick() {
     if(this.searchField != undefined) {
       let text: string = this.searchField.nativeElement.value;
-      if(text != '') {
+      if(text != '' && this.form.valid) {
         this.router.navigate([`found-user/${text}`]);
       }
     }
@@ -56,7 +56,7 @@ export class HeaderComponent implements OnInit {
   btnFindPostsClick() {
     if(this.searchField != undefined) {
       let text: string = this.searchField.nativeElement.value;
-      if(text != '') {
+      if(text != '' && this.form.valid) {
         this.router.navigate([`found-posts/${text}`]);
       }
     }

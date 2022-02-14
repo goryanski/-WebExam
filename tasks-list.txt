@@ -1,6 +1,4 @@
-4.7 Header validation api side
 5. Комментарии. 
-	
 	- Возможность комментировать посты. (add new comment and save it)
 	- Что бы можно было зайти на страницу другого пользователя, посмотреть инфо о нем и его посты 
 		(при нажатии на имя пользователя в комментарии).
@@ -84,3 +82,4 @@ Completed tasks:
 4. Что бы пользователь мог отредактировать свою личную информацию
 4.5  in post component change styles to responsible and prepare to show comments by click on "Comments"
 4.6 change validation conditions for all inputs
+4.7 Header validation api side

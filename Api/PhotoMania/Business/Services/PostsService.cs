@@ -33,13 +33,17 @@ namespace PhotoMania.Business.Services
 
         public async Task<List<PostDto>> GetPostsBySearchKey(PaginationParameters postParameters, string searchKey)
         {
-            List<Post> selectedPosts = (await uow.PostsRepository.GetAllAsync(p => p.Description.Contains(searchKey)))
+            if(validationService.IsHeaderSearchFieldValid(searchKey))
+            {
+                List<Post> selectedPosts = (await uow.PostsRepository.GetAllAsync(p => p.Description.Contains(searchKey)))
                 .OrderByDescending(on => on.Date)
                 .Skip((postParameters.PageNumber - 1) * postParameters.PageSize)
                 .Take(postParameters.PageSize)
                 .ToList();
 
-            return await ConvertPosts(selectedPosts);
+                return await ConvertPosts(selectedPosts);
+            }
+            return new List<PostDto>();
         }
 
         public async Task<List<PostDto>> GetUserPosts(PaginationParameters postParameters, int userId)

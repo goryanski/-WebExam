@@ -26,10 +26,13 @@ namespace PhotoMania.Business.Services
         public async Task<int> GetUserIdByName(string username)
         {
             int userId = -1;
-            Account account = (await uow.AccountsRepository.GetAllAsync(a => a.Login == username)).FirstOrDefault();
-            if(account != null)
+            if (validationService.IsHeaderSearchFieldValid(username))
             {
-                userId = await uow.UsersRepository.GetUserId(account.Id);
+                Account account = (await uow.AccountsRepository.GetAllAsync(a => a.Login == username)).FirstOrDefault();
+                if (account != null)
+                {
+                    userId = await uow.UsersRepository.GetUserId(account.Id);
+                }
             }
             return userId;
         }

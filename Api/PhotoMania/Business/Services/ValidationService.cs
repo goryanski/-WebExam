@@ -69,5 +69,10 @@ namespace PhotoMania.Business.Services
               ? "Description must be English letters only, digits, space, symbols ,.!/+@:_^ Max 64 symbols.\n"
               : "";
         }
+
+        public bool IsHeaderSearchFieldValid(string searchKey)
+        {
+            return Regex.IsMatch(searchKey, "^[a-zA-Z ,.!/:+@_^0-9]{3,18}$");
+        }
     }
 }
