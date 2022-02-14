@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {CommentInterface} from "../../api/interfaces/comment.interface";
 import {CommentReplyInterface} from "../../api/interfaces/comment-reply.interface";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-comment',
@@ -19,14 +20,23 @@ export class CommentComponent implements OnInit {
     repliesCount: 0,
     replies: []
   };
-  constructor() { }
+  @ViewChild('username') username: ElementRef | undefined;
+
+  constructor(
+    private readonly router: Router
+  ) { }
 
   ngOnInit(): void {
   }
 
 
   usernameClick() {
-
+    if(this.username != undefined) {
+      let text: string = this.username.nativeElement.innerText;
+      if(text != '') {
+        this.router.navigate([`found-user/${text}`]);
+      }
+    }
   }
 
   likeClick() {

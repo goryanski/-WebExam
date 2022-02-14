@@ -15,11 +15,33 @@ namespace PhotoMania.Business.Services
         private IUnitOfWork uow;
         private Automapper.ObjectMapper objectMapper = Automapper.ObjectMapper.Instance;
         ICommonService commonService;
+        private IValidationService validationService;
 
-        public CommentsService(IUnitOfWork uow, ICommonService commonService)
+        public CommentsService(IUnitOfWork uow, ICommonService commonService, IValidationService validationService)
         {
             this.uow = uow;
             this.commonService = commonService;
+            this.validationService = validationService;
+        }
+
+        public async Task<string> AddComment(string text, int postId, int userId)
+        {
+            string errorInfo = validationService.CommentValidationError(text);
+            if(errorInfo == "")
+            {
+                Comment comment = new Comment
+                {
+                    Text = text,
+                    Date = DateTime.Now,
+                    PostId = postId,
+                    LikesCount = 0,
+                    OwnerId = userId,
+                    OwnerName = await uow.UsersRepository.GetUsername(userId)
+                };
+                await uow.CommentsRepository.CreateAsync(comment);
+                return "ok";
+            }
+            return errorInfo;
         }
 
         public async Task<List<CommentDto>> GetPostComments(PaginationParameters commentsParameters, int postId)

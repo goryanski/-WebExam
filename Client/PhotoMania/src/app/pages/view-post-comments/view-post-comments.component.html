@@ -3,14 +3,19 @@
 </div>
 
 
-<form class="write-comment-form">
+<form class="write-comment-form" [formGroup]="form">
   <div class="comment-field-block">
     <label for="commentField" #commentFieldLabel>Write a comment</label>
     <textarea type="text" class="form-control me-2 mt-2" id="commentField"
-              #commentField>
+              formControlName="comment" #commentField>
   </textarea>
+    <div *ngIf="form.controls['comment'].errors">
+      <div *ngIf="form.controls['comment'].errors.pattern"
+           class="form-text text-danger">English letters only, digits, space, symbols ,.!/:+@_^();? 2-42 symbols
+      </div>
+    </div>
   </div>
-  <button type="button" class="btn btn-warning" (click)="sendClick()">Send</button>
+  <button [disabled]="!form.valid" type="button" class="btn btn-warning" (click)="sendClick()">Send</button>
 </form>
 
 
@@ -22,9 +27,13 @@
   </div>
 </div>
 
+<div *ngIf="showNextCommentsButton" class="show-next-comments">
+  <button class="btn btn-warning" (click)="showNextCommentsClick()">Show next comments</button>
+</div>
 
 <ng-template #loading>
   <div class="spinner-border loader" role="status"></div>
 </ng-template>
 
 
+<app-modal-window [data]="modalWindowData"></app-modal-window>

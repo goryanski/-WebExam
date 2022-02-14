@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ViewPostCommentsRoutingModule } from './view-post-comments-routing.module';
 import { ViewPostCommentsComponent } from './view-post-comments.component';
 import {ComponentsModule} from "../../components/components.module";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import {ComponentsModule} from "../../components/components.module";
   imports: [
     CommonModule,
     ViewPostCommentsRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    ReactiveFormsModule
   ]
 })
 export class ViewPostCommentsModule { }

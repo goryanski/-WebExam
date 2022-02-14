@@ -6,6 +6,7 @@ import {Observable} from "rxjs";
 import {PostInterface} from "../interfaces/post.interface";
 import {publishReplay, refCount} from "rxjs/operators";
 import {CommentInterface} from "../interfaces/comment.interface";
+import {ApiResponse} from "../interfaces/api.response.interface";
 
 @Injectable()
 export class CommentsService {
@@ -29,6 +30,26 @@ export class CommentsService {
         'Comments',
         `getComments?PageNumber=${pageNumber}&PageSize=${pageSize}&postId=${postId}`
       ].join('/'),
+      this.options
+    ).pipe(
+      publishReplay(1),
+      refCount()
+    );
+  }
+
+
+  addComment(text: string, postId: number, userId: number): Observable<ApiResponse> {
+    return this.httpClient.post<ApiResponse>(
+      [
+        this.appEnv.apiPhotoManiaURL,
+        'Comments',
+        'add'
+      ].join('/'),
+      {
+        text,
+        postId,
+        userId
+      },
       this.options
     ).pipe(
       publishReplay(1),

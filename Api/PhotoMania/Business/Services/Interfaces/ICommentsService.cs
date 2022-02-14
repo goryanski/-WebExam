@@ -10,5 +10,6 @@ namespace PhotoMania.Business.Services.Interfaces
     public interface ICommentsService
     {
         Task<List<CommentDto>> GetPostComments(PaginationParameters commentsParameters, int postId);
+        Task<string> AddComment(string text, int postId, int userId);
     }
 }

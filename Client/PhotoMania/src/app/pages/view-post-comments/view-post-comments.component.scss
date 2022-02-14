@@ -18,6 +18,12 @@
   }
 }
 
+.show-next-comments {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
 
 @media (max-width: 1400px) {
   .write-comment-form {

@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using PhotoMania.Business.Dto;
 using PhotoMania.Business.PaginationModels;
 using PhotoMania.Business.Services.Interfaces;
+using PhotoMania.Models.Response;
+using PhotoMania.Models.ViewModels;
 
 namespace PhotoMania.Controllers
 {
@@ -27,6 +29,15 @@ namespace PhotoMania.Controllers
         public async Task<List<CommentDto>> GetPostComments([FromQuery] PaginationParameters commentsParameters, int postId)
         {
             return await commentsService.GetPostComments(commentsParameters, postId);
+        }
+
+        [HttpPost("add")]
+        public async Task<ApiResponse> AddComment([FromBody] CommentViewModel model)
+        {
+            return new ApiResponse
+            {
+                Response = await commentsService.AddComment(model.Text, model.PostId, model.UserId)
+            };
         }
     }
 }

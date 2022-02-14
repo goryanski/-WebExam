@@ -1,7 +1,4 @@
 5. Комментарии. 
-	- Возможность комментировать посты. (add new comment and save it)
-	- Что бы можно было зайти на страницу другого пользователя, посмотреть инфо о нем и его посты 
-		(при нажатии на имя пользователя в комментарии).
 	- watch comment replies
 	- set like to comment
 	-set like to comment reply
@@ -31,8 +28,8 @@
 !- responsible interface (home and profile first)
 	- 
 
-!- change validation fot username (add .,#)
-
+!- remake ViewPostCommentsComponent.ts / sendClick() / addComment()/ to get last added comment
+ 
 ! - get rid of default text in all forms
 
 - set field modifiers to private everywhere you can (Client)
@@ -83,3 +80,7 @@ Completed tasks:
 4.5  in post component change styles to responsible and prepare to show comments by click on "Comments"
 4.6 change validation conditions for all inputs
 4.7 Header validation api side
+5. Комментарии. 
+	- Возможность комментировать посты. (add new comment and save it)
+	- Что бы можно было зайти на страницу другого пользователя, посмотреть инфо о нем и его посты 
+		(при нажатии на имя пользователя в комментарии).

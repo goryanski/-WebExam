@@ -74,5 +74,12 @@ namespace PhotoMania.Business.Services
         {
             return Regex.IsMatch(searchKey, "^[a-zA-Z ,.!/:+@_^0-9]{3,18}$");
         }
+
+        public string CommentValidationError(string comment)
+        {
+            return !Regex.IsMatch(comment, "^[a-zA-Z ,.!/:+@_^();?0-9]{2,42}$")
+              ? "Comment must be English letters only, digits, space, symbols ,.!/:+@_^();? 2-42 symbols.\n"
+              : "";
+        }
     }
 }
