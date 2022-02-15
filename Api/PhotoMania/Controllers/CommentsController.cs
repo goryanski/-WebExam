@@ -45,5 +45,14 @@ namespace PhotoMania.Controllers
         {
             return await commentsService.GetCommentReplies(repliesParameters, commentId);
         }
+
+        [HttpPost("addReply")]
+        public async Task<ApiResponse> AddReplyToComment([FromBody] CommentReplyViewModel model)
+        {
+            return new ApiResponse
+            {
+                Response = await commentsService.AddReplyToComment(model.Text, model.CommentId, model.OwnerId, model.WhomName)
+            };
+        }
     }
 }

@@ -88,5 +88,27 @@ namespace PhotoMania.Business.Services
             }
             return repliesDto;
         }
+
+        public async Task<string> AddReplyToComment(string text, int commentId, int ownerId, string whomName)
+        {
+            string errorInfo = validationService.CommentValidationError(text);
+            if (errorInfo == "")
+            {
+                CommentReply commentReply = new CommentReply
+                {
+                    Text = text,
+                    Date = DateTime.Now,
+                    LikesCount = 0,
+                    OwnerId = ownerId,
+                    OwnerName = await uow.UsersRepository.GetUsername(ownerId),
+                    CommentId = commentId,
+                    WhomName = whomName,
+                    WhomId = await uow.UsersRepository.GetUserIdByName(whomName)
+                };
+                await uow.CommentRepliesRepository.CreateAsync(commentReply);
+                return "ok";
+            }
+            return errorInfo;
+        }
     }
 }

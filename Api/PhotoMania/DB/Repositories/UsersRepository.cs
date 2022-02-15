@@ -15,8 +15,8 @@ namespace PhotoMania.DB.Repositories
 
         internal async Task<string> GetUsername(int userId)
         {
-            var users = await Table.Include(u => u.Account).ToListAsync();
-            return users.First(u => u.Id == userId).Account.Login;
+            return (await Table.Include(u => u.Account)
+                .FirstAsync(u => u.Id == userId)).Account.Login;
         }
 
         internal async Task<int> GetUserId(int accountId)
@@ -25,9 +25,10 @@ namespace PhotoMania.DB.Repositories
             return (await GetAllAsync(u => u.AccountId == accountId)).First().Id;
         }
 
-        //    internal async Task<int> GetUserIdByName(string username)
-        //    {
-        //        return await Table.Include(u => u.Account).Where(a => a.)
-        //}
+        internal async Task<int> GetUserIdByName(string username)
+        {
+            return (await Table.Include(u => u.Account)
+                .FirstAsync(u => u.Account.Login == username)).Id;
+        }
     }
 }

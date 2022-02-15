@@ -97,4 +97,8 @@ export class ViewPostCommentsComponent implements OnInit {
       }
     }
   }
+
+  addCommentReplayResponseEvent(response: string) {
+    console.log('ViewPostCommentsComponent addCommentReplayResponseEvent response: ', response)
+  }
 }

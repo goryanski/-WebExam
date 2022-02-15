@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {CommentInterface} from "../../../api/interfaces/comment.interface";
 import {CommentReplyInterface} from "../../../api/interfaces/comment-reply.interface";
 import {Router} from "@angular/router";
@@ -15,6 +15,10 @@ export class CommentComponent implements OnInit {
   pageNumber: number = 1;
   pageSize: number = 5;
   showNextRepliesButton: boolean = false;
+  replyButtonWasClicked: boolean = false;
+  hideRepliesButtonWasClicked: boolean = false;
+  watchRepliesButtonWasClicked: boolean = false;
+
   @Input() comment: CommentInterface = {
     id: 0,
     text: '',
@@ -26,6 +30,8 @@ export class CommentComponent implements OnInit {
     repliesCount: 0,
     replies: [] // remove?
   };
+  @Input() currentUserId: number = 0;
+  //@Output() addCommentReplayResponseEvent = new EventEmitter<string>();
   @ViewChild('username') username: ElementRef | undefined;
 
   constructor(
@@ -51,7 +57,7 @@ export class CommentComponent implements OnInit {
   }
 
   replyClick() {
-
+    this.replyButtonWasClicked = true;
   }
 
   watchCommentRepliesClick() {
@@ -62,5 +68,20 @@ export class CommentComponent implements OnInit {
         this.repliesToShow.push(...res);
         this.pageNumber++;
       });
+
+    this.watchRepliesButtonWasClicked = true;
+  }
+
+  addCommentReplayEvent(response: string) {
+    // event for parent
+    //this.addCommentReplayResponseEvent.emit(response);
+
+    // do add comment reply here
+  }
+
+  hideCommentRepliesClick() {
+    this.repliesToShow = [];
+    this.pageNumber = 1;
+    this.watchRepliesButtonWasClicked = false;
   }
 }

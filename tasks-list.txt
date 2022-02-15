@@ -1,7 +1,8 @@
+next => src/app/pages/view-post-comments/comment/comment.component.ts:79
 5. Комментарии. 
 	- watch comment replies
 	- set like to comment
-	-set like to comment reply
+	- set like to comment reply
 	- Отвечать на комментарии других пользователей
 	
 

@@ -15,7 +15,11 @@
 <div class="comments-block">
   <div *ngIf="commentsToShow as comments" >
     <div *ngIf="comments.length > 0">
-      <app-comment *ngFor="let comment of comments" [comment]="comment"></app-comment>
+      <app-comment *ngFor="let comment of comments"
+                   [comment]="comment"
+                   [currentUserId]="currentUserId"
+                  >
+      </app-comment><!-- (addCommentReplayResponseEvent)="addCommentReplayResponseEvent($event)"-->
     </div>
   </div>
 </div>

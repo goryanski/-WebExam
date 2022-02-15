@@ -19,18 +19,40 @@
   </div>
 
   <div class="second-line">
-    <!--  repliesCount-->
+    <!-- repliesCount-->
     <div *ngIf="comment.repliesCount == 0">
       <div class="replies-count">replies: {{comment.repliesCount}}</div>
     </div>
-    <div *ngIf="comment.repliesCount > 0">
+    <div *ngIf="comment.repliesCount > 0 && !watchRepliesButtonWasClicked">
       <div class="watch-replies" (click)="watchCommentRepliesClick()">replies: {{comment.repliesCount}}</div>
+    </div>
+    <!-- hide replies button -->
+    <div *ngIf="watchRepliesButtonWasClicked">
+      <div class="watch-replies" (click)="hideCommentRepliesClick()">hide replies</div>
     </div>
 
     <!--  replyLink-->
     <div class="reply" (click)="replyClick()">reply</div>
+<!--    hide reply link -->
+<!--    <div *ngIf="!makeReplyButtonWasClicked">-->
+<!--      <div class="reply" (click)="replyClick()">reply</div>-->
+<!--    </div>-->
+<!--    &lt;!&ndash; hide reply text field button &ndash;&gt;-->
+<!--    <div *ngIf="makeReplyButtonWasClicked">-->
+<!--      <div class="reply" (click)="hideReplyTextFieldClick()">hide ...</div>-->
+<!--    </div>-->
     <div class="date">{{comment.date}}</div>
   </div>
+</div>
+
+<div *ngIf="replyButtonWasClicked">
+  <app-text-field
+    [way]="'reply to comment'"
+    [commentOwnerName]="comment.ownerName"
+    [currentUserId]="currentUserId"
+    [commentId]="comment.id"
+    (addCommentReplayEvent)="addCommentReplayEvent($event)">
+  </app-text-field>
 </div>
 
 

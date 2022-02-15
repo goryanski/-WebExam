@@ -71,4 +71,24 @@ export class CommentsService {
       refCount()
     );
   }
+
+  addReplyToComment(text: string, commentId: number, ownerId: number, whomName: string): Observable<ApiResponse> {
+    return this.httpClient.post<ApiResponse>(
+      [
+        this.appEnv.apiPhotoManiaURL,
+        'Comments',
+        'addReply'
+      ].join('/'),
+      {
+        text,
+        commentId,
+        ownerId,
+        whomName
+      },
+      this.options
+    ).pipe(
+      publishReplay(1),
+      refCount()
+    );
+  }
 }
