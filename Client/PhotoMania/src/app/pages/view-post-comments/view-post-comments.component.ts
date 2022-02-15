@@ -81,7 +81,7 @@ export class ViewPostCommentsComponent implements OnInit {
       .subscribe(res => {
         // do check if we take as many comments as page size. if true - show button "get next comments", otherwise - hide this button
         this.showNextCommentsButton = res.length == this.pageSize;
-        this.commentsToShow.push(...res)
+        this.commentsToShow.push(...res);
         this.pageNumber++;
       });
   }
@@ -96,10 +96,13 @@ export class ViewPostCommentsComponent implements OnInit {
         .pipe(take(1))
         .subscribe(res => {
           if(res.response == "ok") {
-            // reload comments array with a new comment, so user will see that comment simply was added to the bottom
-            this.commentsToShow = [];
-            this.pageNumber = 1;
-            this.showNextComments();
+            // if showNextCommentsButton was clicked we need to reload comments list to update it, otherwise user will update comments list and see a new comment when he clicks on showNextCommentsButton ()
+            if(!this.showNextCommentsButton) {
+              // reload comments array with a new comment, so user will see like comment simply  adding to the bottom
+              this.commentsToShow = [];
+              this.pageNumber = 1;
+              this.showNextComments();
+            }
           }
           else {
             this.modalWindowData = {

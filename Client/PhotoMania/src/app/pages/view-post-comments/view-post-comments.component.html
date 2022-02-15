@@ -20,7 +20,7 @@
 
 
 <div class="comments-block">
-  <div class="posts" *ngIf="commentsToShow as comments" >
+  <div *ngIf="commentsToShow as comments" >
     <div *ngIf="comments.length > 0">
       <app-comment *ngFor="let comment of comments" [comment]="comment"></app-comment>
     </div>

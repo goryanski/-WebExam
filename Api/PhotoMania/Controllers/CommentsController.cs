@@ -39,5 +39,11 @@ namespace PhotoMania.Controllers
                 Response = await commentsService.AddComment(model.Text, model.PostId, model.UserId)
             };
         }
+
+        [HttpGet("getCommentReplies")]
+        public async Task<List<CommentReplyDto>> GetCommentReplies([FromQuery] PaginationParameters repliesParameters, int commentId)
+        {
+            return await commentsService.GetCommentReplies(repliesParameters, commentId);
+        }
     }
 }

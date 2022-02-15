@@ -9,6 +9,7 @@ import { ModalWindowComponent } from './modal-window/modal-window.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { UserProfileCardComponent } from './user-profile-card/user-profile-card.component';
 import { CommentComponent } from './comment/comment.component';
+import { CommentReplyComponent } from './comment-reply/comment-reply.component';
 
 
 // common components
@@ -20,7 +21,8 @@ import { CommentComponent } from './comment/comment.component';
     UploadComponent,
     ModalWindowComponent,
     UserProfileCardComponent,
-    CommentComponent
+    CommentComponent,
+    CommentReplyComponent
   ],
   exports: [
     HeaderComponent,
@@ -29,7 +31,8 @@ import { CommentComponent } from './comment/comment.component';
     UploadComponent,
     ModalWindowComponent,
     UserProfileCardComponent,
-    CommentComponent
+    CommentComponent,
+    CommentReplyComponent
   ],
   imports: [
     CommonModule,

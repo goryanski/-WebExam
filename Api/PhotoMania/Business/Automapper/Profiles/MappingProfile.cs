@@ -22,6 +22,9 @@ namespace PhotoMania.Business.Automapper.Profiles
 
             CreateMap<Comment, CommentDto>();
             CreateMap<CommentDto, Comment>();
+
+            CreateMap<CommentReply, CommentReplyDto>();
+            CreateMap<CommentReplyDto, CommentReply>();
         }
     }
 }

@@ -11,5 +11,6 @@ namespace PhotoMania.Business.Services.Interfaces
     {
         Task<List<CommentDto>> GetPostComments(PaginationParameters commentsParameters, int postId);
         Task<string> AddComment(string text, int postId, int userId);
+        Task<List<CommentReplyDto>> GetCommentReplies(PaginationParameters repliesParameters, int commentId);
     }
 }

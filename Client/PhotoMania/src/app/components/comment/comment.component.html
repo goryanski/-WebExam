@@ -24,11 +24,21 @@
       <div class="replies-count">replies: {{comment.repliesCount}}</div>
     </div>
     <div *ngIf="comment.repliesCount > 0">
-      <div class="watch-replies">replies: {{comment.repliesCount}}</div>
+      <div class="watch-replies" (click)="watchCommentRepliesClick()">replies: {{comment.repliesCount}}</div>
     </div>
 
     <!--  replyLink-->
     <div class="reply" (click)="replyClick()">reply</div>
     <div class="date">{{comment.date}}</div>
+  </div>
+</div>
+
+
+<!--to do comment reply component with a text field inside to write reply there. in reply to a comment will be another text field too-->
+<div class="comment-replies-block">
+  <div *ngIf="repliesToShow as replies" >
+    <div *ngIf="replies.length > 0">
+      <app-comment-reply *ngFor="let reply of replies" [reply]="reply"></app-comment-reply>
+    </div>
   </div>
 </div>

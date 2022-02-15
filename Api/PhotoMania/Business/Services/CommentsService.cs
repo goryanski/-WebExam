@@ -44,6 +44,7 @@ namespace PhotoMania.Business.Services
             return errorInfo;
         }
 
+
         public async Task<List<CommentDto>> GetPostComments(PaginationParameters commentsParameters, int postId)
         {
             List<Comment> selectedComments = (await uow.CommentsRepository.GetAllAsync(c => c.PostId == postId))
@@ -65,6 +66,27 @@ namespace PhotoMania.Business.Services
                 commentsDto[i].Date = commonService.ConvertDateToTimeAgo(selectedComments[i].Date);
             }
             return commentsDto;
+        }
+
+        public async Task<List<CommentReplyDto>> GetCommentReplies(PaginationParameters repliesParameters, int commentId)
+        {
+            List<CommentReply> selectedReplies = (await uow.CommentRepliesRepository.GetAllAsync(r => r.CommentId == commentId))
+               .OrderBy(on => on.Date)
+               .Skip((repliesParameters.PageNumber - 1) * repliesParameters.PageSize)
+               .Take(repliesParameters.PageSize)
+               .ToList();
+
+            return ConvertCommentReplies(selectedReplies);
+        }
+
+        private List<CommentReplyDto> ConvertCommentReplies(List<CommentReply> selectedReplies)
+        {
+            List<CommentReplyDto> repliesDto = objectMapper.Mapper.Map<List<CommentReplyDto>>(selectedReplies);
+            for (int i = 0; i < repliesDto.Count(); i++)
+            {
+                repliesDto[i].Date = commonService.ConvertDateToTimeAgo(selectedReplies[i].Date);
+            }
+            return repliesDto;
         }
     }
 }
