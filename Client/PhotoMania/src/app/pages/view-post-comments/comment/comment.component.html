@@ -1,8 +1,8 @@
-<div class="comment" [attr.data-commentid]="comment.id" [attr.data-postid]="comment.postId">
+<div class="comment" [attr.data-commentid]="comment.id">
   <div class="first-line">
 <!--    username + text-->
     <div class="username-text">
-      <span class="owner-name" #username (click)="usernameClick()" [attr.data-ownerid]="comment.ownerId">{{comment.ownerName}}</span>
+      <span class="owner-name" #username (click)="usernameClick()">{{comment.ownerName}}</span>
       <span class="text">:&nbsp;&nbsp;&nbsp;{{comment.text}}</span>
     </div>
 

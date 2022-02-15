@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CommentReplyInterface} from "../../api/interfaces/comment-reply.interface";
+import {CommentReplyInterface} from "../../../api/interfaces/comment-reply.interface";
 
 @Component({
   selector: 'app-comment-reply',

@@ -1,8 +1,9 @@
 <div class="comment-reply">
   <div class="first-line">
     <!--    username + text-->
-    <div class="username-text">
+    <div>
       <span class="owner-name" #username (click)="usernameClick()">{{reply.ownerName}}</span>
+      <span class="replied-to">&nbsp;&nbsp;replied to {{reply.whomName}}</span>
       <span class="text">:&nbsp;&nbsp;&nbsp;{{reply.text}}</span>
     </div>
 
@@ -22,6 +23,7 @@
 
 
     <!--  replyLink-->
+    <div></div>
     <div class="reply" (click)="replyClick()">reply</div>
     <div class="date">{{reply.date}}</div>
   </div>

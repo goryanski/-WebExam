@@ -1,4 +1,4 @@
-@import 'src/app/shared/helpers/vars';
+@import '../../../shared/helpers/vars';
 
 .comment-reply {
   border-radius: 30px;
@@ -7,7 +7,6 @@
   width: 45%;
   padding: 20px;
   background-color: #e2e2e2;
-  // general
   .owner-name, .watch-replies, .reply {
     font-size: 20px;
     text-decoration: underline;
@@ -18,6 +17,9 @@
   .first-line {
     display: flex;
     justify-content: space-between;
+    .replied-to {
+      color: #8c8c8c;
+    }
     .likes {
       padding-left: 40px;
       display: flex;

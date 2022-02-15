@@ -1,9 +1,9 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {CommentInterface} from "../../api/interfaces/comment.interface";
-import {CommentReplyInterface} from "../../api/interfaces/comment-reply.interface";
+import {CommentInterface} from "../../../api/interfaces/comment.interface";
+import {CommentReplyInterface} from "../../../api/interfaces/comment-reply.interface";
 import {Router} from "@angular/router";
 import {take} from "rxjs/operators";
-import {CommentsService} from "../../api/services/comments.service";
+import {CommentsService} from "../../../api/services/comments.service";
 
 @Component({
   selector: 'app-comment',

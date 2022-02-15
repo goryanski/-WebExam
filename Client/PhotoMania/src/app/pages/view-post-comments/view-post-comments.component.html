@@ -3,20 +3,13 @@
 </div>
 
 
-<form class="write-comment-form" [formGroup]="form">
-  <div class="comment-field-block">
-    <label for="commentField" #commentFieldLabel>Write a comment</label>
-    <textarea type="text" class="form-control me-2 mt-2" id="commentField"
-              formControlName="comment" #commentField>
-  </textarea>
-    <div *ngIf="form.controls['comment'].errors">
-      <div *ngIf="form.controls['comment'].errors.pattern"
-           class="form-text text-danger">English letters only, digits, space, symbols ,.!/:+@_^();? 2-42 symbols
-      </div>
-    </div>
-  </div>
-  <button [disabled]="!form.valid" type="button" class="btn btn-warning" (click)="sendClick()">Send</button>
-</form>
+<app-text-field
+  [way]="'add comment'"
+  [label]="'Write a comment'"
+  [currentUserId]="currentUserId"
+  [postId]="postId"
+  (addCommentEvent)="addCommentEvent($event)">
+</app-text-field>
 
 
 <div class="comments-block">

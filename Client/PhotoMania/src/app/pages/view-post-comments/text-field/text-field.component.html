@@ -1,0 +1,14 @@
+<form class="write-comment-form" [formGroup]="form">
+  <div class="comment-field-block">
+    <label for="commentField">{{label}}</label>
+    <textarea type="text" class="form-control me-2 mt-2" id="commentField"
+              formControlName="comment" #textField>
+  </textarea>
+    <div *ngIf="form.controls['comment'].errors">
+      <div *ngIf="form.controls['comment'].errors.pattern"
+           class="form-text text-danger">English letters only, digits, space, symbols ,.!/:+@_^();? 2-42 symbols
+      </div>
+    </div>
+  </div>
+  <button [disabled]="!form.valid" type="button" class="btn btn-warning" (click)="sendClick(textField.value)">Send</button>
+</form>

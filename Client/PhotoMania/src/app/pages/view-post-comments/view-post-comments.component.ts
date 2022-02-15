@@ -32,26 +32,15 @@ export class ViewPostCommentsComponent implements OnInit {
     userId: 0
   };
   showNextCommentsButton: boolean = false;
-  form: FormGroup;
-  pattern = {
-    comment: '^[a-zA-Z ,.!/:+@_^();?0-9]{2,42}$', // English letters only, digits, space, symbols ,.!/:+@_^();? 2-42 symbols
-  }
+
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly postsService: PostsApiService,
     private readonly commentsService: CommentsService,
-    private fb: FormBuilder,
+
     private readonly localStorage: BrowserLocalStorage
   ) {
-    this.form = this.fb.group({
-      'comment': this.fb.control(
-        '',
-        [
-          Validators.pattern(this.pattern.comment)
-        ]
-      )
-    });
     this.currentUserId = this.localStorage.getCurrentUserId();
   }
 
@@ -86,35 +75,26 @@ export class ViewPostCommentsComponent implements OnInit {
       });
   }
 
-  sendClick() {
-    if(this.form.valid) {
-      const { comment } = this.form.value;
-      // clear comment field
-      this.form.controls['comment'].setValue('');
-
-      this.commentsService.addComment(comment, this.postId, this.currentUserId)
-        .pipe(take(1))
-        .subscribe(res => {
-          if(res.response == "ok") {
-            // if showNextCommentsButton was clicked we need to reload comments list to update it, otherwise user will update comments list and see a new comment when he clicks on showNextCommentsButton ()
-            if(!this.showNextCommentsButton) {
-              // reload comments array with a new comment, so user will see like comment simply  adding to the bottom
-              this.commentsToShow = [];
-              this.pageNumber = 1;
-              this.showNextComments();
-            }
-          }
-          else {
-            this.modalWindowData = {
-              title: 'Error!',
-              message: res.response
-            }
-          }
-        });
-    }
-  }
 
   showNextCommentsClick() {
     this.showNextComments();
+  }
+
+  addCommentEvent(response: string) {
+    if(response == "ok") {
+      // if showNextCommentsButton was clicked we need to reload comments list to update it, otherwise user will update comments list and see a new comment when he clicks on showNextCommentsButton ()
+      if(!this.showNextCommentsButton) {
+        // reload comments array with a new comment, so user will see like comment simply  adding to the bottom
+        this.commentsToShow = [];
+        this.pageNumber = 1;
+        this.showNextComments();
+      }
+    }
+    else {
+      this.modalWindowData = {
+        title: 'Error!',
+        message: response
+      }
+    }
   }
 }
