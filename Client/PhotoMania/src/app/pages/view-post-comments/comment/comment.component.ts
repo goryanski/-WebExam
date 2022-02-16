@@ -16,8 +16,9 @@ export class CommentComponent implements OnInit {
   pageSize: number = 5;
   showNextRepliesButton: boolean = false;
   replyButtonWasClicked: boolean = false;
-  hideRepliesButtonWasClicked: boolean = false;
   watchRepliesButtonWasClicked: boolean = false;
+  sendReplyButtonWasClicked: boolean = false;
+  public modalWindowData: any;
 
   @Input() comment: CommentInterface = {
     id: 0,
@@ -28,7 +29,7 @@ export class CommentComponent implements OnInit {
     ownerId: 0,
     ownerName: '',
     repliesCount: 0,
-    replies: [] // remove?
+    replies: []
   };
   @Input() currentUserId: number = 0;
   //@Output() addCommentReplayResponseEvent = new EventEmitter<string>();
@@ -61,27 +62,48 @@ export class CommentComponent implements OnInit {
   }
 
   watchCommentRepliesClick() {
-    this.commentsService.getCommentReplies(this.pageNumber, this.pageSize, this.comment.id)
-      .pipe(take(1))
-      .subscribe(res => {
-        this.showNextRepliesButton = res.length == this.pageSize;
-        this.repliesToShow.push(...res);
-        this.pageNumber++;
-      });
-
+    this.getNextReplies();
     this.watchRepliesButtonWasClicked = true;
   }
 
   addCommentReplayEvent(response: string) {
-    // event for parent
-    //this.addCommentReplayResponseEvent.emit(response);
-
-    // do add comment reply here
+    if(response == "ok") {
+        // reload comments array with a new comment, so user will see like comment simply  adding to the bottom. if we don't reload all list - we won't see changes in count of replies. we reload just 5 replies (if this.pageSize = 5), so it's acceptable
+        this.repliesToShow = [];
+        this.pageNumber = 1;
+        this.comment.repliesCount++;
+        this.getNextReplies();
+        this.replyButtonWasClicked = false;
+    }
+    else {
+      // if validation on api side was failed - show modal window to say that
+      this.modalWindowData = {
+        title: 'Error!',
+        message: response
+      }
+    }
   }
 
   hideCommentRepliesClick() {
     this.repliesToShow = [];
     this.pageNumber = 1;
     this.watchRepliesButtonWasClicked = false;
+    this.showNextRepliesButton = false;
+    this.sendReplyButtonWasClicked = false;
+  }
+
+  private getNextReplies() {
+    this.commentsService.getCommentReplies(this.pageNumber, this.pageSize, this.comment.id)
+      .pipe(take(1))
+      .subscribe(res => {
+        this.showNextRepliesButton = res.length == this.pageSize;
+        this.repliesToShow.push(...res);
+        this.sendReplyButtonWasClicked = true;
+        this.pageNumber++;
+      });
+  }
+
+  showNextRepliesClick() {
+    this.getNextReplies()
   }
 }

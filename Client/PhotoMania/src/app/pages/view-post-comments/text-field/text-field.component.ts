@@ -50,7 +50,7 @@ export class TextFieldComponent implements OnInit, OnChanges {
   }
 
   sendClick(text: string) {
-    if (this.form.valid) {
+    if (this.form.valid && text != '') {
       // clear comment field
       this.form.controls['comment'].setValue('');
 

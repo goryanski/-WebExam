@@ -19,32 +19,29 @@
   </div>
 
   <div class="second-line">
-    <!-- repliesCount-->
-    <div *ngIf="comment.repliesCount == 0">
+    <!-- repliesCount,  show/hide replies -->
+    <!-- case 1: repliesCount == 0 - nothing to show, no styles -->
+    <div *ngIf="comment.repliesCount == 0"> <!-- && repliesToShow.length == 0-->
       <div class="replies-count">replies: {{comment.repliesCount}}</div>
     </div>
-    <div *ngIf="comment.repliesCount > 0 && !watchRepliesButtonWasClicked">
+    <!-- case 2: repliesCount > 0 - set styles, add possibility to see comment replies -->
+    <div *ngIf="comment.repliesCount > 0 && !watchRepliesButtonWasClicked && !sendReplyButtonWasClicked">
       <div class="watch-replies" (click)="watchCommentRepliesClick()">replies: {{comment.repliesCount}}</div>
     </div>
-    <!-- hide replies button -->
-    <div *ngIf="watchRepliesButtonWasClicked">
+    <!-- case 3: hide replies button (if previous case was used - add possibility to hide all replies)-->
+    <div *ngIf="watchRepliesButtonWasClicked || sendReplyButtonWasClicked">
       <div class="watch-replies" (click)="hideCommentRepliesClick()">hide replies</div>
     </div>
 
-    <!--  replyLink-->
+
+    <!--  replyLink - add new reply-->
     <div class="reply" (click)="replyClick()">reply</div>
-<!--    hide reply link -->
-<!--    <div *ngIf="!makeReplyButtonWasClicked">-->
-<!--      <div class="reply" (click)="replyClick()">reply</div>-->
-<!--    </div>-->
-<!--    &lt;!&ndash; hide reply text field button &ndash;&gt;-->
-<!--    <div *ngIf="makeReplyButtonWasClicked">-->
-<!--      <div class="reply" (click)="hideReplyTextFieldClick()">hide ...</div>-->
-<!--    </div>-->
     <div class="date">{{comment.date}}</div>
   </div>
 </div>
 
+
+<!--  text field for adding a new reply-->
 <div *ngIf="replyButtonWasClicked">
   <app-text-field
     [way]="'reply to comment'"
@@ -56,7 +53,8 @@
 </div>
 
 
-<!--to do comment reply component with a text field inside to write reply there. in reply to a comment will be another text field too-->
+
+<!-- where replies will display-->
 <div class="comment-replies-block">
   <div *ngIf="repliesToShow as replies" >
     <div *ngIf="replies.length > 0">
@@ -64,3 +62,11 @@
     </div>
   </div>
 </div>
+
+<!-- if replies are more then can be on page -->
+<div *ngIf="showNextRepliesButton" class="show-next-replies">
+  <button class="btn btn-warning" (click)="showNextRepliesClick()">Show next replies</button>
+</div>
+
+<!-- if validation on api side was failed -->
+<app-modal-window [data]="modalWindowData"></app-modal-window>

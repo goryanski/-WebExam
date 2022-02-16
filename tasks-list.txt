@@ -1,6 +1,4 @@
-next => src/app/pages/view-post-comments/comment/comment.component.ts:79
 5. Комментарии. 
-	- watch comment replies
 	- set like to comment
 	- set like to comment reply
 	- Отвечать на комментарии других пользователей
@@ -85,3 +83,4 @@ Completed tasks:
 	- Возможность комментировать посты. (add new comment and save it)
 	- Что бы можно было зайти на страницу другого пользователя, посмотреть инфо о нем и его посты 
 		(при нажатии на имя пользователя в комментарии).
+	- watch comment replies

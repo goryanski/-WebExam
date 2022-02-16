@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnChanges, OnInit, SimpleChange, ViewChild} from '@angular/core';
 import {PostInterface} from "../../api/interfaces/post.interface";
 import {AppEnvironment} from "../../shared/app-environment.interface";
 import {Router} from "@angular/router";
@@ -23,6 +23,7 @@ export class PostComponent implements OnInit {
     commentsCount: 0,
     userId: 0
   };
+  @Input() hideCommentCountField: boolean = false;
   apiStaticFilesURL: string = '';
   currentUserId: number = 0;
   @ViewChild('username') username: ElementRef | undefined;

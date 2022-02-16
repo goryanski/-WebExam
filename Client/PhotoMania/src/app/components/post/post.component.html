@@ -30,5 +30,10 @@
   </div>
 
   <p>{{post.description}}</p>
-  <p class="comments" (click)="clickByComments()">Comments ({{post.commentsCount}})</p>
+  <div *ngIf="!hideCommentCountField">
+    <p class="comments" (click)="clickByComments()">Comments ({{post.commentsCount}})</p>
+  </div>
+  <div *ngIf="hideCommentCountField">
+    <p style="height: 15px"></p>
+  </div>
 </div>
