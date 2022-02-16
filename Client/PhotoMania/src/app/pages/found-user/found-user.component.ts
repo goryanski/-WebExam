@@ -1,7 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {PostInterface} from "../../api/interfaces/post.interface";
-import {UserProfileApiService} from "../../api/services/user-profile.service";
-import {BrowserLocalStorage} from "../../shared/storage/local-storage";
 import {ActivatedRoute} from "@angular/router";
 import {LoadUserDataApiService} from "../../api/services/load-user-data.service";
 import {take} from "rxjs/operators";
@@ -18,12 +15,8 @@ export class FoundUserComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
-    private readonly userDataService: LoadUserDataApiService,
-
-    //private readonly profileApiService: UserProfileApiService
-  ) {
-    //this.showNextPosts();
-  }
+    private readonly userDataService: LoadUserDataApiService
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -42,9 +35,7 @@ export class FoundUserComponent implements OnInit, OnDestroy {
             // when this id changes, app-user-profile-card will find user and app-user-posts will find user posts
             this.userId = res;
           }
-          //console.log('getUserIdByName res: ', res);
         });
-      //this.showNextPosts();
     });
   }
 

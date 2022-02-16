@@ -13,7 +13,6 @@ namespace PhotoMania.DB.Entities
         public int LikesCount { get; set; }
         public int DislikesCount { get; set; }
 
-
         public Photo Photo { get; set; }
         public List<Comment> Comments { get; set; }
 

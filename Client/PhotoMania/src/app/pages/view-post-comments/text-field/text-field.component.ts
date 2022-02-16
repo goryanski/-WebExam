@@ -43,7 +43,6 @@ export class TextFieldComponent implements OnInit, OnChanges {
   ngOnChanges(changes: { [property: string]: SimpleChange }): void {
     if(this.way != '') {
       let changeWay: SimpleChange = changes['way'];
-      //console.log('TextFieldComponent ngOnChanges way: ', changeWay.currentValue)
       if(changeWay.currentValue == 'reply to comment') {
         this.label = `Write a reply to ${this.commentOwnerName}`;
       }

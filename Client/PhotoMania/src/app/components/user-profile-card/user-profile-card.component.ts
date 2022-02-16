@@ -44,7 +44,6 @@ export class UserProfileCardComponent implements OnInit, OnChanges {
             this.isMaxRating = true
           }
         });
-      //console.log('UserProfileCardComponent user: ', this.user);
     }
   }
 

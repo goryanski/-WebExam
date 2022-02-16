@@ -2,7 +2,6 @@ import {Component, HostListener, Input, OnChanges, OnInit, SimpleChange} from '@
 import {UserProfileApiService} from "../../api/services/user-profile.service";
 import {PostInterface} from "../../api/interfaces/post.interface";
 import {take} from "rxjs/operators";
-import {BrowserLocalStorage} from "../../shared/storage/local-storage";
 
 @Component({
   selector: 'app-user-posts',

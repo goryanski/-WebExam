@@ -5,7 +5,6 @@ import {take} from "rxjs/operators";
 import {PostInterface} from "../../api/interfaces/post.interface";
 import {CommentsService} from "../../api/services/comments.service";
 import {CommentInterface} from "../../api/interfaces/comment.interface";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {BrowserLocalStorage} from "../../shared/storage/local-storage";
 
 @Component({
@@ -97,8 +96,6 @@ export class ViewPostCommentsComponent implements OnInit {
       }
     }
   }
-
   addCommentReplayResponseEvent(response: string) {
-    console.log('ViewPostCommentsComponent addCommentReplayResponseEvent response: ', response)
   }
 }

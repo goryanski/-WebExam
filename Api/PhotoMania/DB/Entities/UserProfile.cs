@@ -12,7 +12,6 @@ namespace PhotoMania.DB.Entities
         public bool IsBlocked { get; set; }
         public DateTime RegistrationDate { get; set; }
 
-
         public Avatar Avatar { get; set; }
         public int AccountId { get; set; }
         public Account Account { get; set; }

@@ -1,6 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AuthHelper} from "../../shared/helpers/auth-helper";
-import {BrowserLocalStorage} from "../../shared/storage/local-storage";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
@@ -20,10 +19,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private readonly authHelper: AuthHelper,
-    //private readonly localStorage: BrowserLocalStorage,
     private fb: FormBuilder,
-    private readonly router: Router,
-  private readonly activatedRoute: ActivatedRoute
+    private readonly router: Router
   ) {
     this.form = this.fb.group({
       'search': this.fb.control(

@@ -4,7 +4,7 @@ import {AppEnvironment} from "../../shared/app-environment.interface";
 import {Router} from "@angular/router";
 import {BrowserLocalStorage} from "../../shared/storage/local-storage";
 import {PostsApiService} from "../../api/services/posts.service";
-import {take, tap} from "rxjs/operators";
+import {take} from "rxjs/operators";
 
 @Component({
   selector: 'app-post',

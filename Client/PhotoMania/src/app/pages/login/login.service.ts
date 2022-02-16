@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
-import {map, take, tap} from "rxjs/operators";
-import {Router} from "@angular/router";
+import {map, tap} from "rxjs/operators";
 import {AuthApiService} from "../../api/services/auth.service";
 import {BrowserLocalStorage} from "../../shared/storage/local-storage";
 

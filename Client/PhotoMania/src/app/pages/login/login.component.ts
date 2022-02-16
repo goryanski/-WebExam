@@ -23,8 +23,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private readonly router: Router,
     private readonly loginService: LoginService,
-    private readonly authHelper: AuthHelper,
-    private readonly localStorage: BrowserLocalStorage
+    private readonly authHelper: AuthHelper
   ) {
     this.form = this.fb.group({
       'username': this.fb.control(

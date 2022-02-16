@@ -32,7 +32,4 @@ export class ModalWindowComponent implements OnInit, OnChanges {
       formModal.show();
     }
   }
-
-
-
 }

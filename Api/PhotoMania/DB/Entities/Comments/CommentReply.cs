@@ -11,15 +11,9 @@ namespace PhotoMania.DB.Entities.Comments
         public DateTime Date { get; set; }
         public int LikesCount { get; set; }
         public int CommentId { get; set; }
-        public Comment Comment { get; set; }
-         
-
-
-        // leave name or id
+        public Comment Comment { get; set; }      
         public int OwnerId { get; set; }
         public string OwnerName { get; set; }
-
-
         public int WhomId { get; set; }
         public string WhomName { get; set; }
     }

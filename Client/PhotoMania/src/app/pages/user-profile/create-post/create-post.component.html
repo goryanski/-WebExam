@@ -1,9 +1,6 @@
 <form class="create-form mt-5" [formGroup]="form">
   <div class="mb-3">
     <label class="form-label">Photo (only types jpg, png, jpeg)</label>
-    <!-- file-loader
-          'images' - image folder on server
-          (onUploadFinished) - event on finish image upload to server -->
     <app-upload [saveImgFolder]="'images'"
                 (onUploadFinished)="uploadFinished($event)"></app-upload>
   </div>

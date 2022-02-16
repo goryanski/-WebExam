@@ -17,10 +17,5 @@ namespace PhotoMania.DB.Repositories
             var photos = await GetAllAsync(ph => ph.PostId == postId);
             return photos.First().Url;
         }
-        //internal async Task<int> GetCountAsync(int postId)
-        //{
-        //    var comments = await GetAllAsync(c => c.PostId == postId);
-        //    return comments.Count();
-        //}
     }
 }

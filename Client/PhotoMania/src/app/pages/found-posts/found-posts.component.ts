@@ -2,7 +2,7 @@ import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {take} from "rxjs/operators";
 import {PostInterface} from "../../api/interfaces/post.interface";
 import {PostsApiService} from "../../api/services/posts.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-found-posts',
@@ -20,8 +20,7 @@ export class FoundPostsComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
-    private readonly postsService: PostsApiService,
-    //private readonly router: Router
+    private readonly postsService: PostsApiService
   ) { }
 
   ngOnInit(): void {

@@ -137,7 +137,6 @@ namespace PhotoMania.DB.Repositories
             db.SaveChanges();
             #endregion
 
-
             #region Posts
             Post post1 = new Post
             {
@@ -213,8 +212,6 @@ namespace PhotoMania.DB.Repositories
             db.Posts.Add(post8);
             db.SaveChanges();
             #endregion
-
-
 
             #region Post comments
             // Vasya wrote a comment
@@ -295,7 +292,6 @@ namespace PhotoMania.DB.Repositories
             db.CommentReply.Add(commentReply3);
             db.CommentReply.Add(commentReply4);
             #endregion
-
 
             #region Photos, avatars
             Avatar avatar1 = new Avatar

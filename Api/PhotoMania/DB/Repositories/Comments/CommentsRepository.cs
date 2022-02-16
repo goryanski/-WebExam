@@ -18,9 +18,5 @@ namespace PhotoMania.DB.Repositories.Comments
             var comments = await GetAllAsync();
             return comments.Where(c => c.PostId == postId).Count();
         }
-        //public async Task<int> GetCommentsCount(int postId)
-        //{
-        //    return await GetCountAsync();
-        //}
     }
 }

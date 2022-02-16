@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {AppEnvironment} from "../../shared/app-environment.interface";
-import {BrowserLocalStorage} from "../../shared/storage/local-storage";
 import {Observable} from "rxjs";
 import {PostInterface} from "../interfaces/post.interface";
 import {publishReplay, refCount} from "rxjs/operators";

@@ -23,14 +23,12 @@ export class QueryHttpInterceptor implements HttpInterceptor {
           // log out
           console.log('interceptor works!');
           this.authHelper.setNonAuthenticatedUserState();
-          this.authHelper.clearLocalStorage();// remove
+          this.authHelper.clearLocalStorage();
           this.router.navigate(['login']);
 
           setTimeout(() => {
             document.location.reload();
           },500);
-
-
 
           return of(err.message);
         }

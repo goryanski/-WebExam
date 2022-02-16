@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {CommentInterface} from "../../../api/interfaces/comment.interface";
 import {CommentReplyInterface} from "../../../api/interfaces/comment-reply.interface";
 import {Router} from "@angular/router";

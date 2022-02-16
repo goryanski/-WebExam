@@ -1,5 +1,4 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
 import {PostInterface} from "../../api/interfaces/post.interface";
 import {Router} from "@angular/router";
 import {HomeService} from "../../api/services/home.service";

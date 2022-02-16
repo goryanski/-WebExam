@@ -2,7 +2,6 @@ import {Injectable} from "@angular/core";
 import {AppEnvironment} from "../../shared/app-environment.interface";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {JwtResponse} from "../interfaces/jwt-response.interface";
 import {UserProfileCard} from "../interfaces/user-profile-card.interface";
 import {BrowserLocalStorage} from "../../shared/storage/local-storage";
 import {publishReplay, refCount} from "rxjs/operators";
