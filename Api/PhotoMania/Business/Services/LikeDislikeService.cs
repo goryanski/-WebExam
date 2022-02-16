@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using PhotoMania.Business.Services.Interfaces;
 using PhotoMania.DB.Entities;
+using PhotoMania.DB.Entities.Comments;
 using PhotoMania.DB.Repositories.Interfaces;
 
 namespace PhotoMania.Business.Services
@@ -74,6 +75,64 @@ namespace PhotoMania.Business.Services
                 fp => fp.PostId == postId && fp.UserId == userId
                 )).FirstOrDefault();
             return post != null;
+        }
+
+        public async Task<string> SetLikeToComment(int commentId, int userId)
+        {
+            if (await CommentHasBeenLiked(commentId, userId))
+            {
+                return "This comment has been already liked";
+            }
+
+            LikedComment likedComment = new LikedComment
+            {
+                CommentId = commentId,
+                UserId = userId,
+            };
+            await uow.LikedCommentsRepository.CreateAsync(likedComment);
+
+            Comment comment = await uow.CommentsRepository.GetAsync(commentId);
+            comment.LikesCount++;
+            await uow.CommentsRepository.UpdateAsync(comment);
+
+            return "ok";
+        }
+
+        private async Task<bool> CommentHasBeenLiked(int commentId, int userId)
+        {
+            LikedComment comment = (await uow.LikedCommentsRepository.GetAllAsync(
+                fp => fp.CommentId == commentId && fp.UserId == userId
+                )).FirstOrDefault();
+            return comment != null;
+        }
+
+        public async Task<string> SetLikeToReply(int replyId, int userId)
+        {
+            if (await ReplyHasBeenLiked(replyId, userId))
+            {
+                return "This post has been already liked";
+            }
+
+            LikedCommentReply likedReply = new LikedCommentReply
+            {
+                CommentReplyId = replyId,
+                UserId = userId
+            };
+            await uow.LikedCommentRepliesRepository.CreateAsync(likedReply);
+
+            CommentReply reply = await uow.CommentRepliesRepository.GetAsync(replyId);
+            reply.LikesCount++;
+            await uow.CommentRepliesRepository.UpdateAsync(reply);
+
+            return "ok";
+        }
+
+        private async Task<bool> ReplyHasBeenLiked(int replyId, int userId)
+        {
+            LikedCommentReply reply = (await uow.LikedCommentRepliesRepository.GetAllAsync(
+               fp => fp.CommentReplyId == replyId && fp.UserId == userId
+               )).FirstOrDefault();
+            return reply != null;
         }
     }
 }

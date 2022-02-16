@@ -19,9 +19,11 @@ namespace PhotoMania.Controllers
     public class CommentsController : ControllerBase
     {
         ICommentsService commentsService;
-        public CommentsController(ICommentsService commentsService)
+        ILikeDislikeService likeService;
+        public CommentsController(ICommentsService commentsService, ILikeDislikeService likeService)
         {
             this.commentsService = commentsService;
+            this.likeService = likeService;
         }
 
 
@@ -52,6 +54,24 @@ namespace PhotoMania.Controllers
             return new ApiResponse
             {
                 Response = await commentsService.AddReplyToComment(model.Text, model.CommentId, model.OwnerId, model.WhomName)
+            };
+        }
+
+        [HttpPost("setLikeToComment")]
+        public async Task<ApiResponse> SetLikeToComment([FromBody] LikeCommentViewModel model)
+        {
+            return new ApiResponse
+            {
+                Response = await likeService.SetLikeToComment(model.CommentId, model.UserId)
+            };
+        }
+
+        [HttpPost("setLikeToReply")]
+        public async Task<ApiResponse> SetLikeToReply([FromBody] LikeReplyViewModel model)
+        {
+            return new ApiResponse
+            {
+                Response = await likeService.SetLikeToReply(model.ReplyId, model.UserId)
             };
         }
     }

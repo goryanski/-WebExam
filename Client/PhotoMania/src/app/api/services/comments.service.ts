@@ -91,4 +91,40 @@ export class CommentsService {
       refCount()
     );
   }
+
+  setLikeToComment(commentId: number, userId: number): Observable<ApiResponse> {
+    return this.httpClient.post<ApiResponse>(
+      [
+        this.appEnv.apiPhotoManiaURL,
+        'Comments',
+        'setLikeToComment'
+      ].join('/'),
+      {
+        commentId,
+        userId
+      },
+      this.options
+    ).pipe(
+      publishReplay(1),
+      refCount()
+    );
+  }
+
+  setLikeToReply(replyId: number, userId: number): Observable<ApiResponse> {
+    return this.httpClient.post<ApiResponse>(
+      [
+        this.appEnv.apiPhotoManiaURL,
+        'Comments',
+        'setLikeToReply'
+      ].join('/'),
+      {
+        replyId,
+        userId
+      },
+      this.options
+    ).pipe(
+      publishReplay(1),
+      refCount()
+    );
+  }
 }

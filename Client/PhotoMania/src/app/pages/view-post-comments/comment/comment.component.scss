@@ -35,6 +35,11 @@
     display: flex;
     justify-content: space-between;
   }
+  .error-label {
+    text-align: right;
+    color: red;
+    margin-bottom: 5px;
+  }
 }
 .show-next-replies {
   display: flex;

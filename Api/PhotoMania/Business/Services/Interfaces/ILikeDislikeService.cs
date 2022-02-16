@@ -11,5 +11,7 @@ namespace PhotoMania.Business.Services.Interfaces
     {
         Task<string> SetLikeToPost(int postId, int userId);
         Task<string> SetDislikeToPost(int postId, int userId);
+        Task<string> SetLikeToComment(int commentId, int userId);
+        Task<string> SetLikeToReply(int replyId, int userId);
     }
 }

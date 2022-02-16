@@ -32,8 +32,9 @@ export class CommentComponent implements OnInit {
     replies: []
   };
   @Input() currentUserId: number = 0;
-  //@Output() addCommentReplayResponseEvent = new EventEmitter<string>();
   @ViewChild('username') username: ElementRef | undefined;
+  @ViewChild('errorLabel') errorLabel: ElementRef | undefined;
+  @ViewChild('commentLike') commentLike: ElementRef | undefined;
 
   constructor(
     private readonly router: Router,
@@ -54,7 +55,32 @@ export class CommentComponent implements OnInit {
   }
 
   likeClick() {
-
+    if(this.canClick()) {
+      this.commentsService.setLikeToComment(this.comment.id, this.currentUserId)
+        .pipe(take(1))
+        .subscribe(res => {
+            if(res.response === 'ok') {
+              // display increasing likes number
+              if(this.commentLike?.nativeElement.innerText != undefined) {
+                let countLikes: number = parseInt(this.commentLike?.nativeElement.innerText);
+                this.commentLike.nativeElement.innerText = (++countLikes).toString();
+              }
+            }
+            else {
+              // show error
+              if(this.errorLabel?.nativeElement.innerText != undefined) {
+                this.errorLabel.nativeElement.innerText = "can't like a second time";
+              }
+            }
+          }
+        );
+    }
+    else {
+      // show error
+      if(this.errorLabel?.nativeElement.innerText != undefined) {
+        this.errorLabel.nativeElement.innerText = "can't like your own comment";
+      }
+    }
   }
 
   replyClick() {
@@ -105,5 +131,9 @@ export class CommentComponent implements OnInit {
 
   showNextRepliesClick() {
     this.getNextReplies()
+  }
+
+  private canClick() {
+    return this.currentUserId != 0 && this.currentUserId != this.comment.ownerId;
   }
 }
