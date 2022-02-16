@@ -58,7 +58,11 @@
 <div class="comment-replies-block">
   <div *ngIf="repliesToShow as replies" >
     <div *ngIf="replies.length > 0">
-      <app-comment-reply *ngFor="let reply of replies" [reply]="reply"></app-comment-reply>
+      <app-comment-reply *ngFor="let reply of replies"
+                         [reply]="reply"
+                         [currentUserId]="currentUserId"
+                         (addReplayToReplayEvent)="addCommentReplayEvent($event)"
+      ></app-comment-reply>
     </div>
   </div>
 </div>

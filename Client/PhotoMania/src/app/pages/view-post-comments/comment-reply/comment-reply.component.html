@@ -2,7 +2,7 @@
   <div class="first-line">
     <!--    username + text-->
     <div>
-      <span class="owner-name" #username (click)="usernameClick()">{{reply.ownerName}}</span>
+      <span class="owner-name" #replyUsername (click)="usernameClick()">{{reply.ownerName}}</span>
       <span class="replied-to">&nbsp;&nbsp;replied to {{reply.whomName}}</span>
       <span class="text">:&nbsp;&nbsp;&nbsp;{{reply.text}}</span>
     </div>
@@ -27,4 +27,15 @@
     <div class="reply" (click)="replyClick()">reply</div>
     <div class="date">{{reply.date}}</div>
   </div>
+</div>
+
+<div *ngIf="replyWasClicked">
+  <app-text-field
+    [way]="'reply to reply'"
+    [commentOwnerName]="reply.ownerName"
+    [currentUserId]="currentUserId"
+    [commentId]="reply.commentId"
+    (addReplayToCommentReplayEvent)="addReplayToCommentReplayEvent($event)"
+    >
+  </app-text-field>
 </div>

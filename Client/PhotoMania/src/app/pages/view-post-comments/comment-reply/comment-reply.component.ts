@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {CommentReplyInterface} from "../../../api/interfaces/comment-reply.interface";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-comment-reply',
@@ -18,14 +19,26 @@ export class CommentReplyComponent implements OnInit {
     whomId: 0,
     whomName: ''
   };
+  @Input() currentUserId: number = 0;
+  @Output() addReplayToReplayEvent = new EventEmitter<string>();
+  @ViewChild('replyUsername') replyUsername: ElementRef | undefined;
+  replyWasClicked: boolean = false;
 
-  constructor() { }
+  constructor(
+    private readonly router: Router
+  ) { }
 
   ngOnInit(): void {
   }
 
   usernameClick() {
 
+    if(this.replyUsername != undefined) {
+      let text: string = this.replyUsername.nativeElement.innerText;
+      if(text != '') {
+        this.router.navigate([`found-user/${text}`]);
+      }
+    }
   }
 
   likeClick() {
@@ -33,6 +46,11 @@ export class CommentReplyComponent implements OnInit {
   }
 
   replyClick() {
+    this.replyWasClicked = true;
+  }
 
+  addReplayToCommentReplayEvent(response: any) {
+    // just resend that Event to comment.component.ts where is already suitable method
+    this.addReplayToReplayEvent.emit(response);
   }
 }

@@ -17,6 +17,7 @@ export class TextFieldComponent implements OnInit, OnChanges {
   @Input() commentId: number = 0;
   @Output() addCommentEvent = new EventEmitter<string>();
   @Output() addCommentReplayEvent = new EventEmitter<string>();
+  @Output() addReplayToCommentReplayEvent = new EventEmitter<string>();
   form: FormGroup;
   pattern = {
     comment: '^[a-zA-Z ,.!/:+@_^();?0-9]{2,42}$', // English letters only, digits, space, symbols ,.!/:+@_^();? 2-42 symbols
@@ -54,18 +55,15 @@ export class TextFieldComponent implements OnInit, OnChanges {
       // clear comment field
       this.form.controls['comment'].setValue('');
 
-      //const {comment} = this.form.value;
-      //console.log('comment: ', text)
-
       // 3 ways:
-      // add comment
-      // reply to comment
-      // reply to comment reply
       if(this.way == 'add comment') {
         this.addComment(text);
       }
       else if(this.way == 'reply to comment') {
         this.addReplyToComment(text);
+      }
+      else if(this.way == 'reply to reply') {
+        this.addReplyToCommentReply(text);
       }
     }
   }
@@ -84,6 +82,16 @@ export class TextFieldComponent implements OnInit, OnChanges {
     ).pipe(take(1))
       .subscribe(res => {
         this.addCommentReplayEvent.emit(res.response);
+      });
+  }
+
+  private addReplyToCommentReply(reply: string) {
+    // the same query like previous, but Event we send to comment-reply.component.ts
+    this.commentsService.addReplyToComment(
+      reply, this.commentId, this.currentUserId, this.commentOwnerName
+    ).pipe(take(1))
+      .subscribe(res => {
+        this.addReplayToCommentReplayEvent.emit(res.response);
       });
   }
 }
