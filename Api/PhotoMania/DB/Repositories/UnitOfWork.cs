@@ -287,10 +287,10 @@ namespace PhotoMania.DB.Repositories
                 WhomId = user2.Id,
                 WhomName = account4.Login
             };
-            db.CommentReply.Add(commentReply1);
-            db.CommentReply.Add(commentReply2);
-            db.CommentReply.Add(commentReply3);
-            db.CommentReply.Add(commentReply4);
+            db.CommentReplies.Add(commentReply1);
+            db.CommentReplies.Add(commentReply2);
+            db.CommentReplies.Add(commentReply3);
+            db.CommentReplies.Add(commentReply4);
             #endregion
 
             #region Photos, avatars

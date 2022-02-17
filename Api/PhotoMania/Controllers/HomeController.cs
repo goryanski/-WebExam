@@ -31,9 +31,5 @@ namespace PhotoMania.Controllers
         {
             return await postsService.GetAllPosts(postParameters);
         }
-
-
-
-        // pagination https://forproger.ru/article/paginaciya-v-aspnet-core-web-api
     }
 }

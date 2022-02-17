@@ -42,7 +42,8 @@ namespace PhotoMania.Business.Services
         {
             if(validationService.IsHeaderSearchFieldValid(searchKey))
             {
-                List<Post> selectedPosts = (await uow.PostsRepository.GetAllAsync(p => p.Description.Contains(searchKey)))
+                List<Post> selectedPosts = (await uow.PostsRepository.GetAllAsync(p => 
+                p.Description.ToLower().Contains(searchKey.ToLower())))
                 .OrderByDescending(on => on.Date)
                 .Skip((postParameters.PageNumber - 1) * postParameters.PageSize)
                 .Take(postParameters.PageSize)

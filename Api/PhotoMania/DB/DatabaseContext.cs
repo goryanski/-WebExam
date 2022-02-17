@@ -18,10 +18,10 @@ namespace PhotoMania.DB
         public DbSet<Account> Accounts { get; set; }
         public DbSet<UserProfile> Users { get; set; }
         public DbSet<FavouritePost> FavouritePosts { get; set; }
-        public DbSet<HatedPost> HatedPost { get; set; }
-        public DbSet<LikedCommentReply> LikedCommentReply { get; set; }
-        public DbSet<LikedComment> LikedComment { get; set; }
-        public DbSet<CommentReply> CommentReply { get; set; }
+        public DbSet<HatedPost> HatedPosts { get; set; }
+        public DbSet<LikedCommentReply> LikedCommentReplies { get; set; }
+        public DbSet<LikedComment> LikedComments { get; set; }
+        public DbSet<CommentReply> CommentReplies { get; set; }
         
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options)
